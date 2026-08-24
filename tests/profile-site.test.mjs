@@ -30,6 +30,7 @@ const PAGE_NAMES = [
   ...SERVICE_PAGES,
   "code.html",
   "signal.html",
+  "linkedin-signal.html",
   "contact.html",
 ];
 
@@ -294,6 +295,35 @@ test("npm-stat zeros, omissions, differences, malformed values, and outages neve
   assert.equal(unavailable.officialMinusReference, null);
 });
 
+test("LinkedIn signal preserves dated per-profile boundaries without automated scraping", async () => {
+  const [snapshot, app, updater] = await Promise.all([
+    json("data/linkedin-stats.json"),
+    read("app.js"),
+    read("scripts/update-profile-data.mjs"),
+  ]);
+  assert.equal(snapshot.schemaVersion, 1);
+  assert.equal(snapshot.automated, false);
+  assert.match(snapshot.sourceKind, /snapshot/i);
+  assert.ok(Number.isFinite(Date.parse(snapshot.generatedAt)));
+  assert.match(snapshot.observedOn, /^\d{4}-\d{2}-\d{2}$/);
+  assert.match(snapshot.metricBoundary, /must not be summed as unique reach/i);
+  assert.deepEqual(snapshot.profiles.map((profile) => profile.key), ["jz", "roshi"]);
+  assert.deepEqual(snapshot.profiles.map((profile) => profile.url), [
+    "https://www.linkedin.com/in/johannazollmann/",
+    "https://www.linkedin.com/in/turtlesallthewaydown/",
+  ]);
+  assert.ok(snapshot.profiles.every((profile) => Number.isSafeInteger(profile.followers) && profile.followers >= 0));
+  assert.ok(snapshot.profiles.every((profile) => profile.connections === "500+"));
+  assert.equal(snapshot.organization.url, "https://www.linkedin.com/company/the-wizard-nexus/");
+  assert.ok(Number.isSafeInteger(snapshot.organization.followers) && snapshot.organization.followers >= 0);
+  assert.ok(Number.isSafeInteger(snapshot.organization.listedEmployees) && snapshot.organization.listedEmployees >= 0);
+  assert.equal(snapshot.profiles.find((profile) => profile.key === "roshi").githubUrl, "https://github.com/RIAEvangelist");
+  assert.equal(snapshot.profiles.find((profile) => profile.key === "roshi").websiteUrl, "https://riaevangelist.github.io/RIAEvangelist/");
+  assert.doesNotMatch(JSON.stringify(snapshot), /access.?token|refresh.?token|client.?secret|member.?urn/i);
+  assert.match(app, /data\/linkedin-stats\.json/);
+  assert.doesNotMatch(updater, /linkedin\.com|memberFollowersCount|organizationalEntityFollowerStatistics/i);
+});
+
 test("the public nexus uses focused pages while preserving the complete ecosystem record", async () => {
   const pageNames = PAGE_NAMES;
   const [readme, pages, script, css, svg, history, generator, errorPage] = await Promise.all([
@@ -327,19 +357,29 @@ test("the public nexus uses focused pages while preserving the complete ecosyste
   assert.match(byName.get("people.html"), /assets\/johanna-portrait\.jpg/);
   assert.match(byName.get("people.html"), /assets\/roshi-portrait\.png/);
   assert.match(byName.get("people.html"), /href="https:\/\/github\.com\/RIAEvangelist"/);
+  assert.match(byName.get("people.html"), /href="https:\/\/riaevangelist\.github\.io\/RIAEvangelist\/"/);
   assert.match(byName.get("people.html"), /href="https:\/\/www\.linkedin\.com\/in\/turtlesallthewaydown\/"/);
   assert.match(byName.get("code.html"), /id="repo-grid"/);
   assert.match(byName.get("code.html"), /Public code remains available without scripts/);
   assert.match(byName.get("signal.html"), /id="npm-chart"/);
+  assert.match(byName.get("signal.html"), /href="linkedin-signal\.html"/);
+  assert.match(byName.get("signal.html"), /id="linkedin-jz-followers"/);
+  assert.match(byName.get("linkedin-signal.html"), /data-linkedin-profile="jz"/);
+  assert.match(byName.get("linkedin-signal.html"), /data-linkedin-profile="roshi"/);
+  assert.match(byName.get("linkedin-signal.html"), /https:\/\/www\.linkedin\.com\/company\/the-wizard-nexus\//);
   assert.doesNotMatch(byName.get("signal.html"), /Loading (?:the TWiN NPM|daily values|the latest public snapshot)/);
   assert.match(byName.get("work.html"), /The dojo is open/);
   for (const servicePage of SERVICE_PAGES) assert.match(byName.get("work.html"), new RegExp(`href="${servicePage}"`));
   assert.match(errorPage, /href="\/TheWizardNexus\.com\/styles\.css"/);
   assert.match(errorPage, /href="\/TheWizardNexus\.com\/ecosystem\.html"/);
+  assert.match(errorPage, /wizard-nexus-logo-96\.png/);
   for (const html of pages) {
     assert.match(html, /href="styles\.css"/);
     assert.match(html, /src="app\.js"/);
     assert.match(html, /class="site-header"/);
+    assert.match(html, /class="brand-mark"/);
+    assert.match(html, /wizard-nexus-favicon-32\.png/);
+    assert.doesNotMatch(html, /brand-sigil/);
   }
   assert.match(script, /data\/projects\.json/);
   assert.match(script, /stage-badge/);
@@ -347,7 +387,11 @@ test("the public nexus uses focused pages while preserving the complete ecosyste
   assert.match(script, /aria-label="Open \$\{escapeHtml\(project\.name\)\} — \$\{escapeHtml\(maturity\)\}"/);
   assert.match(script, /data\/repos\.json/);
   assert.match(script, /data\/npm-history\.json/);
+  assert.match(script, /data\/linkedin-stats\.json/);
   assert.match(css, /prefers-reduced-motion/);
+  assert.match(css, /@keyframes cosmos-drift/);
+  assert.match(css, /body::after \{ animation: none !important; transform: none !important; \}/);
+  assert.match(css, /body::before, body::after \{ display: none; \}/);
   assert.match(svg, /TWiN PUBLIC ECOSYSTEM/);
   assert.match(svg, /PROJECT SITES/);
   assert.match(svg, /MAPPED POINTS/);
@@ -381,7 +425,7 @@ test("every focused page has canonical metadata and every internal HTML route re
     assert.equal([...html.matchAll(/<h1\b/g)].length, 1, `${pageName} should contain one primary heading`);
     assert.match(html, new RegExp(`<link rel="canonical" href="${canonical}"`));
     assert.match(html, new RegExp(`<meta property="og:url" content="${canonical}"`));
-    assert.match(html, /<meta property="og:image" content="https:\/\/thewizardnexus\.github\.io\/TheWizardNexus\.com\/assets\/brand-banner\.png">/);
+    assert.match(html, /<meta property="og:image" content="https:\/\/thewizardnexus\.github\.io\/TheWizardNexus\.com\/assets\/wizard-nexus-banner\.png">/);
     assert.match(html, /<meta name="twitter:title" content="[^"]+">/);
     assert.match(html, /<meta name="twitter:description" content="[^"]+">/);
     assert.match(html, /<meta name="twitter:image:alt" content="[^"]+">/);
@@ -402,23 +446,27 @@ test("every focused page has canonical metadata and every internal HTML route re
 });
 
 test("no-script telemetry fallbacks agree across the focused pages", async () => {
-  const [home, technology, ecosystem, code, signal, projects, repos, npm, history] = await Promise.all([
+  const [home, technology, ecosystem, code, signal, linkedinPage, projects, repos, npm, history, linkedin] = await Promise.all([
     read("index.html"),
     read("technology.html"),
     read("ecosystem.html"),
     read("code.html"),
     read("signal.html"),
+    read("linkedin-signal.html"),
     json("data/projects.json"),
     json("data/repos.json"),
     json("data/npm-stats.json"),
     json("data/npm-history.json"),
+    json("data/linkedin-stats.json"),
   ]);
+  const linkedinProfiles = Object.fromEntries(linkedin.profiles.map((profile) => [profile.key, profile]));
   const expectations = [
     [home, { "project-total": projects.published.length, "mapped-points": projects.mapSnapshot.points, "mapped-relationships": projects.mapSnapshot.relationships, "repo-total-hero": repos.counts.total }],
     [technology, { "project-total": projects.published.length, "mapped-points": projects.mapSnapshot.points, "mapped-relationships": projects.mapSnapshot.relationships, "public-project-repo-total": projects.published.filter((project) => project.repositoryUrl && project.sourceBoundary === "Public repository").length }],
     [ecosystem, { "project-total": projects.published.length, "mapped-points": projects.mapSnapshot.points, "mapped-relationships": projects.mapSnapshot.relationships, "next-total": projects.publishingNext.length }],
     [code, { "repo-total": repos.counts.total, "repo-original": repos.counts.original, "repo-stars": repos.counts.stars }],
-    [signal, { "project-total": projects.published.length, "mapped-points": projects.mapSnapshot.points, "mapped-relationships": projects.mapSnapshot.relationships, "repo-total": repos.counts.total, "npm-history-total": history.total.toLocaleString("en-US"), "npm-week": npm.totals.week.toLocaleString("en-US"), "npm-month": npm.totals.month.toLocaleString("en-US"), "npm-year": npm.totals.year.toLocaleString("en-US") }],
+    [signal, { "project-total": projects.published.length, "mapped-points": projects.mapSnapshot.points, "mapped-relationships": projects.mapSnapshot.relationships, "repo-total": repos.counts.total, "npm-history-total": history.total.toLocaleString("en-US"), "npm-week": npm.totals.week.toLocaleString("en-US"), "npm-month": npm.totals.month.toLocaleString("en-US"), "npm-year": npm.totals.year.toLocaleString("en-US"), "linkedin-jz-followers": linkedinProfiles.jz.followers.toLocaleString("en-US"), "linkedin-roshi-followers": linkedinProfiles.roshi.followers.toLocaleString("en-US"), "linkedin-company-followers": linkedin.organization.followers.toLocaleString("en-US") }],
+    [linkedinPage, { "linkedin-jz-followers": linkedinProfiles.jz.followers.toLocaleString("en-US"), "linkedin-roshi-followers": linkedinProfiles.roshi.followers.toLocaleString("en-US"), "linkedin-company-followers": linkedin.organization.followers.toLocaleString("en-US"), "linkedin-company-employees": linkedin.organization.listedEmployees.toLocaleString("en-US") }],
   ];
   for (const [html, pageExpectations] of expectations) {
     for (const [id, expected] of Object.entries(pageExpectations)) {
@@ -428,14 +476,18 @@ test("no-script telemetry fallbacks agree across the focused pages", async () =>
 });
 
 test("the rebrand uses approved assets and requested profiles without excluded content", async () => {
-  const [home, people, technology, contact, assets] = await Promise.all([
+  const [home, people, technology, contact, readme, assets] = await Promise.all([
     read("index.html"),
     read("people.html"),
     read("technology.html"),
     read("contact.html"),
+    read("README.md"),
     readdir(path.join(ROOT, "assets")),
   ]);
-  assert.match(home, /assets\/brand-banner\.png/);
+  assert.match(home, /assets\/wizard-nexus-banner\.png/);
+  assert.match(readme, /assets\/wizard-nexus-banner\.png/);
+  assert.doesNotMatch(readme, /assets\/brand-banner\.png/);
+  assert.match(home, /assets\/wizard-nexus-logo-96\.png/);
   assert.match(home, /assets\/johanna-portrait\.jpg/);
   assert.match(home, /assets\/roshi-portrait\.png/);
   for (const html of [people, technology, contact]) {
@@ -446,6 +498,15 @@ test("the rebrand uses approved assets and requested profiles without excluded c
     "https://www.linkedin.com/in/johannazollmann/",
     "https://www.linkedin.com/in/turtlesallthewaydown/",
   ]) assert.match(people, new RegExp(profile.replace(/[.*+?^$()|[\]\\]/g, "\\$&")));
+  assert.match(people, /https:\/\/riaevangelist\.github\.io\/RIAEvangelist\//);
+  assert.match(contact, /https:\/\/riaevangelist\.github\.io\/RIAEvangelist\//);
+  for (const asset of [
+    "wizard-nexus-logo.png",
+    "wizard-nexus-logo-96.png",
+    "wizard-nexus-favicon-32.png",
+    "wizard-nexus-apple-touch-icon.png",
+    "wizard-nexus-banner.png",
+  ]) assert.ok(assets.includes(asset), `missing approved brand asset ${asset}`);
   assert.ok(!assets.some((name) => /^signal-2026-08-01-10-58-08-970\.jpg$/i.test(name)));
 
   const textExtensions = /\.(?:css|html|js|json|md|mjs|svg|xml|ya?ml)$/i;

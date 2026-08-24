@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://thewizardnexus.github.io/TheWizardNexus.com/">
-    <img src="assets/brand-banner.png" width="100%" alt="Many roads. One mission. Hard systems. Human stakes.">
+    <img src="assets/wizard-nexus-banner.png" width="100%" alt="Many roads. One mission. Hard systems. Human stakes.">
   </a>
 </p>
 <h3 align="center">Human-centered systems for earlier, accountable action.</h3>
@@ -54,6 +54,7 @@ The [Technology directory](https://thewizardnexus.github.io/TheWizardNexus.com/t
 - [Roshi on GitHub](https://github.com/RIAEvangelist)
 - [Complete public source atlas](https://thewizardnexus.github.io/TheWizardNexus.com/code.html)
 - [Measured public signal](https://thewizardnexus.github.io/TheWizardNexus.com/signal.html)
+- [Dated LinkedIn signal](https://thewizardnexus.github.io/TheWizardNexus.com/linkedin-signal.html)
 
 A public interface does not automatically mean public source, production readiness, clinical validation, or authorization for consequential use. The site labels those boundaries directly.
 
@@ -68,6 +69,8 @@ A public interface does not automatically mean public source, production readine
 
 - [Johanna “JZ” Zollmann on LinkedIn](https://www.linkedin.com/in/johannazollmann/)
 - [Roshi on LinkedIn](https://www.linkedin.com/in/turtlesallthewaydown/)
+- [Roshi on GitHub](https://github.com/RIAEvangelist)
+- [Roshi’s website](https://riaevangelist.github.io/RIAEvangelist/)
 - [Meet the team](https://thewizardnexus.github.io/TheWizardNexus.com/people.html)
 
 ## This repository

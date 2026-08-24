@@ -86,6 +86,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://thewizardnexus.github.io/TheWizardNexus.com/linkedin-signal.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://thewizardnexus.github.io/TheWizardNexus.com/contact.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>

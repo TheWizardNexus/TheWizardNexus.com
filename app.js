@@ -26,6 +26,7 @@ const state = {
   repoSort: "updated",
   npm: null,
   npmHistory: null,
+  linkedin: null,
   chart: null,
   chartPlot: null,
   chartHoverIndex: null,
@@ -464,6 +465,37 @@ async function loadNpm() {
   }
 }
 
+function renderLinkedIn() {
+  if (!state.linkedin) return;
+  const profiles = Object.fromEntries(state.linkedin.profiles.map((profile) => [profile.key, profile]));
+  setText("linkedin-jz-followers", numberFormatter.format(profiles.jz.followers));
+  setText("linkedin-roshi-followers", numberFormatter.format(profiles.roshi.followers));
+  setText("linkedin-company-followers", numberFormatter.format(state.linkedin.organization.followers));
+  setText("linkedin-company-employees", numberFormatter.format(state.linkedin.organization.listedEmployees));
+  for (const element of document.querySelectorAll("[data-linkedin-profile]")) {
+    const value = element.dataset.linkedinProfile === "company"
+      ? state.linkedin.organization.followers
+      : profiles[element.dataset.linkedinProfile]?.followers;
+    if (Number.isSafeInteger(value)) element.textContent = numberFormatter.format(value);
+  }
+  for (const element of document.querySelectorAll("[data-linkedin-employees]")) element.textContent = numberFormatter.format(state.linkedin.organization.listedEmployees);
+  for (const element of document.querySelectorAll("[data-linkedin-observed]")) element.textContent = formatDate(state.linkedin.observedOn);
+  setText("linkedin-status", `Dated LinkedIn profile and company-page snapshot observed ${formatDate(state.linkedin.observedOn)}; not a live API feed and not a measure of unique reach or impact.`);
+}
+
+async function loadLinkedIn() {
+  registerLoad("linkedin");
+  try {
+    state.linkedin = await fetchJson("data/linkedin-stats.json");
+    renderLinkedIn();
+    completeLoad("linkedin", state.linkedin.generatedAt);
+  } catch (error) {
+    setText("linkedin-status", "The dated LinkedIn snapshot is temporarily unavailable; direct profile links remain available.");
+    completeLoad("linkedin", null, true);
+    console.error("Unable to load the LinkedIn snapshot.", error);
+  }
+}
+
 function wireProjectControls() {
   document.querySelector("#project-search")?.addEventListener("input", (event) => {
     state.projectQuery = event.target.value;
@@ -521,6 +553,7 @@ function initialize() {
   if (document.querySelector("#project-grid, #project-total, #mapped-points, #mapped-relationships, #next-total, #launch-list")) loads.push(loadProjects());
   if (document.querySelector("#repo-grid, #repo-total, #repo-total-hero, #repo-original, #repo-stars, #repo-updated")) loads.push(loadRepositories());
   if (document.querySelector("#npm-chart")) loads.push(loadNpm());
+  if (document.querySelector("[data-linkedin-followers], [data-linkedin-profile], #linkedin-company-employees")) loads.push(loadLinkedIn());
   Promise.allSettled(loads).then(updateFreshness);
 }
 
