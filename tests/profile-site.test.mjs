@@ -9,15 +9,17 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const read = (relativePath) => readFile(path.join(ROOT, relativePath), "utf8");
 const json = async (relativePath) => JSON.parse(await read(relativePath));
 const textById = (html, id) => html.match(new RegExp(`<[^>]+\\bid="${id}"[^>]*>([^<]*)</[^>]+>`, "i"))?.[1];
-const SERVICE_PAGES = [
-  "service-strategy.html",
-  "service-programs.html",
-  "service-policy.html",
-  "service-precrisis.html",
-  "service-private-ai.html",
-  "service-military-ai.html",
-  "service-cyber.html",
+const escapeRegex = (value) => String(value).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+const SERVICE_PRODUCTS = [
+  { slug: "behavioral-health-strategy", page: "service-strategy.html", unitPriceCents: 25000 },
+  { slug: "program-development-evaluation", page: "service-programs.html", unitPriceCents: 35000 },
+  { slug: "policy-procedure-engineering", page: "service-policy.html", unitPriceCents: 55000 },
+  { slug: "white-label-precrisis", page: "service-precrisis.html", unitPriceCents: 25000 },
+  { slug: "private-ai-cloud-local", page: "service-private-ai.html", unitPriceCents: 35000 },
+  { slug: "private-il2-il6-ai", page: "service-military-ai.html", unitPriceCents: 55000 },
+  { slug: "cyber-rainbow-6", page: "service-cyber.html", unitPriceCents: 110000 },
 ];
+const SERVICE_PAGES = SERVICE_PRODUCTS.map((product) => product.page);
 const PAGE_NAMES = [
   "index.html",
   "technology.html",
@@ -118,7 +120,7 @@ test("technology manifest preserves all canonical sites, headers, and five publi
     },
     "life-first-framework": {
       site: "https://riaevangelist.github.io/life-first-framework/",
-      image: "https://opengraph.githubassets.com/5ef81775fc9b5b1d65bc52504244ba497920c5f09344587ba016cbacecc6bebb/RIAEvangelist/life-first-framework",
+      image: "assets/life-first-framework-header.png",
       repository: "https://github.com/RIAEvangelist/life-first-framework",
     },
     kempo: {
@@ -148,6 +150,7 @@ test("technology manifest preserves all canonical sites, headers, and five publi
   await Promise.all([
     access(path.join(ROOT, "assets", "spellwire-readme-header.png")),
     access(path.join(ROOT, "assets", "twin-compass-readme-header.png")),
+    access(path.join(ROOT, "assets", "life-first-framework-header.png")),
   ]);
 });
 
@@ -331,6 +334,72 @@ test("LinkedIn signal preserves dated per-profile boundaries without automated s
   assert.doesNotMatch(updater, /linkedin\.com|memberFollowersCount|organizationalEntityFollowerStatistics/i);
 });
 
+test("service-hour catalog is clear, one-time, quantity-adjustable, and consistent on every purchase surface", async () => {
+  const [catalog, work, servicePages] = await Promise.all([
+    json("data/service-products.json"),
+    read("work.html"),
+    Promise.all(SERVICE_PAGES.map(read)),
+  ]);
+  const serviceHtml = new Map(SERVICE_PAGES.map((page, index) => [page, servicePages[index]]));
+  const expectedBySlug = new Map(SERVICE_PRODUCTS.map((product) => [product.slug, product]));
+
+  assert.equal(catalog.schemaVersion, 1);
+  assert.equal(catalog.source.provider, "Stripe");
+  assert.equal(catalog.source.account, "The Wizard Nexus");
+  assert.equal(catalog.source.livemode, true);
+  assert.ok(Number.isFinite(Date.parse(catalog.generatedAt)));
+  assert.equal(catalog.purchasePolicy.currency, "usd");
+  assert.equal(catalog.purchasePolicy.paymentType, "one_time");
+  assert.equal(catalog.purchasePolicy.unit, "service_hour");
+  assert.deepEqual(catalog.purchasePolicy.quantity, { adjustable: true, minimum: 1, maximum: 20 });
+  assert.equal(catalog.products.length, SERVICE_PRODUCTS.length);
+  assert.equal(new Set(catalog.products.map((product) => product.slug)).size, SERVICE_PRODUCTS.length);
+  assert.equal(new Set(catalog.products.map((product) => product.purchaseUrl)).size, SERVICE_PRODUCTS.length);
+  assert.equal([...work.matchAll(/data-service-product="/g)].length, SERVICE_PRODUCTS.length);
+
+  for (const product of catalog.products) {
+    const expected = expectedBySlug.get(product.slug);
+    assert.ok(expected, `unexpected service product ${product.slug}`);
+    assert.equal(product.servicePage, expected.page);
+    assert.equal(product.unitPriceCents, expected.unitPriceCents);
+    assert.equal(product.paymentType, "one_time");
+    assert.equal(product.recurring, null);
+    assert.match(product.stripeProductId, /^prod_[A-Za-z0-9]+$/);
+    assert.match(product.stripePriceId, /^price_[A-Za-z0-9]+$/);
+    assert.match(product.stripePaymentLinkId, /^plink_[A-Za-z0-9]+$/);
+    assert.match(product.purchaseUrl, /^https:\/\/buy\.stripe\.com\/[A-Za-z0-9]+$/);
+
+    const displayPrice = `$${(product.unitPriceCents / 100).toLocaleString("en-US")}`;
+    const card = work.match(new RegExp(`<article data-service-product="${escapeRegex(product.slug)}">([\\s\\S]*?)<\\/article>`))?.[1] || "";
+    const detail = serviceHtml.get(product.servicePage);
+    assert.match(card, new RegExp(`${escapeRegex(displayPrice)}[\\s\\S]*per service hour`, "i"));
+    assert.match(card, /One-time purchase/i);
+    assert.match(card, /choose 1–20 hours/i);
+    assert.match(card, /no subscription/i);
+    assert.match(card, /Discuss pricing/i);
+    assert.match(card, new RegExp(`href="${escapeRegex(product.purchaseUrl)}"`));
+    assert.match(card, new RegExp(`data-unit-price-cents="${product.unitPriceCents}"`));
+    assert.match(card, /data-purchase-type="one_time"/);
+    assert.match(card, /aria-label="[^"]*opens in a new tab[^"]*" target="_blank"/i);
+    assert.match(detail, new RegExp(`data-service-product="${escapeRegex(product.slug)}"`));
+    assert.match(detail, new RegExp(`${escapeRegex(displayPrice)}[\\s\\S]*per service hour`, "i"));
+    assert.match(detail, /One-time purchase/i);
+    assert.match(detail, /choose 1–20 hours/i);
+    assert.match(detail, /no subscription/i);
+    assert.match(detail, /Get time — choose hours/i);
+    assert.match(detail, /Discuss pricing/i);
+    assert.match(detail, new RegExp(`href="${escapeRegex(product.purchaseUrl)}"`));
+    assert.match(detail, new RegExp(`data-unit-price-cents="${product.unitPriceCents}"`));
+    assert.match(detail, /data-purchase-type="one_time"/);
+    assert.match(detail, /aria-label="[^"]*opens in a new tab[^"]*" target="_blank"/i);
+    assert.match(detail, /cancellation, rescheduling, or refund requirement/i);
+  }
+
+  assert.doesNotMatch(JSON.stringify(catalog), /(?:sk|rk)_(?:live|test)_|whsec_/i);
+  assert.doesNotMatch(work, /data-purchase-type="(?:subscription|recurring)"/i);
+  assert.match(work, /cancellation, rescheduling, or refund requirement/i);
+});
+
 test("the public nexus uses focused pages while preserving the complete ecosystem record", async () => {
   const pageNames = PAGE_NAMES;
   const [readme, pages, script, css, svg, history, generator, errorPage] = await Promise.all([
@@ -375,7 +444,10 @@ test("the public nexus uses focused pages while preserving the complete ecosyste
   assert.match(byName.get("people.html"), /href="https:\/\/github\.com\/RIAEvangelist"/);
   assert.match(byName.get("people.html"), /href="https:\/\/riaevangelist\.github\.io\/RIAEvangelist\/"/);
   assert.match(byName.get("people.html"), /href="https:\/\/www\.linkedin\.com\/in\/turtlesallthewaydown\/"/);
+  assert.match(byName.get("zen-sentry.html"), /href="https:\/\/thewizardnexus\.github\.io\/Zen-Sentry-Foundation\/"/);
   assert.match(byName.get("zen-sentry.html"), /href="https:\/\/github\.com\/TheWizardNexus\/Zen-Sentry-Foundation"/);
+  assert.match(byName.get("technology.html"), /Every card below opens a live public GitHub Pages site/);
+  assert.match(JSON.stringify(await json("data/projects.json")), /assets\/life-first-framework-header\.png/);
   assert.match(byName.get("code.html"), /id="repo-grid"/);
   assert.match(byName.get("code.html"), /Public code remains available without scripts/);
   assert.match(byName.get("signal.html"), /id="npm-chart"/);
@@ -387,17 +459,34 @@ test("the public nexus uses focused pages while preserving the complete ecosyste
   assert.doesNotMatch(byName.get("signal.html"), /Loading (?:the TWiN NPM|daily values|the latest public snapshot)/);
   assert.match(byName.get("work.html"), /The dojo is open/);
   for (const servicePage of SERVICE_PAGES) assert.match(byName.get("work.html"), new RegExp(`href="${servicePage}"`));
-  assert.match(errorPage, /href="\/TheWizardNexus\.com\/styles\.css"/);
+  assert.match(errorPage, /href="\/TheWizardNexus\.com\/styles\.css\?v=\d{8}[a-z]"/);
   assert.match(errorPage, /href="\/TheWizardNexus\.com\/ecosystem\.html"/);
   assert.match(errorPage, /wizard-nexus-logo-96\.png/);
   for (const html of pages) {
-    assert.match(html, /href="styles\.css"/);
-    assert.match(html, /src="app\.js"/);
+    assert.match(html, /href="styles\.css\?v=\d{8}[a-z]"/);
+    assert.match(html, /src="app\.js\?v=\d{8}[a-z]"/);
     assert.match(html, /class="site-header"/);
     assert.match(html, /class="brand-mark"/);
-    assert.match(html, /wizard-nexus-favicon-32\.png/);
+    assert.match(html, /wizard-nexus-favicon-32\.png\?v=\d{8}[a-z]/);
+    assert.match(html, /wizard-nexus-apple-touch-icon\.png\?v=\d{8}[a-z]/);
+    assert.match(html, /wizard-nexus-logo-96\.png\?v=\d{8}[a-z]/);
+    assert.match(html, /href="philosophy\.html">Ethics &amp; Philosophy<\/a>/);
     assert.doesNotMatch(html, /brand-sigil/);
-    assert.match(html, /id="primary-navigation"[\s\S]*?href="https:\/\/thewizardnexus\.github\.io\/KEMPO\/philosophy\.html">Philosophy ↗<\/a>/);
+    const primaryNav = html.match(/<nav id="primary-navigation"[^>]*>([\s\S]*?)<\/nav>/)?.[1] || "";
+    const primaryHrefs = [...primaryNav.matchAll(/<a\b[^>]*href="([^"]+)"/g)].map((match) => match[1]);
+    assert.deepEqual(primaryHrefs, [
+      "technology.html",
+      "practice.html",
+      "trust.html",
+      "people.html",
+      "https://thewizardnexus.github.io/Zen-Sentry-Foundation/",
+      "work.html",
+      "contact.html",
+      "https://thewizardnexus.github.io/KEMPO/philosophy.html",
+    ]);
+    assert.match(primaryNav, /class="nav-external" href="https:\/\/thewizardnexus\.github\.io\/Zen-Sentry-Foundation\/">Zen Sentry ↗<\/a>/);
+    assert.match(primaryNav, /class="nav-cta nav-contact" href="contact\.html">Contact/);
+    assert.match(primaryNav, /<a class="nav-cta nav-philosophy" href="https:\/\/thewizardnexus\.github\.io\/KEMPO\/philosophy\.html">Philosophy <span aria-hidden="true">↗<\/span><\/a>\s*$/);
   }
   assert.match(script, /data\/projects\.json/);
   assert.match(script, /stage-badge/);

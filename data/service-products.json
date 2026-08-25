@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-08-25T03:12:33.0038666Z",
+  "source": {
+    "provider": "Stripe",
+    "account": "The Wizard Nexus",
+    "livemode": true,
+    "note": "Verified live one-time service-hour catalog. Public IDs and hosted checkout URLs are not secrets; no API credential is stored in this repository."
+  },
+  "purchasePolicy": {
+    "currency": "usd",
+    "paymentType": "one_time",
+    "unit": "service_hour",
+    "quantity": {
+      "adjustable": true,
+      "minimum": 1,
+      "maximum": 20
+    },
+    "automaticTax": false,
+    "statement": "A purchase reserves professional time, not a guaranteed deliverable or immediate start. Fit, scope, and scheduling are confirmed before work begins. Seats, licenses, usage, infrastructure, travel, compliance work, and third-party costs are separate wherever noted."
+  },
+  "products": [
+    {
+      "slug": "behavioral-health-strategy",
+      "name": "Behavioral-Health Strategy — Service Hour",
+      "servicePage": "service-strategy.html",
+      "unitPriceCents": 25000,
+      "paymentType": "one_time",
+      "recurring": null,
+      "extras": "No separate seat or usage charge.",
+      "stripeProductId": "prod_V8RVTpNco5UBtE",
+      "stripePriceId": "price_1U8AcxABxO1kz6t3hDhy6ces",
+      "stripePaymentLinkId": "plink_1U8Ae6ABxO1kz6t36M7jg6aU",
+      "purchaseUrl": "https://buy.stripe.com/8x2cN4a9e1vT3TI2Fl2Ji05"
+    },
+    {
+      "slug": "program-development-evaluation",
+      "name": "Program Development & Evaluation — Service Hour",
+      "servicePage": "service-programs.html",
+      "unitPriceCents": 35000,
+      "paymentType": "one_time",
+      "recurring": null,
+      "extras": "No separate seat or usage charge.",
+      "stripeProductId": "prod_V8RWyYq0FqPJKk",
+      "stripePriceId": "price_1U8AdNABxO1kz6t35xF1iVof",
+      "stripePaymentLinkId": "plink_1U8AeRABxO1kz6t3trQg0xhs",
+      "purchaseUrl": "https://buy.stripe.com/3cIcN4gxC7UhfCq3Jp2Ji09"
+    },
+    {
+      "slug": "policy-procedure-engineering",
+      "name": "Policy & Procedure Engineering — Service Hour",
+      "servicePage": "service-policy.html",
+      "unitPriceCents": 55000,
+      "paymentType": "one_time",
+      "recurring": null,
+      "extras": "No separate seat or usage charge.",
+      "stripeProductId": "prod_V8RWb9KGK8J2O9",
+      "stripePriceId": "price_1U8AdMABxO1kz6t3Qt8JdnXP",
+      "stripePaymentLinkId": "plink_1U8AeTABxO1kz6t3HpLDwOF1",
+      "purchaseUrl": "https://buy.stripe.com/00weVc816fmJ89YcfV2Ji0b"
+    },
+    {
+      "slug": "white-label-precrisis",
+      "name": "White-Label PreCrisis — Service Hour",
+      "servicePage": "service-precrisis.html",
+      "unitPriceCents": 25000,
+      "paymentType": "one_time",
+      "recurring": null,
+      "extras": "Seats and licenses are priced separately.",
+      "stripeProductId": "prod_V8RWfRk4TivfVx",
+      "stripePriceId": "price_1U8AdOABxO1kz6t3t6lvkIVC",
+      "stripePaymentLinkId": "plink_1U8AeQABxO1kz6t3qnKvcDxK",
+      "purchaseUrl": "https://buy.stripe.com/14AbJ0fty7Uhai66VB2Ji08"
+    },
+    {
+      "slug": "private-ai-cloud-local",
+      "name": "Private AI: Cloud or Local — Service Hour",
+      "servicePage": "service-private-ai.html",
+      "unitPriceCents": 35000,
+      "paymentType": "one_time",
+      "recurring": null,
+      "extras": "Seats, usage, infrastructure, and third-party costs are separate.",
+      "stripeProductId": "prod_V8RWT7TEw8UPSG",
+      "stripePriceId": "price_1U8AdKABxO1kz6t3PxiSAzN8",
+      "stripePaymentLinkId": "plink_1U8AeOABxO1kz6t3Q36yyrcf",
+      "purchaseUrl": "https://buy.stripe.com/28EeVc5SY8Yl2PE5Rx2Ji06"
+    },
+    {
+      "slug": "private-il2-il6-ai",
+      "name": "Private IL-2 through IL-6 AI — Service Hour",
+      "servicePage": "service-military-ai.html",
+      "unitPriceCents": 55000,
+      "paymentType": "one_time",
+      "recurring": null,
+      "extras": "Seats, usage, infrastructure, compliance support, and third-party costs are separate.",
+      "stripeProductId": "prod_V8RWn2LOwQ4tOM",
+      "stripePriceId": "price_1U8AdJABxO1kz6t3WLzlxOZE",
+      "stripePaymentLinkId": "plink_1U8AeSABxO1kz6t3vZKp1t40",
+      "purchaseUrl": "https://buy.stripe.com/6oU28qepufmJ1LA3Jp2Ji0a"
+    },
+    {
+      "slug": "cyber-rainbow-6",
+      "name": "Cyber Rainbow 6 — Service Hour",
+      "servicePage": "service-cyber.html",
+      "unitPriceCents": 110000,
+      "paymentType": "one_time",
+      "recurring": null,
+      "extras": "Seats, usage, infrastructure, and third-party costs are separate.",
+      "stripeProductId": "prod_V8RWfyXAf39tH0",
+      "stripePriceId": "price_1U8AdLABxO1kz6t3FvflNbpY",
+      "stripePaymentLinkId": "plink_1U8AePABxO1kz6t38DOQwqh5",
+      "purchaseUrl": "https://buy.stripe.com/00w00i2GM0rPdui7ZF2Ji07"
+    }
+  ]
+}

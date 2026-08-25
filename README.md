@@ -29,10 +29,10 @@
   <a href="https://thewizardnexus.github.io/TheWizardNexus.com/technology.html">Technology</a> ·
   <a href="https://thewizardnexus.github.io/TheWizardNexus.com/ecosystem.html">Ecosystem</a> ·
   <a href="https://thewizardnexus.github.io/TheWizardNexus.com/practice.html">Practice</a> ·
-  <a href="https://thewizardnexus.github.io/TheWizardNexus.com/philosophy.html">Philosophy</a> ·
+  <a href="https://thewizardnexus.github.io/KEMPO/philosophy.html">Philosophy</a> ·
   <a href="https://thewizardnexus.github.io/TheWizardNexus.com/trust.html">Trust</a> ·
   <a href="https://thewizardnexus.github.io/TheWizardNexus.com/people.html">People</a> ·
-  <a href="https://thewizardnexus.github.io/TheWizardNexus.com/zen-sentry.html">Zen Sentry</a> ·
+  <a href="https://thewizardnexus.github.io/Zen-Sentry-Foundation/">Zen Sentry</a> ·
   <a href="https://thewizardnexus.github.io/TheWizardNexus.com/work.html">Services</a> ·
   <a href="https://thewizardnexus.github.io/TheWizardNexus.com/contact.html">Contact</a>
 </p>
@@ -49,7 +49,7 @@ TWiN is a **woman-led, Veteran-founded, clinically informed team** founded by **
 
 ## Technology and public source
 
-The [Technology directory](https://thewizardnexus.github.io/TheWizardNexus.com/technology.html) links all 14 public project sites and renders project-owned header art or, where none is published, the project’s GitHub repository card. A repository link appears only where the source repository is public.
+The [Technology directory](https://thewizardnexus.github.io/TheWizardNexus.com/technology.html) links all 14 public project sites and renders project-owned header art, a project-specific commissioned banner, or—where neither is available—the project’s GitHub repository card. A repository link appears only where the source repository is public.
 
 - [The Wizard Nexus on GitHub](https://github.com/TheWizardNexus)
 - [Roshi on GitHub](https://github.com/RIAEvangelist)
@@ -66,8 +66,8 @@ A public interface does not automatically mean public source, production readine
 - [KEMPO philosophy](https://thewizardnexus.github.io/KEMPO/philosophy.html) — the full public philosophy of practiced judgment under pressure.
 - [Life First Framework](https://riaevangelist.github.io/life-first-framework/) — an open working framework for life, dignity, agency, accountability, and repair ([repository](https://github.com/RIAEvangelist/life-first-framework)).
 - [Trust](https://thewizardnexus.github.io/TheWizardNexus.com/trust.html) — accountable decisions, evidence, privacy, maturity, source boundaries, and repair.
-- [Zen Sentry Foundation](https://thewizardnexus.github.io/TheWizardNexus.com/zen-sentry.html) — research, tools, partnerships, and community initiatives for protection before crisis.
-- [Services](https://thewizardnexus.github.io/TheWizardNexus.com/work.html) — seven focused paths across strategy, programs, policy, private AI, PreCrisis implementation, and resilience-centered cyber work.
+- [Zen Sentry Foundation](https://thewizardnexus.github.io/Zen-Sentry-Foundation/) — research, tools, partnerships, and community initiatives for protection before crisis ([repository](https://github.com/TheWizardNexus/Zen-Sentry-Foundation)).
+- [Services](https://thewizardnexus.github.io/TheWizardNexus.com/work.html) — seven focused paths with clear one-time service-hour pricing, adjustable 1–20 hour checkout, and a discuss-pricing route.
 
 ## People
 
@@ -79,7 +79,7 @@ A public interface does not automatically mean public source, production readine
 
 ## This repository
 
-This repository is the dependency-free static source for **TheWizardNexus.com**. It uses plain HTML, CSS, and JavaScript and publishes to GitHub Pages from `main` through [the Pages workflow](.github/workflows/profile-site.yml).
+This repository is the dependency-free static source for **TheWizardNexus.com**. It uses plain HTML, CSS, and JavaScript and publishes to GitHub Pages from `main` through [the Pages workflow](.github/workflows/profile-site.yml). The public, one-time Stripe service-hour catalog is recorded in [`data/service-products.json`](data/service-products.json); it contains public product, price, and Payment Link identifiers only—never secret keys.
 
 Local validation:
 
