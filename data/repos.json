@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-08-25T00:59:53.859Z",
+  "generatedAt": "2026-08-25T03:33:03.886Z",
   "source": {
     "profile": "https://api.github.com/users/TheWizardNexus",
     "repositories": "https://api.github.com/users/TheWizardNexus/repos?per_page=100&type=owner"
@@ -23,26 +23,6 @@
   },
   "repositories": [
     {
-      "name": "arcane-os-sdk",
-      "fullName": "TheWizardNexus/arcane-os-sdk",
-      "description": "sdk for building apps for Acane OS",
-      "explanation": "A standalone SDK and CLI for building, testing, packaging, and managing Arcane applications inside or outside ARCANE OS.",
-      "url": "https://github.com/TheWizardNexus/arcane-os-sdk",
-      "homepage": "https://thewizardnexus.github.io/arcane-os-sdk/",
-      "language": "JavaScript",
-      "stars": 0,
-      "forks": 0,
-      "openIssues": 0,
-      "watchers": 0,
-      "archived": false,
-      "disabled": false,
-      "fork": false,
-      "topics": [],
-      "license": "AGPL-3.0",
-      "createdAt": "2026-08-13T23:55:03Z",
-      "updatedAt": "2026-08-25T00:57:23Z"
-    },
-    {
       "name": "TheWizardNexus.com",
       "fullName": "TheWizardNexus/TheWizardNexus.com",
       "description": "The public facing website",
@@ -60,7 +40,27 @@
       "topics": [],
       "license": null,
       "createdAt": "2026-08-24T15:14:01Z",
-      "updatedAt": "2026-08-24T17:50:36Z"
+      "updatedAt": "2026-08-25T03:33:03Z"
+    },
+    {
+      "name": "arcane-os-sdk",
+      "fullName": "TheWizardNexus/arcane-os-sdk",
+      "description": "sdk for building apps for Acane OS",
+      "explanation": "A standalone SDK and CLI for building, testing, packaging, and managing Arcane applications inside or outside ARCANE OS.",
+      "url": "https://github.com/TheWizardNexus/arcane-os-sdk",
+      "homepage": "https://thewizardnexus.github.io/arcane-os-sdk/",
+      "language": "JavaScript",
+      "stars": 0,
+      "forks": 0,
+      "openIssues": 0,
+      "watchers": 0,
+      "archived": false,
+      "disabled": false,
+      "fork": false,
+      "topics": [],
+      "license": "AGPL-3.0",
+      "createdAt": "2026-08-13T23:55:03Z",
+      "updatedAt": "2026-08-25T02:57:32Z"
     },
     {
       "name": "Zen-Sentry-Foundation",
@@ -69,7 +69,7 @@
       "explanation": "Zen Sentry Foundation is a veteran-led nonprofit advancing upstream behavioral health, Veteran suicide prevention, responsible AI ethics, and human-centered systems designed to strengthen support before crisis.",
       "url": "https://github.com/TheWizardNexus/Zen-Sentry-Foundation",
       "homepage": null,
-      "language": "Unclassified",
+      "language": "HTML",
       "stars": 0,
       "forks": 0,
       "openIssues": 0,
@@ -80,7 +80,7 @@
       "topics": [],
       "license": null,
       "createdAt": "2026-08-24T17:06:34Z",
-      "updatedAt": "2026-08-24T17:06:35Z"
+      "updatedAt": "2026-08-25T01:59:50Z"
     },
     {
       "name": "TheWizardNexus",
