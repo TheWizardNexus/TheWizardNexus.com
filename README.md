@@ -19,7 +19,7 @@
 
 <!-- profile-telemetry-counts:start -->
 <p align="center">
-  <strong>13 published project sites · 78 mapped ecosystem points · 171 relationships · 6 public repositories</strong><br>
+  <strong>14 published project sites · 78 mapped ecosystem points · 171 relationships · 7 public repositories</strong><br>
   <sub><strong>141 official npm range downloads</strong> from January 1, 2026 through August 23, 2026 · npm-stat is an optional comparison only</sub><br>
   <a href="https://thewizardnexus.github.io/TheWizardNexus.com/technology.html"><strong>Navigate the live TWiN technology directory →</strong></a>
 </p>
@@ -29,6 +29,7 @@
   <a href="https://thewizardnexus.github.io/TheWizardNexus.com/technology.html">Technology</a> ·
   <a href="https://thewizardnexus.github.io/TheWizardNexus.com/ecosystem.html">Ecosystem</a> ·
   <a href="https://thewizardnexus.github.io/TheWizardNexus.com/practice.html">Practice</a> ·
+  <a href="https://thewizardnexus.github.io/TheWizardNexus.com/philosophy.html">Philosophy</a> ·
   <a href="https://thewizardnexus.github.io/TheWizardNexus.com/trust.html">Trust</a> ·
   <a href="https://thewizardnexus.github.io/TheWizardNexus.com/people.html">People</a> ·
   <a href="https://thewizardnexus.github.io/TheWizardNexus.com/zen-sentry.html">Zen Sentry</a> ·
@@ -40,7 +41,7 @@
 
 The Wizard Nexus connects behavioral-health practice, governed AI, local-first technology, and evidence-centered workflows so trusted people can understand emerging risk and act earlier.
 
-At its center is **PreCrisis AI**: technology designed to help people recognize signs of trouble early enough for meaningful human intervention. Across every system, TWiN keeps source boundaries, maturity, privacy, evidence, and human decision authority visible.
+At its center is **PreCrisis AI**: technology designed to help people recognize signs of trouble early enough for meaningful human intervention. Across every system, TWiN puts life and dignity first, preserves human agency, and keeps source boundaries, maturity, privacy, evidence, accountability, and repair visible.
 
 > **Optimize → Detect → Prevent → Intervene**
 
@@ -48,7 +49,7 @@ TWiN is a **woman-led, Veteran-founded, clinically informed team** founded by **
 
 ## Technology and public source
 
-The [Technology directory](https://thewizardnexus.github.io/TheWizardNexus.com/technology.html) links every one of the 13 public GitHub Pages project sites and renders each project’s canonical GitHub header image. A repository link appears only where the source repository is public.
+The [Technology directory](https://thewizardnexus.github.io/TheWizardNexus.com/technology.html) links all 14 public project sites and renders project-owned header art or, where none is published, the project’s GitHub repository card. A repository link appears only where the source repository is public.
 
 - [The Wizard Nexus on GitHub](https://github.com/TheWizardNexus)
 - [Roshi on GitHub](https://github.com/RIAEvangelist)
@@ -61,7 +62,10 @@ A public interface does not automatically mean public source, production readine
 ## Practice, foundation, and services
 
 - [Practice](https://thewizardnexus.github.io/TheWizardNexus.com/practice.html) — PreCrisis, KEMPO, and the disciplines behind earlier action.
-- [Trust](https://thewizardnexus.github.io/TheWizardNexus.com/trust.html) — accountable decisions, evidence, privacy, maturity, and source boundaries.
+- [Philosophy](https://thewizardnexus.github.io/TheWizardNexus.com/philosophy.html) — KEMPO, Life First, and the moral commitments governing consequential work.
+- [KEMPO philosophy](https://thewizardnexus.github.io/KEMPO/philosophy.html) — the full public philosophy of practiced judgment under pressure.
+- [Life First Framework](https://riaevangelist.github.io/life-first-framework/) — an open working framework for life, dignity, agency, accountability, and repair ([repository](https://github.com/RIAEvangelist/life-first-framework)).
+- [Trust](https://thewizardnexus.github.io/TheWizardNexus.com/trust.html) — accountable decisions, evidence, privacy, maturity, source boundaries, and repair.
 - [Zen Sentry Foundation](https://thewizardnexus.github.io/TheWizardNexus.com/zen-sentry.html) — research, tools, partnerships, and community initiatives for protection before crisis.
 - [Services](https://thewizardnexus.github.io/TheWizardNexus.com/work.html) — seven focused paths across strategy, programs, policy, private AI, PreCrisis implementation, and resilience-centered cyber work.
 

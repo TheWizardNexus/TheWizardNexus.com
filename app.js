@@ -131,7 +131,7 @@ function updateFreshness() {
 }
 
 const projectGroups = {
-  foundation: new Set(["astrolabe", "twin-compass", "kempo", "spellwire"]),
+  foundation: new Set(["astrolabe", "twin-compass", "life-first-framework", "kempo", "spellwire"]),
   platform: new Set(["arcane-os", "arcane-os-sdk", "ax", "dbopfs", "dbopfs-studio", "toshokann"]),
   workspace: new Set(["sentinel", "scamurai", "redress"]),
 };

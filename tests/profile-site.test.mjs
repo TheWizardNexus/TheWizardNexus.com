@@ -23,6 +23,7 @@ const PAGE_NAMES = [
   "technology.html",
   "ecosystem.html",
   "practice.html",
+  "philosophy.html",
   "trust.html",
   "people.html",
   "zen-sentry.html",
@@ -40,7 +41,7 @@ test("curated ecosystem accounts for every published interface without confusing
   const urls = projects.published.map((project) => project.url);
   const stages = new Map(projects.published.map((project) => [project.slug, project.stage]));
 
-  assert.equal(projects.published.length, 13);
+  assert.equal(projects.published.length, 14);
   assert.equal(projects.publishingNext.length, 3);
   assert.equal(new Set(slugs).size, slugs.length);
   assert.equal(new Set(urls).size, urls.length);
@@ -53,6 +54,7 @@ test("curated ecosystem accounts for every published interface without confusing
   assert.equal(stages.get("arcane-os"), "Development");
   assert.equal(stages.get("dbopfs"), "Released 1.0.0");
   assert.equal(stages.get("twin-compass"), "Released 1.0.0");
+  assert.equal(stages.get("life-first-framework"), "Public working draft 0.3");
   assert.equal(stages.get("scamurai"), "Pre-release");
   assert.equal(stages.get("redress"), "Inside ARCANE");
   assert.ok(projects.mapSnapshot.points >= 78);
@@ -61,7 +63,7 @@ test("curated ecosystem accounts for every published interface without confusing
   assert.ok(projects.mapSnapshot.dataUrl.startsWith("https://raw.githubusercontent.com/TheWizardNexus/Astrolabe/"));
 });
 
-test("technology manifest preserves all canonical sites, headers, and four public repositories", async () => {
+test("technology manifest preserves all canonical sites, headers, and five public repositories", async () => {
   const projects = await json("data/projects.json");
   const actual = Object.fromEntries(projects.published.map((project) => [project.slug, {
     site: project.url,
@@ -114,6 +116,11 @@ test("technology manifest preserves all canonical sites, headers, and four publi
       image: "assets/twin-compass-readme-header.png",
       repository: null,
     },
+    "life-first-framework": {
+      site: "https://riaevangelist.github.io/life-first-framework/",
+      image: "https://opengraph.githubassets.com/5ef81775fc9b5b1d65bc52504244ba497920c5f09344587ba016cbacecc6bebb/RIAEvangelist/life-first-framework",
+      repository: "https://github.com/RIAEvangelist/life-first-framework",
+    },
     kempo: {
       site: "https://thewizardnexus.github.io/KEMPO/",
       image: "https://thewizardnexus.github.io/KEMPO/public/og.png",
@@ -136,7 +143,7 @@ test("technology manifest preserves all canonical sites, headers, and four publi
     },
   });
   const publicRepositories = projects.published.filter((project) => project.repositoryUrl);
-  assert.equal(publicRepositories.length, 4);
+  assert.equal(publicRepositories.length, 5);
   assert.ok(publicRepositories.every((project) => project.sourceBoundary === "Public repository"));
   await Promise.all([
     access(path.join(ROOT, "assets", "spellwire-readme-header.png")),
@@ -341,7 +348,7 @@ test("the public nexus uses focused pages while preserving the complete ecosyste
 
   assert.match(readme, /assets\/twin-signal\.svg/);
   assert.match(readme, /thewizardnexus\.github\.io\/TheWizardNexus.com/);
-  for (const pageName of ["technology.html", "practice.html", "trust.html", "people.html", "zen-sentry.html", "work.html", "signal.html", "contact.html"]) {
+  for (const pageName of ["technology.html", "practice.html", "philosophy.html", "trust.html", "people.html", "zen-sentry.html", "work.html", "signal.html", "contact.html"]) {
     assert.match(byName.get("index.html"), new RegExp(`href="${pageName}"`));
   }
   assert.doesNotMatch(byName.get("index.html"), /id="project-grid"|id="repo-grid"|id="npm-chart"/);
@@ -349,16 +356,26 @@ test("the public nexus uses focused pages while preserving the complete ecosyste
   assert.match(byName.get("technology.html"), /All live sites remain directly available without scripts/);
   const technologyNoScript = byName.get("technology.html").match(/<noscript>([\s\S]*?)<\/noscript>/)?.[1] || "";
   assert.equal([...technologyNoScript.matchAll(/href="https:\/\/thewizardnexus\.github\.io\/(?!TheWizardNexus\.com)/g)].length, 13);
+  assert.match(technologyNoScript, /href="https:\/\/riaevangelist\.github\.io\/life-first-framework\/"/);
   assert.doesNotMatch(byName.get("ecosystem.html"), /id="project-grid"|id="project-search"|id="project-filters"/);
-  assert.match(byName.get("ecosystem.html"), /Open all 13 project sites/);
+  assert.match(byName.get("ecosystem.html"), /Open all 14 project sites/);
   assert.match(byName.get("practice.html"), /Optimize[\s\S]*Detect[\s\S]*Prevent[\s\S]*Intervene/);
-  assert.match(byName.get("trust.html"), /Stage before spectacle/);
+  assert.match(byName.get("practice.html"), /Knowledge[\s\S]*Empower[\s\S]*Monitor[\s\S]*Prevent[\s\S]*Optimize/);
+  assert.match(byName.get("practice.html"), /PreCrisis helps people notice meaningful change\. KEMPO trains and tests/);
+  assert.match(byName.get("philosophy.html"), /Life and dignity first/);
+  assert.match(byName.get("philosophy.html"), /https:\/\/thewizardnexus\.github\.io\/KEMPO\/philosophy\.html/);
+  assert.match(byName.get("philosophy.html"), /https:\/\/riaevangelist\.github\.io\/life-first-framework\//);
+  assert.match(byName.get("philosophy.html"), /https:\/\/github\.com\/RIAEvangelist\/life-first-framework/);
+  assert.match(byName.get("trust.html"), /Morals before/);
+  assert.match(byName.get("trust.html"), /Accountability and repair/);
   assert.match(byName.get("people.html"), /Johanna “JZ” Zollmann, LCSW/);
   assert.match(byName.get("people.html"), /assets\/johanna-portrait\.jpg/);
   assert.match(byName.get("people.html"), /assets\/roshi-portrait\.png/);
+  assert.match(byName.get("people.html"), /assets\/wizard-nexus-logo-premium\.png/);
   assert.match(byName.get("people.html"), /href="https:\/\/github\.com\/RIAEvangelist"/);
   assert.match(byName.get("people.html"), /href="https:\/\/riaevangelist\.github\.io\/RIAEvangelist\/"/);
   assert.match(byName.get("people.html"), /href="https:\/\/www\.linkedin\.com\/in\/turtlesallthewaydown\/"/);
+  assert.match(byName.get("zen-sentry.html"), /href="https:\/\/github\.com\/TheWizardNexus\/Zen-Sentry-Foundation"/);
   assert.match(byName.get("code.html"), /id="repo-grid"/);
   assert.match(byName.get("code.html"), /Public code remains available without scripts/);
   assert.match(byName.get("signal.html"), /id="npm-chart"/);
@@ -380,6 +397,7 @@ test("the public nexus uses focused pages while preserving the complete ecosyste
     assert.match(html, /class="brand-mark"/);
     assert.match(html, /wizard-nexus-favicon-32\.png/);
     assert.doesNotMatch(html, /brand-sigil/);
+    assert.match(html, /id="primary-navigation"[\s\S]*?href="https:\/\/thewizardnexus\.github\.io\/KEMPO\/philosophy\.html">Philosophy ↗<\/a>/);
   }
   assert.match(script, /data\/projects\.json/);
   assert.match(script, /stage-badge/);
@@ -389,6 +407,9 @@ test("the public nexus uses focused pages while preserving the complete ecosyste
   assert.match(script, /data\/npm-history\.json/);
   assert.match(script, /data\/linkedin-stats\.json/);
   assert.match(css, /prefers-reduced-motion/);
+  assert.doesNotMatch(css, /\.page-hero::(?:before|after)/);
+  assert.match(css, /border-left: 3px solid var\(--page-accent\)/);
+  assert.match(css, /\.ethics-grid/);
   assert.match(css, /@keyframes cosmos-drift/);
   assert.match(css, /body::after \{ animation: none !important; transform: none !important; \}/);
   assert.match(css, /body::before, body::after \{ display: none; \}/);
@@ -430,7 +451,9 @@ test("every focused page has canonical metadata and every internal HTML route re
     assert.match(html, /<meta name="twitter:description" content="[^"]+">/);
     assert.match(html, /<meta name="twitter:image:alt" content="[^"]+">/);
     assert.match(sitemap, new RegExp(`<loc>${canonical}</loc>`));
-    const localLinks = [...html.matchAll(/<a\b[^>]*\bhref="([^"#]+\.html)"/g)].map((match) => match[1]);
+    const localLinks = [...html.matchAll(/<a\b[^>]*\bhref="([^"#]+\.html)"/g)]
+      .map((match) => match[1])
+      .filter((href) => !/^https?:\/\//.test(href));
     for (const link of localLinks) assert.ok(rootEntries.includes(link), `${pageName} links to missing ${link}`);
   }
   assert.equal([...sitemap.matchAll(/<loc>/g)].length, pageNames.length);
@@ -502,6 +525,7 @@ test("the rebrand uses approved assets and requested profiles without excluded c
   assert.match(contact, /https:\/\/riaevangelist\.github\.io\/RIAEvangelist\//);
   for (const asset of [
     "wizard-nexus-logo.png",
+    "wizard-nexus-logo-premium.png",
     "wizard-nexus-logo-96.png",
     "wizard-nexus-favicon-32.png",
     "wizard-nexus-apple-touch-icon.png",

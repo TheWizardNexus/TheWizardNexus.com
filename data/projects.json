@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-08-24T16:51:27.563Z",
+  "generatedAt": "2026-08-25T00:59:53.859Z",
   "source": {
     "profile": "https://github.com/TheWizardNexus/TheWizardNexus",
-    "note": "Curated from the public TWiN profile and revision-specific project evidence. Public interfaces preserve separate maturity and source-boundary labels."
+    "note": "Curated from the public TWiN profile, project-owned public interfaces, and the related public Life First project independently stewarded by Roshi. Public interfaces preserve separate maturity and source-boundary labels."
   },
   "mapSnapshot": {
     "source": "https://github.com/TheWizardNexus/Astrolabe",
@@ -151,6 +151,22 @@
       "sourceBoundary": "Private repository",
       "featured": true,
       "accent": "violet"
+    },
+    {
+      "slug": "life-first-framework",
+      "name": "Life First Framework",
+      "category": "AI governance",
+      "stage": "Public working draft 0.3",
+      "maturity": "Working draft",
+      "version": "0.3",
+      "description": "An open framework for AI systems that put human life, dignity, agency, and accountability first, independently stewarded by Roshi.",
+      "url": "https://riaevangelist.github.io/life-first-framework/",
+      "repositoryUrl": "https://github.com/RIAEvangelist/life-first-framework",
+      "image": "https://opengraph.githubassets.com/5ef81775fc9b5b1d65bc52504244ba497920c5f09344587ba016cbacecc6bebb/RIAEvangelist/life-first-framework",
+      "sourceStatus": "Public working draft",
+      "sourceBoundary": "Public repository",
+      "featured": true,
+      "accent": "green"
     },
     {
       "slug": "kempo",

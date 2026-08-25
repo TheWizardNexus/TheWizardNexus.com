@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-08-24T16:51:27.563Z",
+  "generatedAt": "2026-08-25T00:59:53.859Z",
   "source": {
     "profile": "https://api.github.com/users/TheWizardNexus",
     "repositories": "https://api.github.com/users/TheWizardNexus/repos?per_page=100&type=owner"
@@ -15,8 +15,8 @@
     "following": 0
   },
   "counts": {
-    "total": 6,
-    "original": 6,
+    "total": 7,
+    "original": 7,
     "forks": 0,
     "archived": 0,
     "stars": 2
@@ -29,7 +29,7 @@
       "explanation": "A standalone SDK and CLI for building, testing, packaging, and managing Arcane applications inside or outside ARCANE OS.",
       "url": "https://github.com/TheWizardNexus/arcane-os-sdk",
       "homepage": "https://thewizardnexus.github.io/arcane-os-sdk/",
-      "language": "HTML",
+      "language": "JavaScript",
       "stars": 0,
       "forks": 0,
       "openIssues": 0,
@@ -40,7 +40,47 @@
       "topics": [],
       "license": "AGPL-3.0",
       "createdAt": "2026-08-13T23:55:03Z",
-      "updatedAt": "2026-08-24T15:34:16Z"
+      "updatedAt": "2026-08-25T00:57:23Z"
+    },
+    {
+      "name": "TheWizardNexus.com",
+      "fullName": "TheWizardNexus/TheWizardNexus.com",
+      "description": "The public facing website",
+      "explanation": "The public facing website",
+      "url": "https://github.com/TheWizardNexus/TheWizardNexus.com",
+      "homepage": "https://thewizardnexus.github.io/TheWizardNexus.com/",
+      "language": "HTML",
+      "stars": 0,
+      "forks": 0,
+      "openIssues": 0,
+      "watchers": 0,
+      "archived": false,
+      "disabled": false,
+      "fork": false,
+      "topics": [],
+      "license": null,
+      "createdAt": "2026-08-24T15:14:01Z",
+      "updatedAt": "2026-08-24T17:50:36Z"
+    },
+    {
+      "name": "Zen-Sentry-Foundation",
+      "fullName": "TheWizardNexus/Zen-Sentry-Foundation",
+      "description": "Zen Sentry Foundation is a veteran-led nonprofit advancing upstream behavioral health, Veteran suicide prevention, responsible AI ethics, and human-centered systems designed to strengthen support before crisis.",
+      "explanation": "Zen Sentry Foundation is a veteran-led nonprofit advancing upstream behavioral health, Veteran suicide prevention, responsible AI ethics, and human-centered systems designed to strengthen support before crisis.",
+      "url": "https://github.com/TheWizardNexus/Zen-Sentry-Foundation",
+      "homepage": null,
+      "language": "Unclassified",
+      "stars": 0,
+      "forks": 0,
+      "openIssues": 0,
+      "watchers": 0,
+      "archived": false,
+      "disabled": false,
+      "fork": false,
+      "topics": [],
+      "license": null,
+      "createdAt": "2026-08-24T17:06:34Z",
+      "updatedAt": "2026-08-24T17:06:35Z"
     },
     {
       "name": "TheWizardNexus",
@@ -61,26 +101,6 @@
       "license": null,
       "createdAt": "2026-07-13T18:33:00Z",
       "updatedAt": "2026-08-24T15:32:32Z"
-    },
-    {
-      "name": "TheWizardNexus.com",
-      "fullName": "TheWizardNexus/TheWizardNexus.com",
-      "description": "The public facing website",
-      "explanation": "The public facing website",
-      "url": "https://github.com/TheWizardNexus/TheWizardNexus.com",
-      "homepage": "https://thewizardnexus.github.io/TheWizardNexus.com/",
-      "language": "Unclassified",
-      "stars": 0,
-      "forks": 0,
-      "openIssues": 0,
-      "watchers": 0,
-      "archived": false,
-      "disabled": false,
-      "fork": false,
-      "topics": [],
-      "license": null,
-      "createdAt": "2026-08-24T15:14:01Z",
-      "updatedAt": "2026-08-24T15:15:25Z"
     },
     {
       "name": "DBOPFS",
