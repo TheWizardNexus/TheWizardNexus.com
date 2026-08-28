@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-08-27T17:50:21.220Z",
+  "generatedAt": "2026-08-28T18:55:11.388Z",
   "source": {
     "profile": "https://api.github.com/users/TheWizardNexus",
     "repositories": "https://api.github.com/users/TheWizardNexus/repos?per_page=100&type=owner"
@@ -40,27 +40,7 @@
       "topics": [],
       "license": "AGPL-3.0",
       "createdAt": "2026-08-13T23:55:03Z",
-      "updatedAt": "2026-08-27T17:31:40Z"
-    },
-    {
-      "name": "TheWizardNexus.com",
-      "fullName": "TheWizardNexus/TheWizardNexus.com",
-      "description": "The public facing website",
-      "explanation": "The public facing website",
-      "url": "https://github.com/TheWizardNexus/TheWizardNexus.com",
-      "homepage": "https://thewizardnexus.github.io/TheWizardNexus.com/",
-      "language": "HTML",
-      "stars": 0,
-      "forks": 0,
-      "openIssues": 0,
-      "watchers": 0,
-      "archived": false,
-      "disabled": false,
-      "fork": false,
-      "topics": [],
-      "license": null,
-      "createdAt": "2026-08-24T15:14:01Z",
-      "updatedAt": "2026-08-26T07:30:13Z"
+      "updatedAt": "2026-08-28T05:38:18Z"
     },
     {
       "name": "TheWizardNexus",
@@ -80,7 +60,27 @@
       "topics": [],
       "license": null,
       "createdAt": "2026-07-13T18:33:00Z",
-      "updatedAt": "2026-08-26T07:28:42Z"
+      "updatedAt": "2026-08-27T18:10:43Z"
+    },
+    {
+      "name": "TheWizardNexus.com",
+      "fullName": "TheWizardNexus/TheWizardNexus.com",
+      "description": "The public facing website",
+      "explanation": "The public facing website",
+      "url": "https://github.com/TheWizardNexus/TheWizardNexus.com",
+      "homepage": "https://thewizardnexus.github.io/TheWizardNexus.com/",
+      "language": "HTML",
+      "stars": 0,
+      "forks": 0,
+      "openIssues": 0,
+      "watchers": 0,
+      "archived": false,
+      "disabled": false,
+      "fork": false,
+      "topics": [],
+      "license": null,
+      "createdAt": "2026-08-24T15:14:01Z",
+      "updatedAt": "2026-08-27T18:09:10Z"
     },
     {
       "name": "Zen-Sentry-Foundation",
