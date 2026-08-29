@@ -357,7 +357,7 @@ function drawChart() {
   const yFor = (value) => padding.top + plotHeight - ((value / ceiling) * plotHeight);
 
   context.clearRect(0, 0, width, height);
-  context.font = "650 13px ui-monospace, SFMono-Regular, Consolas, monospace";
+  context.font = "650 14px ui-monospace, SFMono-Regular, Consolas, monospace";
   context.textAlign = "right";
   context.textBaseline = "middle";
   context.fillStyle = "#6f8491";

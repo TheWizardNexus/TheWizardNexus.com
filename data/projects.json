@@ -225,23 +225,6 @@
       "accent": "cyan"
     },
     {
-      "slug": "sentinel",
-      "name": "Sentinel",
-      "category": "Investigative intelligence",
-      "pathway": "apply",
-      "relationship": "Applies ARCANE to investigative intelligence",
-      "stage": "Development",
-      "maturity": "Development",
-      "description": "An in-development, provenance-first workspace for turning complex records into source-cited, human-reviewed leads and reports.",
-      "url": "https://thewizardnexus.github.io/Sentinel/",
-      "repositoryUrl": null,
-      "image": "https://thewizardnexus.github.io/Sentinel/public/og.png",
-      "sourceStatus": "Public site",
-      "sourceBoundary": "Private repository",
-      "featured": false,
-      "accent": "cyan"
-    },
-    {
       "slug": "scamurai",
       "name": "Scamurai",
       "category": "Human defense",
@@ -275,6 +258,23 @@
       "sourceBoundary": "Private repository",
       "featured": false,
       "accent": "gold"
+    },
+    {
+      "slug": "sentinel",
+      "name": "Sentinel",
+      "category": "Investigative intelligence",
+      "pathway": "apply",
+      "relationship": "Applies ARCANE to investigative intelligence",
+      "stage": "Development",
+      "maturity": "Development",
+      "description": "An in-development, provenance-first workspace for turning complex records into source-cited, human-reviewed leads and reports.",
+      "url": "https://thewizardnexus.github.io/Sentinel/",
+      "repositoryUrl": null,
+      "image": "https://thewizardnexus.github.io/Sentinel/public/og.png",
+      "sourceStatus": "Public site",
+      "sourceBoundary": "Private repository",
+      "featured": false,
+      "accent": "cyan"
     }
   ],
   "publishingNext": [
