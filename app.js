@@ -348,7 +348,7 @@ function drawChart() {
   const context = canvas.getContext("2d");
   context.scale(density, density);
 
-  const padding = { top: 24, right: 22, bottom: 38, left: width < 500 ? 42 : 58 };
+  const padding = { top: 24, right: 22, bottom: 42, left: width < 500 ? 48 : 62 };
   const plotWidth = width - padding.left - padding.right;
   const plotHeight = height - padding.top - padding.bottom;
   const maximum = Math.max(...points.map((point) => point.value), 0);
@@ -357,7 +357,7 @@ function drawChart() {
   const yFor = (value) => padding.top + plotHeight - ((value / ceiling) * plotHeight);
 
   context.clearRect(0, 0, width, height);
-  context.font = "650 10px ui-monospace, SFMono-Regular, Consolas, monospace";
+  context.font = "650 13px ui-monospace, SFMono-Regular, Consolas, monospace";
   context.textAlign = "right";
   context.textBaseline = "middle";
   context.fillStyle = "#6f8491";

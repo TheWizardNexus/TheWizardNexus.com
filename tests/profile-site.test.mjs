@@ -664,6 +664,21 @@ test("the rebrand uses approved assets and requested profiles without excluded c
   assert.deepEqual(residue, []);
 });
 
+test("visible typography keeps an explicit 12.5 pixel minimum", async () => {
+  const styles = await read("styles.css");
+  const script = await read("app.js");
+  const declarations = [...styles.matchAll(/(?:font-size:\s*|font:\s*(?:(?:normal|italic)\s+)?\d+\s+)(\d*\.?\d+)(rem|px)/g)];
+  const undersized = declarations
+    .map((match) => ({ declaration: match[0], pixels: Number(match[1]) * (match[2] === "rem" ? 16 : 1) }))
+    .filter(({ pixels }) => pixels < 12.5);
+  const canvasFonts = [...script.matchAll(/context\.font\s*=\s*"[^"]*?(\d+(?:\.\d+)?)px/g)]
+    .map((match) => Number(match[1]));
+
+  assert.deepEqual(undersized, []);
+  assert.ok(canvasFonts.length > 0);
+  assert.ok(canvasFonts.every((pixels) => pixels >= 12.5));
+});
+
 test("implementation introduces no TypeScript, TSX, or TypeScript toolchain", async () => {
   const forbidden = [];
 
