@@ -556,7 +556,7 @@ const sharedFallbacks = {
   "repo-updated": latestRepositoryUpdate
     ? new Intl.DateTimeFormat("en-US", { month: "short", day: "numeric", timeZone: "UTC" }).format(new Date(latestRepositoryUpdate))
     : "—",
-  "project-result-count": `${projects.published.length} published project sites in the public constellation.`,
+  "project-result-count": `${projects.published.length} public sites across four connected pathways.`,
   "repo-result-count": `${repoSnapshot.counts.total} public repositories in the atlas.`,
   "npm-history-total": fullNumber(historySnapshot.total),
   "npm-week": fullNumber(npmSnapshot.totals.week),

@@ -19,7 +19,7 @@
 
 <!-- profile-telemetry-counts:start -->
 <p align="center">
-  <strong>14 published project sites · 78 mapped ecosystem points · 171 relationships · 7 public repositories</strong><br>
+  <strong>15 published project sites · 78 mapped ecosystem points · 171 relationships · 7 public repositories</strong><br>
   <sub><strong>145 official npm range downloads</strong> from January 1, 2026 through August 28, 2026 · npm-stat is an optional comparison only</sub><br>
   <a href="https://thewizardnexus.github.io/TheWizardNexus.com/technology.html"><strong>Navigate the live TWiN technology directory →</strong></a>
 </p>
@@ -49,7 +49,7 @@ TWiN is a **woman-led, Veteran-founded, clinically informed team** founded by **
 
 ## Technology and public source
 
-The [Technology directory](https://thewizardnexus.github.io/TheWizardNexus.com/technology.html) links all 14 public project sites and renders project-owned header art, a project-specific commissioned banner, or—where neither is available—the project’s GitHub repository card. A repository link appears only where the source repository is public.
+The [Technology directory](https://thewizardnexus.github.io/TheWizardNexus.com/technology.html) links the public project sites across four pathways and renders project-owned header art, a project-specific commissioned banner, or—where neither is available—the project’s GitHub repository card. A repository link appears only where the source repository is public.
 
 - [The Wizard Nexus on GitHub](https://github.com/TheWizardNexus)
 - [Roshi on GitHub](https://github.com/RIAEvangelist)

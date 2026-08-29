@@ -130,47 +130,55 @@ function updateFreshness() {
   freshness.innerHTML = `<span aria-hidden="true"></span> ${label} ${escapeHtml(formatTimestamp(latest.toISOString()))}`;
 }
 
-const projectGroups = {
-  foundation: new Set(["astrolabe", "twin-compass", "life-first-framework", "kempo", "spellwire"]),
-  platform: new Set(["arcane-os", "arcane-os-sdk", "ax", "dbopfs", "dbopfs-studio", "toshokann"]),
-  workspace: new Set(["sentinel", "scamurai", "redress"]),
-};
+const projectPathways = [
+  {
+    id: "guide",
+    code: "01",
+    title: "Guide & evaluate",
+    description: "Principles, model foundations, and evaluation methods that keep consequential work human-governed.",
+  },
+  {
+    id: "build",
+    code: "02",
+    title: "Build & connect",
+    description: "The operating environment, development tools, data, communication, discovery, and knowledge infrastructure.",
+  },
+  {
+    id: "apply",
+    code: "03",
+    title: "Applied systems",
+    description: "Systems that apply the shared foundations to behavioral health, investigations, human defense, and legal work.",
+  },
+  {
+    id: "map",
+    code: "04",
+    title: "Map the Nexus",
+    description: "The interactive map for seeing the wider ecosystem and the relationships beyond the public sites.",
+  },
+];
 
 function projectMatchesFilter(project) {
-  return state.projectFilter === "all" || projectGroups[state.projectFilter]?.has(project.slug);
+  return state.projectFilter === "all" || project.pathway === state.projectFilter;
 }
 
 function projectMaturityLabel(project) {
   return [project.maturity || project.stage, project.version].filter(Boolean).join(" · ");
 }
 
-function renderProjects() {
-  const grid = document.querySelector("#project-grid");
-  if (!grid || !state.projects) return;
-  const query = state.projectQuery.trim().toLowerCase();
-  const filtered = state.projects.published.filter((project) => {
-    const haystack = [project.name, project.category, project.stage, project.maturity, project.version, project.deployment, project.description, project.sourceStatus, project.sourceBoundary].join(" ").toLowerCase();
-    return projectMatchesFilter(project) && (!query || haystack.includes(query));
-  });
-
-  setText("project-result-count", `${numberFormatter.format(filtered.length)} published ${filtered.length === 1 ? "project" : "projects"}${query || state.projectFilter !== "all" ? " match this pathway" : " in the public constellation"}.`);
-  if (!filtered.length) {
-    grid.innerHTML = '<p class="result-count">No published project matches this pathway.</p>';
-    return;
-  }
-
-  grid.innerHTML = filtered.map((project) => {
-    const maturity = projectMaturityLabel(project);
-    const repository = project.repositoryUrl && project.sourceBoundary === "Public repository"
-      ? `<a class="secondary" href="${escapeHtml(project.repositoryUrl)}">Inspect repository ↗</a>`
-      : "";
-    return `<article class="project-card" data-accent="${escapeHtml(project.accent)}">
+function renderProjectCard(project) {
+  const maturity = projectMaturityLabel(project);
+  const repository = project.repositoryUrl && project.sourceBoundary === "Public repository"
+    ? `<a class="secondary" href="${escapeHtml(project.repositoryUrl)}">Inspect repository ↗</a>`
+    : "";
+  const featured = project.slug === "precrisis" || project.pathway === "map";
+  return `<article class="project-card${featured ? " project-card-featured" : ""}" data-accent="${escapeHtml(project.accent)}">
       <a class="project-media" href="${escapeHtml(project.url)}" aria-label="Open ${escapeHtml(project.name)} — ${escapeHtml(maturity)}">
         <span class="image-fallback">${escapeHtml(project.name)}</span>
         <img src="${escapeHtml(project.image)}" alt="" loading="lazy">
         <span class="stage-badge">${escapeHtml(maturity)}</span>
       </a>
       <div class="project-body">
+        <p class="project-relationship">${escapeHtml(project.relationship || project.category)}</p>
         <div class="card-kicker"><span>${escapeHtml(project.category)}</span><span>${escapeHtml(project.sourceBoundary)}</span></div>
         <h3>${escapeHtml(project.name)}</h3>
         <p>${escapeHtml(project.description)}</p>
@@ -178,10 +186,41 @@ function renderProjects() {
         <div class="card-links"><a href="${escapeHtml(project.url)}">Explore project ↗</a>${repository}</div>
       </div>
     </article>`;
+}
+
+function renderProjects() {
+  const grid = document.querySelector("#project-grid");
+  if (!grid || !state.projects) return;
+  const query = state.projectQuery.trim().toLowerCase();
+  const filtered = state.projects.published.filter((project) => {
+    const haystack = [project.name, project.category, project.pathway, project.relationship, project.stage, project.maturity, project.version, project.deployment, project.description, project.sourceStatus, project.sourceBoundary].join(" ").toLowerCase();
+    return projectMatchesFilter(project) && (!query || haystack.includes(query));
+  });
+
+  setText("project-result-count", `${numberFormatter.format(filtered.length)} public ${filtered.length === 1 ? "site" : "sites"}${query || state.projectFilter !== "all" ? " match this pathway" : " across four connected pathways"}.`);
+  if (!filtered.length) {
+    grid.innerHTML = '<p class="result-count">No public site matches this pathway.</p>';
+    return;
+  }
+
+  grid.innerHTML = projectPathways.map((pathway) => {
+    const projects = filtered.filter((project) => project.pathway === pathway.id);
+    if (!projects.length) return "";
+    return `<section class="project-pathway" aria-labelledby="pathway-${escapeHtml(pathway.id)}">
+      <header class="project-pathway-header">
+        <div><span>${escapeHtml(pathway.code)} // PUBLIC PATHWAY</span><h3 id="pathway-${escapeHtml(pathway.id)}">${escapeHtml(pathway.title)}</h3></div>
+        <p>${escapeHtml(pathway.description)}</p>
+      </header>
+      <div class="project-grid">${projects.map(renderProjectCard).join("")}</div>
+    </section>`;
   }).join("");
 
   for (const image of grid.querySelectorAll("img")) {
-    image.addEventListener("error", () => image.closest(".project-media")?.classList.add("image-error"), { once: true });
+    const media = image.closest(".project-media");
+    const showImage = () => media?.classList.add("image-loaded");
+    if (image.complete && image.naturalWidth > 0) showImage();
+    else image.addEventListener("load", showImage, { once: true });
+    image.addEventListener("error", () => media?.classList.add("image-error"), { once: true });
   }
 }
 

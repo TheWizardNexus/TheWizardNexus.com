@@ -43,8 +43,8 @@ test("curated ecosystem accounts for every published interface without confusing
   const urls = projects.published.map((project) => project.url);
   const stages = new Map(projects.published.map((project) => [project.slug, project.stage]));
 
-  assert.equal(projects.published.length, 14);
-  assert.equal(projects.publishingNext.length, 3);
+  assert.equal(projects.published.length, 15);
+  assert.equal(projects.publishingNext.length, 2);
   assert.equal(new Set(slugs).size, slugs.length);
   assert.equal(new Set(urls).size, urls.length);
   assert.ok(projects.published.every((project) => project.url.startsWith("https://")));
@@ -52,11 +52,14 @@ test("curated ecosystem accounts for every published interface without confusing
   assert.ok(projects.published.every((project) => project.sourceBoundary.trim().length > 0));
   assert.ok(projects.published.every((project) => project.maturity.trim().length > 0));
   assert.ok(projects.published.every((project) => project.stage.trim().length > 0));
+  assert.ok(projects.published.every((project) => ["guide", "build", "apply", "map"].includes(project.pathway)));
+  assert.ok(projects.published.every((project) => project.relationship.trim().length > 0));
   assert.ok(projects.publishingNext.every((project) => project.stage === "Development"));
   assert.equal(stages.get("arcane-os"), "Development");
   assert.equal(stages.get("dbopfs"), "Released 1.0.0");
   assert.equal(stages.get("twin-compass"), "Released 1.0.0");
   assert.equal(stages.get("life-first-framework"), "Public working draft 0.3");
+  assert.equal(stages.get("precrisis"), "Development");
   assert.equal(stages.get("scamurai"), "Pre-release");
   assert.equal(stages.get("redress"), "Inside ARCANE");
   assert.ok(projects.mapSnapshot.points >= 78);
@@ -128,6 +131,11 @@ test("technology manifest preserves all canonical sites, headers, and five publi
       image: "https://thewizardnexus.github.io/KEMPO/public/og.png",
       repository: null,
     },
+    precrisis: {
+      site: "https://precrisis.ai/",
+      image: "https://precrisis.ai/og.png?v=20260825f",
+      repository: null,
+    },
     sentinel: {
       site: "https://thewizardnexus.github.io/Sentinel/",
       image: "https://thewizardnexus.github.io/Sentinel/public/og.png",
@@ -152,6 +160,14 @@ test("technology manifest preserves all canonical sites, headers, and five publi
     access(path.join(ROOT, "assets", "twin-compass-readme-header.png")),
     access(path.join(ROOT, "assets", "life-first-framework-header.png")),
   ]);
+});
+
+test("legacy Zen Sentry path redirects to the separate-organization relationship page", async () => {
+  const redirect = await read("zen-sentry-foundation/index.html");
+
+  assert.match(redirect, /url=\.\.\/zen-sentry\.html/i);
+  assert.match(redirect, /location\.replace\("\.\.\/zen-sentry\.html"\)/);
+  assert.match(redirect, /noindex/i);
 });
 
 test("public code atlas accounts for every repository and labels each record", async () => {
@@ -426,8 +442,9 @@ test("the public nexus uses focused pages while preserving the complete ecosyste
   const technologyNoScript = byName.get("technology.html").match(/<noscript>([\s\S]*?)<\/noscript>/)?.[1] || "";
   assert.equal([...technologyNoScript.matchAll(/href="https:\/\/thewizardnexus\.github\.io\/(?!TheWizardNexus\.com)/g)].length, 13);
   assert.match(technologyNoScript, /href="https:\/\/riaevangelist\.github\.io\/life-first-framework\/"/);
+  assert.match(technologyNoScript, /href="https:\/\/precrisis\.ai\/"/);
   assert.doesNotMatch(byName.get("ecosystem.html"), /id="project-grid"|id="project-search"|id="project-filters"/);
-  assert.match(byName.get("ecosystem.html"), /Open all 14 project sites/);
+  assert.match(byName.get("ecosystem.html"), /Open the public pathways/);
   assert.match(byName.get("practice.html"), /Optimize[\s\S]*Detect[\s\S]*Prevent[\s\S]*Intervene/);
   assert.match(byName.get("practice.html"), /Knowledge[\s\S]*Empower[\s\S]*Monitor[\s\S]*Prevent[\s\S]*Optimize/);
   assert.match(byName.get("practice.html"), /PreCrisis helps people notice meaningful change\. KEMPO trains and tests/);
@@ -446,7 +463,12 @@ test("the public nexus uses focused pages while preserving the complete ecosyste
   assert.match(byName.get("people.html"), /href="https:\/\/www\.linkedin\.com\/in\/turtlesallthewaydown\/"/);
   assert.match(byName.get("zen-sentry.html"), /href="https:\/\/thewizardnexus\.github\.io\/Zen-Sentry-Foundation\/"/);
   assert.match(byName.get("zen-sentry.html"), /href="https:\/\/github\.com\/TheWizardNexus\/Zen-Sentry-Foundation"/);
-  assert.match(byName.get("technology.html"), /Every card below opens a live public GitHub Pages site/);
+  assert.match(byName.get("technology.html"), /Every card below opens a live public site/);
+  assert.match(byName.get("technology.html"), /Guide &amp; evaluate/);
+  assert.match(byName.get("technology.html"), /Build &amp; connect/);
+  assert.match(byName.get("technology.html"), /Applied systems/);
+  assert.match(byName.get("technology.html"), /Map the Nexus/);
+  assert.match(byName.get("index.html"), /TWiN develops systems, tools, and evaluation methods/);
   assert.match(JSON.stringify(await json("data/projects.json")), /assets\/life-first-framework-header\.png/);
   assert.match(byName.get("code.html"), /id="repo-grid"/);
   assert.match(byName.get("code.html"), /Public code remains available without scripts/);
@@ -489,7 +511,10 @@ test("the public nexus uses focused pages while preserving the complete ecosyste
     assert.match(primaryNav, /<a class="nav-cta nav-philosophy" href="https:\/\/thewizardnexus\.github\.io\/KEMPO\/philosophy\.html">Philosophy <span aria-hidden="true">↗<\/span><\/a>\s*$/);
   }
   assert.match(script, /data\/projects\.json/);
+  assert.match(script, /const projectPathways =/);
+  assert.match(script, /project\.pathway === state\.projectFilter/);
   assert.match(script, /stage-badge/);
+  assert.match(script, /image-loaded/);
   assert.match(script, /project\.repositoryUrl && project\.sourceBoundary === "Public repository"/);
   assert.match(script, /aria-label="Open \$\{escapeHtml\(project\.name\)\} — \$\{escapeHtml\(maturity\)\}"/);
   assert.match(script, /data\/repos\.json/);
