@@ -607,11 +607,12 @@ test("every focused page has canonical metadata and every internal HTML route re
     assert.equal([...html.matchAll(/<h1\b/g)].length, 1, `${pageName} should contain one primary heading`);
     assert.match(html, new RegExp(`<link rel="canonical" href="${canonical}"`));
     assert.match(html, new RegExp(`<meta property="og:url" content="${canonical}"`));
-    assert.match(html, /<meta property="og:image" content="https:\/\/thewizardnexus\.github\.io\/TheWizardNexus\.com\/assets\/wizard-nexus-social-preview-metal\.png\?v=\d{8}[a-z]">/);
+    assert.match(html, /<meta property="og:image" content="https:\/\/thewizardnexus\.github\.io\/TheWizardNexus\.com\/assets\/wizard-nexus-social-preview-original\.png\?v=\d{8}[a-z]">/);
     assert.match(html, /<meta property="og:image:type" content="image\/png">/);
     assert.match(html, /<meta property="og:image:width" content="1200">/);
     assert.match(html, /<meta property="og:image:height" content="630">/);
-    assert.match(html, /<meta name="twitter:image" content="https:\/\/thewizardnexus\.github\.io\/TheWizardNexus\.com\/assets\/wizard-nexus-social-preview-metal\.png\?v=\d{8}[a-z]">/);
+    assert.match(html, /<meta name="twitter:image" content="https:\/\/thewizardnexus\.github\.io\/TheWizardNexus\.com\/assets\/wizard-nexus-social-preview-original\.png\?v=\d{8}[a-z]">/);
+    assert.doesNotMatch(html, /wizard-nexus-social-preview-metal/);
     assert.match(html, /<meta name="twitter:title" content="[^"]+">/);
     assert.match(html, /<meta name="twitter:description" content="[^"]+">/);
     assert.match(html, /<meta name="twitter:image:alt" content="[^"]+">/);
@@ -729,7 +730,7 @@ test("the rebrand uses approved assets and requested profiles without excluded c
     "wizard-nexus-favicon-32.png",
     "wizard-nexus-apple-touch-icon.png",
     "wizard-nexus-banner.png",
-    "wizard-nexus-social-preview-metal.png",
+    "wizard-nexus-social-preview-original.png",
   ]) assert.ok(assets.includes(asset), `missing approved brand asset ${asset}`);
   assert.ok(!assets.some((name) => /^signal-2026-08-01-10-58-08-970\.jpg$/i.test(name)));
 
