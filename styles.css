@@ -371,19 +371,21 @@ h1 span, h2 span { color: transparent; -webkit-text-stroke: 1px rgba(234, 241, 2
 .portfolio-pathway-grid article { display: flex; min-height: 25rem; padding: clamp(1.5rem, 3vw, 2.2rem); flex-direction: column; background: rgba(8, 18, 27, 0.98); }
 .portfolio-pathway-grid article > span { color: var(--teal); font: 700 0.875rem/1.5 var(--mono); letter-spacing: 0.08em; }
 .portfolio-pathway-grid h3 { margin: 2.4rem 0 1rem; font-size: clamp(1.5rem, 2.5vw, 2.2rem); line-height: 1.1; letter-spacing: -0.04em; }
-.portfolio-project-links { display: flex; margin: 0; padding: 0; align-content: flex-start; flex-wrap: wrap; gap: 0.55rem; list-style: none; }
+.portfolio-project-links { display: grid; margin: 0; padding: 0; border-top: 1px solid var(--line); list-style: none; }
+.portfolio-project-links li { border-bottom: 1px solid var(--line); }
 .portfolio-project-links a {
-  display: inline-flex;
-  width: fit-content;
-  padding: 0.5rem 0.65rem;
-  gap: 0.35rem;
-  border: 1px solid var(--line-strong);
-  border-radius: 0.45rem;
-  background: rgba(255, 255, 255, 0.02);
-  color: var(--muted);
-  font: 700 0.875rem/1.35 var(--mono);
+  display: flex;
+  width: 100%;
+  padding: 0.7rem 0;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  color: var(--ink);
+  font: 700 0.95rem/1.4 var(--mono);
 }
-.portfolio-project-links a:hover { border-color: var(--teal); color: var(--teal); }
+.portfolio-project-links a span { color: var(--quiet); }
+.portfolio-project-links a:hover,
+.portfolio-project-links a:hover span { color: var(--teal); }
 .portfolio-pathway-overview { width: fit-content; margin-top: auto; padding-top: 1.5rem; border-bottom: 1px solid var(--line-strong); color: var(--ink); font: 700 0.875rem/1.5 var(--mono); }
 .portfolio-pathway-overview:hover { border-color: var(--teal); color: var(--teal); }
 
