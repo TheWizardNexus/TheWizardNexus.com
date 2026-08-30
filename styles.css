@@ -635,6 +635,15 @@ h1 span, h2 span { color: transparent; -webkit-text-stroke: 1px rgba(234, 241, 2
 .project-card-featured .project-body { display: flex; padding: clamp(1.7rem, 4vw, 3rem); flex-direction: column; justify-content: center; }
 .project-card-featured .project-body h3 { font-size: clamp(2.2rem, 4vw, 3.6rem); }
 .project-card-featured .project-body > p:not(.project-relationship):not(.project-boundaries) { min-height: 0; max-width: 48rem; font-size: 1.08rem; }
+.project-card[data-project-slug="precrisis"] .stage-badge,
+.project-card[data-project-slug="precrisis"] .project-relationship,
+.project-card[data-project-slug="precrisis"] .card-kicker,
+.project-card[data-project-slug="precrisis"] .project-boundaries span,
+.project-card[data-project-slug="precrisis"] .card-links { font-size: 1rem; }
+.project-card[data-project-slug="precrisis"] .project-body > p:not(.project-relationship):not(.project-boundaries) {
+  font-size: 1.2rem;
+  line-height: 1.65;
+}
 .launch-section {
   display: grid;
   width: var(--shell);

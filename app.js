@@ -171,7 +171,7 @@ function renderProjectCard(project) {
     ? `<a class="secondary" href="${escapeHtml(project.repositoryUrl)}">Inspect repository ↗</a>`
     : "";
   const featured = project.slug === "precrisis" || project.pathway === "map";
-  return `<article class="project-card${featured ? " project-card-featured" : ""}" data-accent="${escapeHtml(project.accent)}">
+  return `<article class="project-card${featured ? " project-card-featured" : ""}" data-project-slug="${escapeHtml(project.slug)}" data-accent="${escapeHtml(project.accent)}">
       <a class="project-media" href="${escapeHtml(project.url)}" aria-label="Open ${escapeHtml(project.name)} — ${escapeHtml(maturity)}">
         <span class="image-fallback">${escapeHtml(project.name)}</span>
         <img src="${escapeHtml(project.image)}" alt="" loading="lazy">
