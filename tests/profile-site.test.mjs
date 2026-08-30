@@ -637,6 +637,15 @@ test("the homepage is a concise, consistently linked orientation to the public w
   assert.match(home, /class="team-preview-portraits"/);
 });
 
+test("every page identifies TWiN by its strategic role instead of a generic public label", async () => {
+  const pages = await Promise.all([...PAGE_NAMES, "404.html"].map(read));
+
+  for (const html of pages) {
+    assert.match(html, /<small>TWiN \/\/ Systems · Tools · Evaluation<\/small>/);
+    assert.doesNotMatch(html, /TWiN \/\/ Public nexus/i);
+  }
+});
+
 test("the rebrand uses approved assets and requested profiles without excluded content", async () => {
   const [home, people, technology, contact, readme, assets] = await Promise.all([
     read("index.html"),

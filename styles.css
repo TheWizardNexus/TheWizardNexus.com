@@ -129,7 +129,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .brand { display: inline-flex; min-width: max-content; align-items: center; gap: 0.8rem; }
 .brand-copy { display: grid; }
 .brand-copy b { font-size: 0.92rem; letter-spacing: -0.015em; }
-.brand-copy small { color: var(--quiet); font: 650 0.875rem/1.5 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; }
+.brand-copy small { color: var(--quiet); font: 650 0.875rem/1.5 var(--mono); letter-spacing: 0.045em; }
 .brand-mark { display: block; width: 2.5rem; height: 2.5rem; flex: 0 0 auto; object-fit: contain; }
 .brand-mark.small { width: 2rem; height: 2rem; }
 
