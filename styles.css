@@ -1148,6 +1148,11 @@ h1 span, h2 span { color: transparent; -webkit-text-stroke: 1px rgba(234, 241, 2
 .contact-preflight p,
 .service-process p { margin: 0.3rem 0 0; color: var(--muted); font-size: 0.875rem; }
 
+/* Keep the short Contact journey visually connected instead of separating each step like a long-form page. */
+.contact-hero { min-height: 24rem; padding-block: clamp(3rem, 5vw, 4.5rem); }
+.contact-preflight { margin-bottom: 0; padding-block: clamp(3rem, 5vw, 4.5rem); }
+.contact-grid { padding-block: clamp(3rem, 5vw, 5rem); }
+
 .service-catalog-note {
   max-width: 68rem;
   margin: 1.6rem 0 0;
