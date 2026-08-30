@@ -725,10 +725,10 @@ h1 span, h2 span { color: transparent; -webkit-text-stroke: 1px rgba(234, 241, 2
 .ethics-section,
 .philosophy-instruments { width: var(--shell); margin: 0 auto; padding: clamp(5rem, 9vw, 9rem) 0; border-top: 1px solid var(--line); }
 .judgment-section .section-heading { margin-bottom: 3rem; }
+.ethical-system-components { border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; background: var(--line); }
 .kempo-feature {
   padding: clamp(1.5rem, 4vw, 3.5rem);
-  border: 1px solid rgba(223, 195, 124, 0.38);
-  border-radius: var(--radius);
+  border: 0;
   background: linear-gradient(145deg, rgba(223, 195, 124, 0.07), rgba(8, 18, 27, 0.96) 48%);
 }
 .kempo-feature .section-heading { margin-bottom: 2rem; }
@@ -746,11 +746,10 @@ h1 span, h2 span { color: transparent; -webkit-text-stroke: 1px rgba(234, 241, 2
 .kempo-flow small { color: var(--muted); font-size: 0.875rem; line-height: 1.45; }
 .kempo-feature > .button-row { margin-top: 2rem; }
 .kempo-framework-link { margin: 1.5rem 0 0; }
-.kempo-connected { margin-top: clamp(3rem, 5vw, 5rem); padding-top: clamp(2.5rem, 4vw, 4rem); border-top: 1px solid var(--line); }
-.kempo-connected-heading h3 { margin: 0; font-size: clamp(2.2rem, 4vw, 4rem); line-height: 1; letter-spacing: -0.055em; }
+.kempo-connected { margin-top: 1px; }
 .kempo-connected .technology-paths,
 .philosophy-instruments .technology-paths { width: 100%; margin: 3rem 0 0; }
-.kempo-connected .technology-paths { margin-top: 2rem; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.kempo-connected .technology-paths { margin: 0; grid-template-columns: repeat(2, minmax(0, 1fr)); border: 0; border-radius: 0; }
 .kempo-connected .technology-paths > a { min-height: 14rem; }
 
 /* Trust */
