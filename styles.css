@@ -162,12 +162,6 @@ button, a { -webkit-tap-highlight-color: transparent; }
 }
 #primary-navigation .nav-contact { margin-left: 0.3rem; }
 #primary-navigation .nav-cta:hover { border-color: var(--teal); background: rgba(108, 224, 220, 0.13); }
-#primary-navigation .nav-philosophy {
-  margin-left: 0.12rem;
-  border-color: rgba(223, 195, 124, 0.38);
-  background: rgba(223, 195, 124, 0.08);
-}
-#primary-navigation .nav-philosophy:hover { border-color: var(--brass); background: rgba(223, 195, 124, 0.14); color: #fff5d9; }
 #primary-navigation .nav-cta::after { display: none; }
 .menu-button {
   display: none;

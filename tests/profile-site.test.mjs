@@ -542,18 +542,18 @@ test("the public nexus uses focused pages while preserving the complete ecosyste
     const primaryNav = html.match(/<nav id="primary-navigation"[^>]*>([\s\S]*?)<\/nav>/)?.[1] || "";
     const primaryHrefs = [...primaryNav.matchAll(/<a\b[^>]*href="([^"]+)"/g)].map((match) => match[1]);
     assert.deepEqual(primaryHrefs, [
+      "ecosystem.html",
+      "trust.html",
       "technology.html",
       "practice.html",
-      "trust.html",
+      "work.html",
       "people.html",
       "https://thewizardnexus.github.io/Zen-Sentry-Foundation/",
-      "work.html",
       "contact.html",
-      "https://thewizardnexus.github.io/KEMPO/philosophy.html",
     ]);
     assert.match(primaryNav, /class="nav-external" href="https:\/\/thewizardnexus\.github\.io\/Zen-Sentry-Foundation\/">Zen Sentry ↗<\/a>/);
     assert.match(primaryNav, /class="nav-cta nav-contact" href="contact\.html">Contact/);
-    assert.match(primaryNav, /<a class="nav-cta nav-philosophy" href="https:\/\/thewizardnexus\.github\.io\/KEMPO\/philosophy\.html">Philosophy <span aria-hidden="true">↗<\/span><\/a>\s*$/);
+    assert.doesNotMatch(primaryNav, /nav-philosophy|>Philosophy\b/);
   }
   assert.match(script, /data\/projects\.json/);
   assert.match(script, /const projectPathways =/);
