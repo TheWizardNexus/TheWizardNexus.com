@@ -456,6 +456,9 @@ test("the public nexus uses focused pages while preserving the complete ecosyste
   assert.match(byName.get("practice.html"), /Optimize[\s\S]*Detect[\s\S]*Prevent[\s\S]*Intervene/);
   assert.match(byName.get("practice.html"), /Knowledge[\s\S]*Empower[\s\S]*Monitor[\s\S]*Prevent[\s\S]*Optimize/);
   assert.match(byName.get("practice.html"), /PreCrisis helps people notice meaningful change\. KEMPO trains and tests/);
+  assert.match(byName.get("practice.html"), /Where the practice is applied[\s\S]*Six application areas\./);
+  const practiceApplications = byName.get("practice.html").match(/<section class="practice-section"[\s\S]*?<\/section>/)?.[0] || "";
+  for (const servicePage of SERVICE_PAGES) assert.match(practiceApplications, new RegExp(`href="${servicePage}"`));
   assert.match(byName.get("practice.html"), /One ethical operating system[\s\S]*An AI martial art[\s\S]*How does the system judge under pressure\?[\s\S]*KEMPO practice sequence/);
   assert.match(byName.get("practice.html"), /href="https:\/\/thewizardnexus\.github\.io\/KEMPO\/">Open KEMPO/);
   assert.doesNotMatch(byName.get("practice.html"), /<span>KEMPO<\/span>/);
