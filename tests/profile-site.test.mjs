@@ -467,6 +467,9 @@ test("the public nexus uses focused pages while preserving the complete ecosyste
   assert.match(byName.get("philosophy.html"), /https:\/\/github\.com\/RIAEvangelist\/life-first-framework/);
   assert.match(byName.get("trust.html"), /Morals before/);
   assert.match(byName.get("trust.html"), /Accountability and repair/);
+  assert.match(byName.get("trust.html"), /The Technology directory pairs each published interface/);
+  assert.match(byName.get("trust.html"), /href="technology\.html">Open the Technology directory/);
+  assert.doesNotMatch(byName.get("trust.html"), /The ecosystem directory pairs each published interface/);
   assert.match(byName.get("people.html"), /Johanna “JZ” Zollmann, LCSW/);
   assert.match(byName.get("people.html"), /assets\/johanna-portrait\.jpg/);
   assert.match(byName.get("people.html"), /assets\/roshi-portrait\.png/);
