@@ -1131,8 +1131,11 @@ h1 span, h2 span { color: transparent; -webkit-text-stroke: 1px rgba(234, 241, 2
 .email-options span { margin-top: 0.45rem; color: var(--muted); font-size: 0.875rem; line-height: 1.5; }
 .email-address { margin: 1rem 0 0; color: var(--quiet); font: 650 0.875rem/1.6 var(--mono); overflow-wrap: anywhere; }
 .contact-caution { margin: 2rem 0 0; padding-top: 1.2rem; border-top: 1px solid var(--line); color: var(--quiet); font: 650 0.875rem/1.6 var(--mono); }
-.contact-routes { display: grid; gap: 1px; border: 1px solid var(--line); background: var(--line); }
-.contact-routes a { display: grid; min-height: 9rem; padding: 1.3rem; align-content: center; background: var(--panel); }
+.contact-presence { min-width: 0; align-self: start; }
+.contact-routes-heading { margin-bottom: 1rem; }
+.contact-routes-heading h2 { margin: 0; font-size: clamp(1.9rem, 3.2vw, 2.8rem); letter-spacing: -0.045em; }
+.contact-routes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; background: var(--line); }
+.contact-routes a { display: grid; min-height: 7.5rem; padding: 1.1rem; align-content: center; background: var(--panel); }
 .contact-routes a:hover { background: var(--panel-strong); }
 .contact-routes span { color: var(--teal); font: 700 0.875rem/1.5 var(--mono); letter-spacing: 0.06em; }
 .contact-routes strong { margin-top: 0.4rem; font-size: 1.05rem; }
@@ -1375,6 +1378,7 @@ h1 span, h2 span { color: transparent; -webkit-text-stroke: 1px rgba(234, 241, 2
   .person-card { grid-template-columns: 1fr; }
   .person-photo { width: min(100%, 12rem); max-width: 12rem; max-height: 12rem; }
   .person-monogram { width: 8rem; }
+  .contact-routes { grid-template-columns: 1fr; }
   .team-preview,
   .portfolio-pathway-grid,
   .ecosystem-relationship-flow,

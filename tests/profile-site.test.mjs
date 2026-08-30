@@ -508,7 +508,9 @@ test("the public nexus uses focused pages while preserving the complete ecosyste
   assert.match(byName.get("contact.html"), /https:\/\/outlook\.office\.com\/mail\/deeplink\/compose/);
   assert.match(byName.get("contact.html"), /mailto:connect@thewizardnexus\.com\?subject=[^\"]+&amp;body=People%3A/);
   assert.match(byName.get("contact.html"), /Purpose%3A[\s\S]*Boundary%3A/);
+  assert.match(byName.get("contact.html"), /Follow the work[\s\S]*TWiN across the web\./);
   assert.ok(byName.get("contact.html").indexOf("https://www.linkedin.com/company/the-wizard-nexus/") < byName.get("contact.html").indexOf("https://www.linkedin.com/in/johannazollmann/"));
+  assert.ok(byName.get("contact.html").indexOf("https://github.com/TheWizardNexus") < byName.get("contact.html").indexOf("https://www.linkedin.com/in/johannazollmann/"));
   for (const inquiryPage of ["contact.html", "work.html", ...SERVICE_PAGES]) {
     assert.match(byName.get(inquiryPage), /mailto:connect@thewizardnexus\.com/);
     assert.doesNotMatch(byName.get(inquiryPage), /flashevangelist@gmail\.com/);
