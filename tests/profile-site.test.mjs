@@ -503,6 +503,8 @@ test("the public nexus uses focused pages while preserving the complete ecosyste
   assert.match(byName.get("work.html"), /The dojo is open/);
   assert.match(byName.get("practice.html"), /The dojo is open[\s\S]*href="work\.html">Explore services/);
   assert.match(byName.get("contact.html"), /Step into[\s\S]*the dojo\./);
+  assert.match(byName.get("contact.html"), /mailto:connect@thewizardnexus\.com\?subject=[^\"]+&amp;body=People%3A/);
+  assert.match(byName.get("contact.html"), /Purpose%3A[\s\S]*Boundary%3A/);
   for (const inquiryPage of ["contact.html", "work.html", ...SERVICE_PAGES]) {
     assert.match(byName.get(inquiryPage), /mailto:connect@thewizardnexus\.com/);
     assert.doesNotMatch(byName.get(inquiryPage), /flashevangelist@gmail\.com/);
