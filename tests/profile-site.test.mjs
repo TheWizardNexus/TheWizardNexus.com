@@ -476,7 +476,7 @@ test("the public nexus uses focused pages while preserving the complete ecosyste
   assert.match(byName.get("people.html"), /Johanna “JZ” Zollmann, LCSW/);
   assert.match(byName.get("people.html"), /assets\/johanna-portrait\.jpg/);
   assert.match(byName.get("people.html"), /assets\/roshi-portrait\.png/);
-  assert.match(byName.get("people.html"), /assets\/wizard-nexus-logo-premium\.png/);
+  assert.match(byName.get("people.html"), /assets\/wizard-nexus-logo\.png\?v=\d{8}[a-z]/);
   assert.match(byName.get("people.html"), /class="people-bearing"[\s\S]*The shared bearing[\s\S]*Earlier human connection is the point\./);
   assert.ok(byName.get("people.html").indexOf('class="people-bearing"') < byName.get("people.html").indexOf('class="people-section"'));
   assert.doesNotMatch(byName.get("people.html"), /<section class="mission-band"/);
