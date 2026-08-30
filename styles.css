@@ -1119,6 +1119,17 @@ h1 span, h2 span { color: transparent; -webkit-text-stroke: 1px rgba(234, 241, 2
 .contact-primary { padding: clamp(2rem, 5vw, 4rem); border: 1px solid var(--line-strong); border-radius: var(--radius); background: rgba(9, 20, 30, 0.9); }
 .contact-primary > p:not(.eyebrow, .contact-caution) { max-width: 48rem; color: var(--muted); }
 .contact-primary .button { margin-top: 1rem; }
+.email-chooser { margin-top: 1rem; }
+.email-chooser > summary { margin-top: 0; list-style: none; cursor: pointer; user-select: none; }
+.email-chooser > summary::-webkit-details-marker { display: none; }
+.email-chooser > summary span { display: inline-block; transition: transform 160ms ease; }
+.email-chooser[open] > summary span { transform: rotate(180deg); }
+.email-options { display: grid; margin-top: 0.8rem; grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr)); gap: 0.7rem; }
+.email-options > a { display: grid; min-height: 7.5rem; padding: 1rem; align-content: center; border: 1px solid var(--line-strong); border-radius: 0.7rem; background: var(--panel); }
+.email-options > a:hover { border-color: var(--coral); background: var(--panel-strong); }
+.email-options strong { color: var(--text); font-size: 1rem; }
+.email-options span { margin-top: 0.45rem; color: var(--muted); font-size: 0.875rem; line-height: 1.5; }
+.email-address { margin: 1rem 0 0; color: var(--quiet); font: 650 0.875rem/1.6 var(--mono); overflow-wrap: anywhere; }
 .contact-caution { margin: 2rem 0 0; padding-top: 1.2rem; border-top: 1px solid var(--line); color: var(--quiet); font: 650 0.875rem/1.6 var(--mono); }
 .contact-routes { display: grid; gap: 1px; border: 1px solid var(--line); background: var(--line); }
 .contact-routes a { display: grid; min-height: 9rem; padding: 1.3rem; align-content: center; background: var(--panel); }
