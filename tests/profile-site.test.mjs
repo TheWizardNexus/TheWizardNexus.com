@@ -526,6 +526,8 @@ test("the public nexus uses focused pages while preserving the complete ecosyste
     assert.match(html, /src="app\.js\?v=\d{8}[a-z]"/);
     assert.match(html, /class="site-header"/);
     assert.match(html, /class="brand-mark"/);
+    assert.equal([...html.matchAll(/class="footer-linkedin"/g)].length, 1);
+    assert.match(html, /class="footer-linkedin" href="https:\/\/www\.linkedin\.com\/company\/the-wizard-nexus\/" aria-label="TWiN on LinkedIn"/);
     assert.doesNotMatch(html, /class="page-code"/);
     assert.match(html, /wizard-nexus-favicon-32\.png\?v=\d{8}[a-z]/);
     assert.match(html, /wizard-nexus-apple-touch-icon\.png\?v=\d{8}[a-z]/);
