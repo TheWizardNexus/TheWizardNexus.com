@@ -456,6 +456,9 @@ test("the public nexus uses focused pages while preserving the complete ecosyste
   assert.match(byName.get("practice.html"), /Optimize[\s\S]*Detect[\s\S]*Prevent[\s\S]*Intervene/);
   assert.match(byName.get("practice.html"), /Knowledge[\s\S]*Empower[\s\S]*Monitor[\s\S]*Prevent[\s\S]*Optimize/);
   assert.match(byName.get("practice.html"), /PreCrisis helps people notice meaningful change\. KEMPO trains and tests/);
+  assert.match(byName.get("practice.html"), /One ethical operating system[\s\S]*An AI martial art[\s\S]*How does the system judge under pressure\?[\s\S]*KEMPO practice sequence/);
+  assert.match(byName.get("practice.html"), /href="https:\/\/thewizardnexus\.github\.io\/KEMPO\/">Open KEMPO/);
+  assert.doesNotMatch(byName.get("practice.html"), /<span>KEMPO<\/span>/);
   assert.match(byName.get("philosophy.html"), /Life and dignity first/);
   assert.match(byName.get("philosophy.html"), /https:\/\/thewizardnexus\.github\.io\/KEMPO\/philosophy\.html/);
   assert.match(byName.get("philosophy.html"), /https:\/\/riaevangelist\.github\.io\/life-first-framework\//);
