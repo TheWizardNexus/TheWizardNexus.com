@@ -972,10 +972,16 @@ body[data-page="people"] .page-next { margin-bottom: clamp(3.5rem, 6vw, 6rem); p
   display: grid;
   padding: clamp(2.5rem, 5vw, 4.5rem) 0 0;
   align-items: end;
-  grid-template-columns: minmax(0, 1fr) minmax(20rem, 0.8fr);
-  gap: var(--section-gap);
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
 }
-.brand-hero-copy h1 { margin-bottom: 0; }
+.brand-hero-copy > div:last-child { max-width: 52rem; }
+.brand-hero-copy h1 {
+  max-width: none;
+  margin-bottom: 0;
+  font-size: clamp(3rem, 5.4vw, 5.5rem);
+  white-space: nowrap;
+}
 .compact-heading h2 { font-size: clamp(2.4rem, 4vw, 4rem); }
 .home-mission {
   display: grid;
@@ -1309,7 +1315,6 @@ body[data-page="people"] .page-next { margin-bottom: clamp(3.5rem, 6vw, 6rem); p
   .kempo-flow li:nth-child(n + 4) { grid-column: span 3; }
   .practice-grid,
   .work-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .ecosystem-relationship-flow,
   .service-benefit-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
@@ -1325,6 +1330,7 @@ body[data-page="people"] .page-next { margin-bottom: clamp(3.5rem, 6vw, 6rem); p
   .linkedin-profile-grid { grid-template-columns: 1fr; }
   .linkedin-company-card { grid-column: auto; }
   .brand-hero-copy { align-items: start; }
+  .brand-hero-copy h1 { white-space: normal; }
   .home-hero { min-height: auto; grid-template-columns: 1fr; }
   .nexus-console { width: min(100%, 34rem); margin-inline: auto; }
   .home-signal { grid-template-columns: repeat(2, minmax(0, 1fr)); }
