@@ -1065,45 +1065,38 @@ body[data-page="people"] .page-next { margin-bottom: clamp(3.5rem, 6vw, 6rem); p
   margin: 2.25rem 0 0;
   padding: 0;
   grid-template-columns: 1fr;
-  border-top: 1px solid var(--line-strong);
-  background: transparent;
-  counter-reset: ecosystem-relationship;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: linear-gradient(135deg, rgba(108, 224, 220, 0.04), rgba(8, 18, 27, 0.3));
   list-style: none;
 }
 .ecosystem-relationship-flow li {
   position: relative;
+  display: grid;
   min-height: 0;
+  padding: 1rem 1.25rem 1rem 2.6rem;
+  align-items: baseline;
+  grid-template-columns: minmax(10rem, 0.32fr) minmax(0, 1fr);
+  gap: 1.25rem;
   border-bottom: 1px solid var(--line);
   background: transparent;
-  counter-increment: ecosystem-relationship;
 }
-.ecosystem-relationship-flow a {
-  display: grid;
-  padding: 1rem 0.8rem 1rem 2.8rem;
-  align-items: baseline;
-  grid-template-columns: minmax(9rem, 0.32fr) minmax(0, 1fr) auto;
-  gap: 1rem;
-  transition: background 160ms ease;
-}
-.ecosystem-relationship-flow a:hover { background: rgba(108, 224, 220, 0.06); }
 .ecosystem-relationship-flow li::before {
+  content: "";
   position: absolute;
-  top: 1rem;
-  left: 0.65rem;
-  display: grid;
-  width: 1.55rem;
+  top: 1.35rem;
+  left: 1.1rem;
+  width: 0.55rem;
   aspect-ratio: 1;
-  place-items: center;
-  border: 1px solid rgba(108, 224, 220, 0.38);
   border-radius: 50%;
-  color: var(--teal);
-  font: 700 0.875rem/1 var(--mono);
-  content: counter(ecosystem-relationship, decimal-leading-zero);
+  border: 1px solid var(--teal);
+  background: rgba(108, 224, 220, 0.18);
+  box-shadow: 0 0 0 0.28rem rgba(108, 224, 220, 0.05);
 }
-.ecosystem-relationship-flow li:last-child { grid-column: auto; }
+.ecosystem-relationship-flow li:last-child { grid-column: auto; border-bottom: 0; }
 .ecosystem-relationship-flow span { color: var(--teal); font: 700 0.875rem/1.5 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; }
 .ecosystem-relationship-flow strong { max-width: none; font-size: 1rem; line-height: 1.4; }
-.ecosystem-relationship-flow i { color: var(--quiet); font: normal 700 0.875rem/1.5 var(--mono); }
 .ecosystem-metrics p { min-height: 8rem; }
 .ecosystem-directory-note { max-width: 48rem; margin: 2rem 0 0; color: var(--muted); }
 .ecosystem-overview .button-row { margin-top: 2rem; }
@@ -1448,8 +1441,7 @@ body[data-page="people"] .page-next { margin-bottom: clamp(3.5rem, 6vw, 6rem); p
   .ethics-grid article { min-height: auto; }
   .page-metrics.ecosystem-metrics { grid-template-columns: 1fr; }
   .ecosystem-relationship-flow li:last-child { grid-column: auto; }
-  .ecosystem-relationship-flow a { grid-template-columns: 1fr auto; gap: 0.25rem 1rem; }
-  .ecosystem-relationship-flow strong { grid-column: 1 / -1; }
+  .ecosystem-relationship-flow li { grid-template-columns: 1fr; gap: 0.2rem; }
   .audience-band ul { grid-template-columns: 1fr; }
   .boundary-row { grid-template-columns: 1fr; gap: 0.35rem; }
   .repo-toolbar { grid-template-columns: 1fr; }
