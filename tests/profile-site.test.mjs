@@ -635,6 +635,7 @@ test("the homepage is a concise, consistently linked orientation to the public w
   assert.match(portfolioMarkup, /Explore by purpose/);
   assert.doesNotMatch(portfolioMarkup, /The public nexus|The individual sites keep their own identity/i);
   assert.match(home, /class="team-preview-portraits"/);
+  assert.match(home, /<section class="zsf-boundary"[^>]*>\s*<img class="zsf-logo"/);
 });
 
 test("every page identifies TWiN by its strategic role instead of a generic public label", async () => {
