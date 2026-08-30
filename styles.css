@@ -514,19 +514,6 @@ h1 span, h2 span { color: transparent; -webkit-text-stroke: 1px rgba(234, 241, 2
   color: var(--page-accent);
   box-shadow: 0 0.8rem 2.4rem rgba(0, 0, 0, 0.18);
 }
-.page-code {
-  display: inline-grid;
-  min-width: 2.35rem;
-  height: 1.65rem;
-  padding: 0 0.42rem;
-  place-content: center;
-  border: 1px solid var(--page-accent);
-  border-radius: 0.24rem;
-  background: rgba(5, 10, 16, 0.88);
-  color: var(--ink);
-  font-size: 0.875rem;
-  letter-spacing: 0.04em;
-}
 .page-hero-aside { padding-bottom: 0.6rem; }
 .page-hero-aside > p { margin: 0 0 1.6rem; color: var(--muted); font-size: clamp(1rem, 1.5vw, 1.18rem); line-height: 1.75; }
 .page-hero-aside .button-row { margin-top: 1.5rem; }
@@ -1368,5 +1355,5 @@ h1 span, h2 span { color: transparent; -webkit-text-stroke: 1px rgba(234, 241, 2
 @media (forced-colors: active) {
   h1 span, h2 span { color: CanvasText; -webkit-text-stroke: 0; }
   body::before, body::after { display: none; }
-  .brand-mark, .page-code, .button, .project-card, .person-photo { forced-color-adjust: auto; }
+  .brand-mark, .button, .project-card, .person-photo { forced-color-adjust: auto; }
 }

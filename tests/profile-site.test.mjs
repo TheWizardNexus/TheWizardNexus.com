@@ -486,7 +486,6 @@ test("the public nexus uses focused pages while preserving the complete ecosyste
   assert.match(byName.get("linkedin-signal.html"), /https:\/\/www\.linkedin\.com\/company\/the-wizard-nexus\//);
   assert.doesNotMatch(byName.get("signal.html"), /Loading (?:the TWiN NPM|daily values|the latest public snapshot)/);
   assert.match(byName.get("work.html"), /The dojo is open/);
-  assert.doesNotMatch(byName.get("work.html"), /<span class="page-code">07<\/span> Services/);
   assert.ok(byName.get("work.html").indexOf('class="engagement-section"') < byName.get("work.html").indexOf('class="work-paths"'));
   for (const servicePage of SERVICE_PAGES) assert.match(byName.get("work.html"), new RegExp(`href="${servicePage}"`));
   assert.match(errorPage, /href="\/TheWizardNexus\.com\/styles\.css\?v=\d{8}[a-z]"/);
@@ -497,6 +496,7 @@ test("the public nexus uses focused pages while preserving the complete ecosyste
     assert.match(html, /src="app\.js\?v=\d{8}[a-z]"/);
     assert.match(html, /class="site-header"/);
     assert.match(html, /class="brand-mark"/);
+    assert.doesNotMatch(html, /class="page-code"/);
     assert.match(html, /wizard-nexus-favicon-32\.png\?v=\d{8}[a-z]/);
     assert.match(html, /wizard-nexus-apple-touch-icon\.png\?v=\d{8}[a-z]/);
     assert.match(html, /wizard-nexus-logo-96\.png\?v=\d{8}[a-z]/);
