@@ -502,6 +502,11 @@ test("the public nexus uses focused pages while preserving the complete ecosyste
   assert.doesNotMatch(byName.get("signal.html"), /Loading (?:the TWiN NPM|daily values|the latest public snapshot)/);
   assert.match(byName.get("work.html"), /The dojo is open/);
   assert.match(byName.get("practice.html"), /The dojo is open[\s\S]*href="work\.html">Explore services/);
+  assert.match(byName.get("contact.html"), /Step into[\s\S]*the dojo\./);
+  for (const inquiryPage of ["contact.html", "work.html", ...SERVICE_PAGES]) {
+    assert.match(byName.get(inquiryPage), /mailto:connect@thewizardnexus\.com/);
+    assert.doesNotMatch(byName.get(inquiryPage), /flashevangelist@gmail\.com/);
+  }
   assert.ok(byName.get("contact.html").indexOf('class="contact-preflight"') < byName.get("contact.html").indexOf('class="contact-grid"'));
   assert.ok(byName.get("work.html").indexOf('class="engagement-section"') < byName.get("work.html").indexOf('class="work-paths"'));
   for (const servicePage of SERVICE_PAGES) assert.match(byName.get("work.html"), new RegExp(`href="${servicePage}"`));
