@@ -606,7 +606,7 @@ test("every focused page has canonical metadata and every internal HTML route re
     assert.equal([...html.matchAll(/<h1\b/g)].length, 1, `${pageName} should contain one primary heading`);
     assert.match(html, new RegExp(`<link rel="canonical" href="${canonical}"`));
     assert.match(html, new RegExp(`<meta property="og:url" content="${canonical}"`));
-    assert.match(html, /<meta property="og:image" content="https:\/\/thewizardnexus\.github\.io\/TheWizardNexus\.com\/assets\/wizard-nexus-banner\.png">/);
+    assert.match(html, /<meta property="og:image" content="https:\/\/thewizardnexus\.github\.io\/TheWizardNexus\.com\/assets\/wizard-nexus-banner\.png\?v=\d{8}[a-z]">/);
     assert.match(html, /<meta name="twitter:title" content="[^"]+">/);
     assert.match(html, /<meta name="twitter:description" content="[^"]+">/);
     assert.match(html, /<meta name="twitter:image:alt" content="[^"]+">/);
