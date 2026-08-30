@@ -472,6 +472,8 @@ test("the public nexus uses focused pages while preserving the complete ecosyste
   assert.match(byName.get("technology.html"), /Build &amp; connect/);
   assert.match(byName.get("technology.html"), /Applied systems/);
   assert.match(byName.get("technology.html"), /Map the Nexus/);
+  assert.ok(byName.get("technology.html").indexOf('class="technology-paths"') < byName.get("technology.html").indexOf('class="directory-section technology-directory"'));
+  assert.ok(byName.get("technology.html").indexOf('data-project-filter="map"') < byName.get("technology.html").indexOf('data-project-filter="guide"'));
   assert.match(byName.get("index.html"), /TWiN develops systems, tools, and evaluation methods/);
   assert.match(JSON.stringify(await json("data/projects.json")), /assets\/life-first-framework-header\.png/);
   assert.match(byName.get("code.html"), /id="repo-grid"/);
@@ -516,6 +518,7 @@ test("the public nexus uses focused pages while preserving the complete ecosyste
   }
   assert.match(script, /data\/projects\.json/);
   assert.match(script, /const projectPathways =/);
+  assert.ok(script.indexOf('id: "map"') < script.indexOf('id: "guide"'));
   assert.match(script, /project\.pathway === state\.projectFilter/);
   assert.match(script, /stage-badge/);
   assert.match(script, /image-loaded/);

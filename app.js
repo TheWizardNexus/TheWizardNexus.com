@@ -132,28 +132,28 @@ function updateFreshness() {
 
 const projectPathways = [
   {
-    id: "guide",
+    id: "map",
     code: "01",
+    title: "Map the Nexus",
+    description: "The interactive map for seeing the wider ecosystem and the relationships beyond the public sites.",
+  },
+  {
+    id: "guide",
+    code: "02",
     title: "Guide & evaluate",
     description: "Principles, model foundations, and evaluation methods that keep consequential work human-governed.",
   },
   {
     id: "build",
-    code: "02",
+    code: "03",
     title: "Build & connect",
     description: "The operating environment, development tools, data, communication, discovery, and knowledge infrastructure.",
   },
   {
     id: "apply",
-    code: "03",
+    code: "04",
     title: "Applied systems",
     description: "Systems that apply the shared foundations to behavioral health, investigations, human defense, and legal work.",
-  },
-  {
-    id: "map",
-    code: "04",
-    title: "Map the Nexus",
-    description: "The interactive map for seeing the wider ecosystem and the relationships beyond the public sites.",
   },
 ];
 

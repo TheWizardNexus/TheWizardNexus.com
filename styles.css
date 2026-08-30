@@ -1003,6 +1003,7 @@ h1 span, h2 span { color: transparent; -webkit-text-stroke: 1px rgba(234, 241, 2
 
 .profile-link-row { display: flex; flex-wrap: wrap; gap: 1.2rem; }
 .technology-directory { padding-top: clamp(5rem, 8vw, 8rem); }
+.technology-hero + .technology-paths { margin-top: clamp(3rem, 6vw, 6rem); margin-bottom: 0; }
 .technology-paths,
 .ecosystem-layer-grid {
   display: grid;
