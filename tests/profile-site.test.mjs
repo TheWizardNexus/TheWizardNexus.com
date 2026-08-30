@@ -437,7 +437,7 @@ test("the public nexus uses focused pages while preserving the complete ecosyste
 
   assert.match(readme, /assets\/twin-signal\.svg/);
   assert.match(readme, /thewizardnexus\.github\.io\/TheWizardNexus.com/);
-  for (const pageName of ["technology.html", "practice.html", "philosophy.html", "trust.html", "people.html", "zen-sentry.html", "work.html", "signal.html", "contact.html"]) {
+  for (const pageName of ["technology.html", "practice.html", "trust.html", "people.html", "zen-sentry.html", "work.html", "signal.html", "contact.html"]) {
     assert.match(byName.get("index.html"), new RegExp(`href="${pageName}"`));
   }
   assert.doesNotMatch(byName.get("index.html"), /id="project-grid"|id="repo-grid"|id="npm-chart"/);
@@ -528,11 +528,13 @@ test("the public nexus uses focused pages while preserving the complete ecosyste
     assert.match(html, /class="brand-mark"/);
     assert.equal([...html.matchAll(/class="footer-linkedin"/g)].length, 1);
     assert.match(html, /class="footer-linkedin" href="https:\/\/www\.linkedin\.com\/company\/the-wizard-nexus\/" aria-label="TWiN on LinkedIn"/);
+    const footerNav = html.match(/<nav aria-label="Footer navigation">([\s\S]*?)<\/nav>/)?.[1] || "";
+    const footerHrefs = [...footerNav.matchAll(/<a\b[^>]*href="([^"]+)"/g)].map((match) => match[1]);
+    assert.deepEqual(footerHrefs, ["technology.html", "practice.html", "work.html", "contact.html"]);
     assert.doesNotMatch(html, /class="page-code"/);
     assert.match(html, /wizard-nexus-favicon-32\.png\?v=\d{8}[a-z]/);
     assert.match(html, /wizard-nexus-apple-touch-icon\.png\?v=\d{8}[a-z]/);
     assert.match(html, /wizard-nexus-logo-96\.png\?v=\d{8}[a-z]/);
-    assert.match(html, /href="philosophy\.html">Ethics &amp; Philosophy<\/a>/);
     assert.doesNotMatch(html, /brand-sigil/);
     const primaryNav = html.match(/<nav id="primary-navigation"[^>]*>([\s\S]*?)<\/nav>/)?.[1] || "";
     const primaryHrefs = [...primaryNav.matchAll(/<a\b[^>]*href="([^"]+)"/g)].map((match) => match[1]);
