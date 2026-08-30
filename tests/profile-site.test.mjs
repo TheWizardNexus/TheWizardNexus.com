@@ -766,6 +766,16 @@ test("visible typography keeps an explicit 14 pixel minimum", async () => {
   assert.ok(canvasFonts.every((pixels) => pixels >= 14));
 });
 
+test("two-column title groups center on desktop and top-align when stacked", async () => {
+  const styles = await read("styles.css");
+
+  assert.match(styles, /\.section-heading\s*\{[^}]*align-items:\s*center;/s);
+  assert.match(styles, /\.page-hero\s*\{[^}]*align-items:\s*center;/s);
+  assert.match(styles, /\.page-next,\s*\.source-boundary\s*\{[^}]*align-items:\s*center;/s);
+  assert.match(styles, /\.project-pathway-header\s*\{[^}]*align-items:\s*center;/s);
+  assert.match(styles, /@media \(max-width:\s*58rem\)[\s\S]*?\.page-hero\s*\{[^}]*align-items:\s*start;/);
+});
+
 test("implementation introduces no TypeScript, TSX, or TypeScript toolchain", async () => {
   const forbidden = [];
 

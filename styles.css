@@ -391,7 +391,7 @@ h1 span, h2 span { color: transparent; -webkit-text-stroke: 1px rgba(234, 241, 2
   width: var(--shell);
   margin: 0 auto;
   padding: clamp(2.5rem, 6vw, 5rem);
-  align-items: end;
+  align-items: center;
   grid-template-columns: minmax(0, 1.05fr) minmax(18rem, 0.95fr);
   gap: clamp(2rem, 6vw, 6rem);
   border: 1px solid rgba(223, 195, 124, 0.32);
@@ -406,7 +406,7 @@ h1 span, h2 span { color: transparent; -webkit-text-stroke: 1px rgba(234, 241, 2
 .zsf-boundary .button-row { margin-top: 1.7rem; }
 
 .route-section { width: var(--shell); margin: 0 auto; padding: var(--section-space) 0; }
-.section-heading { display: grid; align-items: end; grid-template-columns: minmax(0, 1.1fr) minmax(18rem, 0.75fr); gap: clamp(2rem, 8vw, 8rem); }
+.section-heading { display: grid; align-items: center; grid-template-columns: minmax(0, 1.1fr) minmax(18rem, 0.75fr); gap: clamp(2rem, 8vw, 8rem); }
 .section-heading-solo { grid-template-columns: 1fr; }
 .section-heading-solo > div { max-width: 44rem; }
 .section-heading h2,
@@ -448,7 +448,7 @@ h1 span, h2 span { color: transparent; -webkit-text-stroke: 1px rgba(234, 241, 2
   width: var(--shell);
   margin: 0 auto clamp(6rem, 10vw, 10rem);
   padding: clamp(3rem, 6vw, 5rem);
-  align-items: end;
+  align-items: center;
   grid-template-columns: minmax(0, 1.25fr) minmax(16rem, 0.75fr);
   gap: clamp(2rem, 8vw, 8rem);
   border: 1px solid var(--line-strong);
@@ -493,7 +493,7 @@ h1 span, h2 span { color: transparent; -webkit-text-stroke: 1px rgba(234, 241, 2
   min-height: 26rem;
   margin: 0 auto;
   padding: var(--section-space-tight) 0;
-  align-items: end;
+  align-items: center;
   grid-template-columns: minmax(0, 1.45fr) minmax(18rem, 0.55fr);
   gap: var(--section-gap);
   border-bottom: 1px solid var(--line);
@@ -550,7 +550,7 @@ h1 span, h2 span { color: transparent; -webkit-text-stroke: 1px rgba(234, 241, 2
 .people-section,
 .principles-section,
 .work-paths { width: var(--shell); margin: 0 auto; padding: var(--section-space) 0; }
-.directory-heading { align-items: start; }
+.directory-heading { align-items: center; }
 .directory-tools { display: grid; margin-top: 3rem; grid-template-columns: minmax(16rem, 0.6fr) minmax(0, 1.4fr); gap: 1rem; }
 .search-field,
 .select-field { display: grid; gap: 0.45rem; }
@@ -592,6 +592,7 @@ h1 span, h2 span { color: transparent; -webkit-text-stroke: 1px rgba(234, 241, 2
   display: grid;
   margin-bottom: 2rem;
   padding-top: 1.5rem;
+  align-items: center;
   grid-template-columns: minmax(15rem, 0.8fr) minmax(0, 1.2fr);
   gap: clamp(1.5rem, 5vw, 5rem);
   border-top: 1px solid var(--line-strong);
@@ -649,6 +650,7 @@ h1 span, h2 span { color: transparent; -webkit-text-stroke: 1px rgba(234, 241, 2
   width: var(--shell);
   margin: 0 auto var(--section-space);
   padding: clamp(2rem, 5vw, 4rem);
+  align-items: center;
   grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
   gap: var(--section-gap);
   border: 1px solid var(--line-strong);
@@ -681,7 +683,7 @@ h1 span, h2 span { color: transparent; -webkit-text-stroke: 1px rgba(234, 241, 2
   width: var(--shell);
   margin: 0 auto var(--section-space);
   padding: clamp(2.6rem, 6vw, 5rem);
-  align-items: end;
+  align-items: center;
   grid-template-columns: minmax(0, 1.15fr) minmax(16rem, 0.75fr);
   gap: var(--section-gap);
   border: 1px solid var(--line-strong);
@@ -699,6 +701,7 @@ h1 span, h2 span { color: transparent; -webkit-text-stroke: 1px rgba(234, 241, 2
   width: var(--shell);
   margin: 0 auto;
   padding: var(--section-space) 0;
+  align-items: center;
   grid-template-columns: minmax(18rem, 0.7fr) minmax(0, 1.3fr);
   gap: var(--section-gap);
 }
@@ -729,6 +732,7 @@ h1 span, h2 span { color: transparent; -webkit-text-stroke: 1px rgba(234, 241, 2
   width: var(--shell);
   margin: 0 auto var(--section-space);
   padding: clamp(2.8rem, 6vw, 5rem);
+  align-items: center;
   grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
   gap: var(--section-gap);
   border: 1px solid var(--line-strong);
@@ -785,6 +789,7 @@ h1 span, h2 span { color: transparent; -webkit-text-stroke: 1px rgba(234, 241, 2
   width: var(--shell);
   margin: 0 auto;
   padding: var(--section-space) 0;
+  align-items: center;
   grid-template-columns: minmax(18rem, 0.72fr) minmax(0, 1.28fr);
   gap: var(--section-gap);
   border-top: 1px solid var(--line);
@@ -811,6 +816,7 @@ h1 span, h2 span { color: transparent; -webkit-text-stroke: 1px rgba(234, 241, 2
   width: var(--shell);
   margin: 0 auto;
   padding: clamp(2.8rem, 6vw, 5rem);
+  align-items: center;
   grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
   gap: var(--section-gap);
   border: 1px solid rgba(101, 231, 174, 0.28);
@@ -831,7 +837,7 @@ h1 span, h2 span { color: transparent; -webkit-text-stroke: 1px rgba(234, 241, 2
 .philosophy-instruments .technology-paths { margin-top: 2rem; }
 .philosophy-instruments .technology-paths > a { min-height: 14rem; padding: 1.5rem; }
 .philosophy-instruments .technology-paths strong { margin-top: 1.25rem; }
-.philosophy-boundaries { margin-bottom: var(--section-space-tight); align-items: start; border-color: rgba(223, 195, 124, 0.28); background: linear-gradient(135deg, rgba(223, 195, 124, 0.07), rgba(9, 20, 30, 0.92)); }
+.philosophy-boundaries { margin-bottom: var(--section-space-tight); border-color: rgba(223, 195, 124, 0.28); background: linear-gradient(135deg, rgba(223, 195, 124, 0.07), rgba(9, 20, 30, 0.92)); }
 
 /* People */
 .people-hero { min-height: 24rem; padding-block: clamp(3rem, 5vw, 4.5rem); }
@@ -855,7 +861,7 @@ h1 span, h2 span { color: transparent; -webkit-text-stroke: 1px rgba(234, 241, 2
 .person-id small { color: var(--quiet); font-size: 0.875rem; }
 .person-card h3 { margin: 0 0 1.1rem; font-size: clamp(2rem, 4vw, 3.8rem); letter-spacing: -0.055em; }
 .person-card > div:last-child > p { color: var(--muted); }
-.people-bearing { display: grid; width: var(--shell); margin: 0 auto; padding: clamp(1.2rem, 2.5vw, 1.8rem); align-items: start; grid-template-columns: minmax(10rem, 0.35fr) minmax(0, 1fr); gap: clamp(1rem, 4vw, 3rem); border: 1px solid var(--line); border-radius: var(--radius); background: rgba(9, 20, 30, 0.72); }
+.people-bearing { display: grid; width: var(--shell); margin: 0 auto; padding: clamp(1.2rem, 2.5vw, 1.8rem); align-items: center; grid-template-columns: minmax(10rem, 0.35fr) minmax(0, 1fr); gap: clamp(1rem, 4vw, 3rem); border: 1px solid var(--line); border-radius: var(--radius); background: rgba(9, 20, 30, 0.72); }
 .people-bearing .eyebrow,
 .people-bearing > p:last-child { margin: 0; }
 .people-bearing > p:last-child { color: var(--muted); }
@@ -951,7 +957,6 @@ body[data-page="people"] .page-next { margin-bottom: clamp(3.5rem, 6vw, 6rem); p
 
 /* Work with us */
 .work-grid article > span { color: var(--coral); }
-.engagement-section { align-items: start; }
 .work-hero + .engagement-section { border-top: 0; }
 .engagement-section ol { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--line); }
 .engagement-section li { display: grid; padding: 1.4rem 0; grid-template-columns: 3.5rem 1fr; gap: 1rem; border-bottom: 1px solid var(--line); }
@@ -980,7 +985,7 @@ body[data-page="people"] .page-next { margin-bottom: clamp(3.5rem, 6vw, 6rem); p
 .brand-hero-copy {
   display: grid;
   padding: clamp(2.5rem, 5vw, 4.5rem) 0 0;
-  align-items: end;
+  align-items: center;
   grid-template-columns: 1fr;
   gap: 1.5rem;
 }
@@ -997,6 +1002,7 @@ body[data-page="people"] .page-next { margin-bottom: clamp(3.5rem, 6vw, 6rem); p
   width: var(--shell);
   margin: 0 auto;
   padding: var(--section-space-tight) 0;
+  align-items: center;
   grid-template-columns: minmax(18rem, 0.72fr) minmax(0, 1.28fr);
   gap: var(--section-gap);
   border-bottom: 1px solid var(--line);
@@ -1205,6 +1211,7 @@ body[data-page="people"] .page-next { margin-bottom: clamp(3.5rem, 6vw, 6rem); p
   width: var(--shell);
   margin: 0 auto;
   padding: var(--section-space) 0;
+  align-items: center;
   grid-template-columns: minmax(18rem, 0.72fr) minmax(0, 1.28fr);
   gap: var(--section-gap);
   border-top: 1px solid var(--line);
@@ -1339,6 +1346,11 @@ body[data-page="people"] .page-next { margin-bottom: clamp(3.5rem, 6vw, 6rem); p
   .linkedin-profile-grid { grid-template-columns: 1fr; }
   .linkedin-company-card { grid-column: auto; }
   .brand-hero-copy { align-items: start; }
+  .home-mission,
+  .zsf-boundary,
+  .contact-preflight,
+  .service-process,
+  .service-why { align-items: start; }
   .brand-hero-copy h1 { white-space: normal; }
   .home-hero { min-height: auto; grid-template-columns: 1fr; }
   .nexus-console { width: min(100%, 34rem); margin-inline: auto; }
@@ -1370,11 +1382,20 @@ body[data-page="people"] .page-next { margin-bottom: clamp(3.5rem, 6vw, 6rem); p
   .engagement-section,
   .npm-section,
   .dojo-callout { grid-template-columns: 1fr; gap: 2.5rem; }
+  .method-section,
+  .launch-section,
+  .boundary-section,
+  .life-first-callout,
+  .philosophy-boundaries,
+  .claim-section,
+  .origin-section,
+  .source-notes,
+  .engagement-section { align-items: start; }
   .origin-mark { width: min(16rem, 70vw); margin-inline: auto; }
   .page-hero { min-height: auto; align-items: start; }
   .page-metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .directory-tools { grid-template-columns: 1fr; }
-  .project-pathway-header { grid-template-columns: 1fr; gap: 1rem; }
+  .project-pathway-header { align-items: start; grid-template-columns: 1fr; gap: 1rem; }
   .project-card-featured { grid-template-columns: 1fr; }
   .project-card-featured .project-media { min-height: 0; aspect-ratio: 1.91 / 1; border-right: 0; border-bottom: 1px solid var(--line); }
   .project-body p { min-height: auto; }
@@ -1437,7 +1458,7 @@ body[data-page="people"] .page-next { margin-bottom: clamp(3.5rem, 6vw, 6rem); p
   .claim-grid,
   .source-note-grid { grid-template-columns: 1fr; }
   .person-card { grid-template-columns: 1fr; }
-  .people-bearing { grid-template-columns: 1fr; }
+  .people-bearing { align-items: start; grid-template-columns: 1fr; }
   .person-photo { width: min(100%, 12rem); max-width: 12rem; max-height: 12rem; }
   .person-monogram { width: 8rem; }
   .contact-routes { grid-template-columns: 1fr; }
