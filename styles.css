@@ -400,7 +400,7 @@ h1 span, h2 span { color: transparent; -webkit-text-stroke: 1px rgba(234, 241, 2
   background: linear-gradient(130deg, rgba(223, 195, 124, 0.08), transparent 55%), rgba(8, 18, 27, 0.9);
 }
 .zsf-identity { min-width: 0; }
-.zsf-logo { display: block; width: clamp(10rem, 13vw, 13rem); height: auto; aspect-ratio: 1; grid-column: 1 / -1; justify-self: center; border: 1px solid rgba(223, 195, 124, 0.38); border-radius: 1rem; object-fit: cover; box-shadow: 0 1.2rem 3rem rgba(0, 0, 0, 0.24); }
+.zsf-logo { display: block; width: clamp(10rem, 13vw, 13rem); height: auto; aspect-ratio: 1; margin: 0 auto clamp(2rem, 3vw, 3rem); border: 1px solid rgba(223, 195, 124, 0.38); border-radius: 1rem; object-fit: cover; box-shadow: 0 1.2rem 3rem rgba(0, 0, 0, 0.24); }
 .zsf-identity .eyebrow { margin-bottom: 0.75rem; }
 .zsf-boundary h2 { margin-bottom: 0; font-size: clamp(2.6rem, 4.2vw, 4.2rem); letter-spacing: -0.065em; }
 .zsf-boundary > div:last-child > p { max-width: 48rem; margin: 0; color: var(--muted); font-size: 1.08rem; line-height: 1.75; }
