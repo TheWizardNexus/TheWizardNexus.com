@@ -618,6 +618,7 @@ test("no-script telemetry fallbacks agree across the focused pages", async () =>
 
 test("the homepage is a concise, consistently linked orientation to the public work", async () => {
   const [home, projects] = await Promise.all([read("index.html"), json("data/projects.json")]);
+  const portfolioMarkup = home.match(/<section class="portfolio-overview"[\s\S]*?<\/section>/)?.[0] || "";
   const projectLinks = [...home.matchAll(/<li><a href="([^"]+)">/g)].map((match) => match[1]);
   const appliedMarkup = home.match(/<ul class="portfolio-project-links" aria-label="Applied systems projects">([\s\S]*?)<\/ul>/)?.[1] || "";
   const appliedLinks = [...appliedMarkup.matchAll(/<a href="([^"]+)">/g)].map((match) => match[1]);
@@ -631,6 +632,8 @@ test("the homepage is a concise, consistently linked orientation to the public w
     "https://thewizardnexus.github.io/Sentinel/",
   ]);
   assert.doesNotMatch(home, /endless landing page|class="route-section"|portfolio-pathway-feature/i);
+  assert.match(portfolioMarkup, /Explore by purpose/);
+  assert.doesNotMatch(portfolioMarkup, /The public nexus|The individual sites keep their own identity/i);
   assert.match(home, /class="team-preview-portraits"/);
 });
 
@@ -649,6 +652,8 @@ test("the rebrand uses approved assets and requested profiles without excluded c
   assert.match(home, /assets\/wizard-nexus-logo-96\.png/);
   assert.match(home, /assets\/johanna-portrait\.jpg/);
   assert.match(home, /assets\/roshi-portrait\.png/);
+  assert.match(home, /assets\/zen-sentry-logo\.jpg/);
+  assert.ok(assets.includes("zen-sentry-logo.jpg"), "missing official Zen Sentry Foundation logo");
   for (const html of [people, technology, contact]) {
     assert.match(html, /https:\/\/github\.com\/TheWizardNexus/);
     assert.match(html, /https:\/\/github\.com\/RIAEvangelist/);

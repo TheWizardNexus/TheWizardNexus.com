@@ -393,18 +393,23 @@ h1 span, h2 span { color: transparent; -webkit-text-stroke: 1px rgba(234, 241, 2
   margin: 0 auto;
   padding: clamp(2.5rem, 6vw, 5rem);
   align-items: end;
-  grid-template-columns: minmax(0, 0.9fr) minmax(18rem, 1.1fr);
-  gap: clamp(2rem, 8vw, 8rem);
+  grid-template-columns: minmax(0, 1.05fr) minmax(18rem, 0.95fr);
+  gap: clamp(2rem, 6vw, 6rem);
   border: 1px solid rgba(223, 195, 124, 0.32);
   border-radius: var(--radius);
   background: linear-gradient(130deg, rgba(223, 195, 124, 0.08), transparent 55%), rgba(8, 18, 27, 0.9);
 }
-.zsf-boundary h2 { margin-bottom: 0; font-size: clamp(2.8rem, 5.5vw, 5.8rem); letter-spacing: -0.065em; }
+.zsf-identity { display: grid; min-width: 0; align-items: start; grid-template-columns: 1fr; gap: 1.4rem; }
+.zsf-logo { display: block; width: 7rem; height: auto; aspect-ratio: 1; border: 1px solid rgba(223, 195, 124, 0.38); border-radius: 1rem; object-fit: cover; box-shadow: 0 1.2rem 3rem rgba(0, 0, 0, 0.24); }
+.zsf-identity .eyebrow { margin-bottom: 0.75rem; }
+.zsf-boundary h2 { margin-bottom: 0; font-size: clamp(2.6rem, 4.2vw, 4.2rem); letter-spacing: -0.065em; }
 .zsf-boundary > div:last-child > p { max-width: 48rem; margin: 0; color: var(--muted); font-size: 1.08rem; line-height: 1.75; }
 .zsf-boundary .button-row { margin-top: 1.7rem; }
 
 .route-section { width: var(--shell); margin: 0 auto; padding: clamp(6rem, 10vw, 10rem) 0; }
 .section-heading { display: grid; align-items: end; grid-template-columns: minmax(0, 1.1fr) minmax(18rem, 0.75fr); gap: clamp(2rem, 8vw, 8rem); }
+.section-heading-solo { grid-template-columns: 1fr; }
+.section-heading-solo > div { max-width: 44rem; }
 .section-heading h2,
 .home-closing h2 { margin-bottom: 0; font-size: clamp(2.8rem, 5.5vw, 5.8rem); letter-spacing: -0.065em; }
 .section-heading > p { margin: 0; color: var(--muted); font-size: 1.02rem; }
@@ -1288,6 +1293,8 @@ h1 span, h2 span { color: transparent; -webkit-text-stroke: 1px rgba(234, 241, 2
   .brand-hero { padding-top: 1rem; }
   .brand-hero-image { height: auto; aspect-ratio: 1584 / 593; object-fit: contain; object-position: center; }
   .brand-hero-copy { padding-top: 3.5rem; }
+  .zsf-identity { grid-template-columns: 1fr; }
+  .zsf-logo { width: 6.5rem; }
   .home-hero { padding-top: 4rem; }
   h1 { font-size: clamp(3.2rem, 17vw, 5rem); }
   .button-row { display: grid; }
