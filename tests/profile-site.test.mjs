@@ -449,6 +449,10 @@ test("the public nexus uses focused pages while preserving the complete ecosyste
   assert.match(technologyNoScript, /href="https:\/\/precrisis\.ai\/"/);
   assert.doesNotMatch(byName.get("ecosystem.html"), /id="project-grid"|id="project-search"|id="project-filters"/);
   assert.match(byName.get("ecosystem.html"), /Open the public pathways/);
+  assert.doesNotMatch(byName.get("technology.html"), /id="mapped-points"|id="mapped-relationships"|id="public-project-repo-total"/);
+  assert.doesNotMatch(byName.get("ecosystem.html"), /id="project-total"|class="ecosystem-layer-grid"/);
+  assert.match(byName.get("ecosystem.html"), /class="ecosystem-relationship-flow"/);
+  assert.match(byName.get("ecosystem.html"), /Foundations[\s\S]*Platforms[\s\S]*Products[\s\S]*Programs[\s\S]*Audiences[\s\S]*Funding[\s\S]*Native hosts/);
   assert.match(byName.get("practice.html"), /Optimize[\s\S]*Detect[\s\S]*Prevent[\s\S]*Intervene/);
   assert.match(byName.get("practice.html"), /Knowledge[\s\S]*Empower[\s\S]*Monitor[\s\S]*Prevent[\s\S]*Optimize/);
   assert.match(byName.get("practice.html"), /PreCrisis helps people notice meaningful change\. KEMPO trains and tests/);
@@ -608,8 +612,8 @@ test("no-script telemetry fallbacks agree across the focused pages", async () =>
   const linkedinProfiles = Object.fromEntries(linkedin.profiles.map((profile) => [profile.key, profile]));
   const expectations = [
     [home, { "project-total": projects.published.length, "mapped-points": projects.mapSnapshot.points, "mapped-relationships": projects.mapSnapshot.relationships, "repo-total-hero": repos.counts.total }],
-    [technology, { "project-total": projects.published.length, "mapped-points": projects.mapSnapshot.points, "mapped-relationships": projects.mapSnapshot.relationships, "public-project-repo-total": projects.published.filter((project) => project.repositoryUrl && project.sourceBoundary === "Public repository").length }],
-    [ecosystem, { "project-total": projects.published.length, "mapped-points": projects.mapSnapshot.points, "mapped-relationships": projects.mapSnapshot.relationships, "next-total": projects.publishingNext.length }],
+    [technology, { "project-result-count": `${projects.published.length} public sites across four connected pathways.` }],
+    [ecosystem, { "mapped-points": projects.mapSnapshot.points, "mapped-relationships": projects.mapSnapshot.relationships, "next-total": projects.publishingNext.length }],
     [code, { "repo-total": repos.counts.total, "repo-original": repos.counts.original, "repo-stars": repos.counts.stars }],
     [signal, { "project-total": projects.published.length, "mapped-points": projects.mapSnapshot.points, "mapped-relationships": projects.mapSnapshot.relationships, "repo-total": repos.counts.total, "npm-history-total": history.total.toLocaleString("en-US"), "npm-week": npm.totals.week.toLocaleString("en-US"), "npm-month": npm.totals.month.toLocaleString("en-US"), "npm-year": npm.totals.year.toLocaleString("en-US"), "linkedin-jz-followers": linkedinProfiles.jz.followers.toLocaleString("en-US"), "linkedin-roshi-followers": linkedinProfiles.roshi.followers.toLocaleString("en-US"), "linkedin-company-followers": linkedin.organization.followers.toLocaleString("en-US") }],
     [linkedinPage, { "linkedin-jz-followers": linkedinProfiles.jz.followers.toLocaleString("en-US"), "linkedin-roshi-followers": linkedinProfiles.roshi.followers.toLocaleString("en-US"), "linkedin-company-followers": linkedin.organization.followers.toLocaleString("en-US"), "linkedin-company-employees": linkedin.organization.listedEmployees.toLocaleString("en-US") }],
