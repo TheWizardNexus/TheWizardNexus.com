@@ -616,6 +616,24 @@ test("no-script telemetry fallbacks agree across the focused pages", async () =>
   }
 });
 
+test("the homepage is a concise, consistently linked orientation to the public work", async () => {
+  const [home, projects] = await Promise.all([read("index.html"), json("data/projects.json")]);
+  const projectLinks = [...home.matchAll(/<li><a href="([^"]+)">/g)].map((match) => match[1]);
+  const appliedMarkup = home.match(/<ul class="portfolio-project-links" aria-label="Applied systems projects">([\s\S]*?)<\/ul>/)?.[1] || "";
+  const appliedLinks = [...appliedMarkup.matchAll(/<a href="([^"]+)">/g)].map((match) => match[1]);
+
+  assert.equal([...home.matchAll(/class="portfolio-project-links"/g)].length, 4);
+  assert.deepEqual(projectLinks.toSorted(), projects.published.map((project) => project.url).toSorted());
+  assert.deepEqual(appliedLinks, [
+    "https://precrisis.ai/",
+    "https://thewizardnexus.github.io/Scamurai/",
+    "https://thewizardnexus.github.io/Redress/",
+    "https://thewizardnexus.github.io/Sentinel/",
+  ]);
+  assert.doesNotMatch(home, /endless landing page|class="route-section"|portfolio-pathway-feature/i);
+  assert.match(home, /class="team-preview-portraits"/);
+});
+
 test("the rebrand uses approved assets and requested profiles without excluded content", async () => {
   const [home, people, technology, contact, readme, assets] = await Promise.all([
     read("index.html"),
