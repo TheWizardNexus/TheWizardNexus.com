@@ -127,7 +127,7 @@ test("technology manifest preserves all canonical sites, headers, and five publi
     },
     "life-first-framework": {
       site: "https://riaevangelist.github.io/life-first-framework/",
-      image: "assets/life-first-framework-header.png",
+      image: "assets/life-first-framework-header.png?v=20260902",
       repository: "https://github.com/RIAEvangelist/life-first-framework",
     },
     kempo: {
