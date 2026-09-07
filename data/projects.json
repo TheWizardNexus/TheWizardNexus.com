@@ -93,7 +93,7 @@
       "description": "A released browser-native local data layer built on OPFS: tables become directories, records become files, and data stays local unless exported.",
       "url": "https://thewizardnexus.github.io/DBOPFS/",
       "repositoryUrl": "https://github.com/TheWizardNexus/DBOPFS",
-      "image": "https://thewizardnexus.github.io/DBOPFS/assets/og.png",
+      "image": "assets/dbopfs-showcase-banner.png",
       "sourceStatus": "Publicly source-available",
       "sourceBoundary": "Public repository",
       "featured": true,

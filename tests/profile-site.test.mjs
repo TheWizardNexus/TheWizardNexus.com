@@ -102,7 +102,7 @@ test("technology manifest preserves all canonical sites, headers, and five publi
     },
     dbopfs: {
       site: "https://thewizardnexus.github.io/DBOPFS/",
-      image: "https://thewizardnexus.github.io/DBOPFS/assets/og.png",
+      image: "assets/dbopfs-showcase-banner.png",
       repository: "https://github.com/TheWizardNexus/DBOPFS",
     },
     "dbopfs-studio": {
