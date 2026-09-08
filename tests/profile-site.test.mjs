@@ -112,7 +112,7 @@ test("technology manifest preserves all canonical sites, headers, and five publi
     },
     spellwire: {
       site: "https://thewizardnexus.github.io/SpellWire/",
-      image: "assets/spellwire-readme-header.png",
+      image: "assets/spellwire-showcase-banner.svg",
       repository: null,
     },
     toshokann: {
@@ -160,7 +160,7 @@ test("technology manifest preserves all canonical sites, headers, and five publi
   assert.equal(publicRepositories.length, 5);
   assert.ok(publicRepositories.every((project) => project.sourceBoundary === "Public repository"));
   await Promise.all([
-    access(path.join(ROOT, "assets", "spellwire-readme-header.png")),
+    access(path.join(ROOT, "assets", "spellwire-showcase-banner.svg")),
     access(path.join(ROOT, "assets", "twin-compass-readme-header.png")),
     access(path.join(ROOT, "assets", "life-first-framework-header.png")),
   ]);
