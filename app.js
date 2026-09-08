@@ -58,7 +58,7 @@ function formatDate(value) {
 }
 
 function formatMonthDay(value) {
-  return value ? monthDayFormatter.format(new Date(`${value}T00:00:00Z`)) : "—";
+  return value ? monthDayFormatter.format(new Date(`${value}T00:00:00Z`)) : "Not available";
 }
 
 function formatTimestamp(value) {
@@ -170,23 +170,25 @@ function renderProjectCard(project) {
   const repository = project.repositoryUrl && project.sourceBoundary === "Public repository"
     ? `<a class="secondary" href="${escapeHtml(project.repositoryUrl)}">Inspect repository ↗</a>`
     : "";
-  const featured = project.slug === "precrisis" || project.pathway === "map";
-  return `<article class="project-card${featured ? " project-card-featured" : ""}" data-project-slug="${escapeHtml(project.slug)}" data-accent="${escapeHtml(project.accent)}">
-      <a class="project-media" href="${escapeHtml(project.url)}" aria-label="Open ${escapeHtml(project.name)} — ${escapeHtml(maturity)}">
+
+  return `<article class="project-card" data-project-slug="${escapeHtml(project.slug)}" data-accent="${escapeHtml(project.accent)}">
+      <div class="project-media">
         <span class="image-fallback">${escapeHtml(project.name)}</span>
-        <img src="${escapeHtml(project.image)}" alt="" loading="lazy">
-        <span class="stage-badge">${escapeHtml(maturity)}</span>
-      </a>
+        <img class="banner-art" src="${escapeHtml(project.image)}" alt="" loading="lazy">
+        ${project.slug === "dbopfs" ? '<span class="dbopfs-banner-brand" aria-hidden="true"><img class="dbopfs-banner-logo" src="assets/dbopfs-logo.svg" alt=""><span class="dbopfs-banner-name">DBOPFS</span><span class="dbopfs-banner-subtitle">A browser-native database,<br>written in files.</span><span class="dbopfs-banner-signature">THE WIZARD NEXUS</span></span>' : ""}
+      </div>
       <div class="project-body">
         <p class="project-relationship">${escapeHtml(project.relationship || project.category)}</p>
-        <div class="card-kicker"><span>${escapeHtml(project.category)}</span><span>${escapeHtml(project.sourceBoundary)}</span></div>
-        <h3>${escapeHtml(project.name)}</h3>
+        <div class="card-kicker"><span>${escapeHtml(project.category)}</span><span class="project-status">${escapeHtml(maturity)}</span></div>
+        <h3><a class="project-tile-link" href="${escapeHtml(project.url)}">${escapeHtml(project.name)}</a></h3>
         <p>${escapeHtml(project.description)}</p>
         <p class="project-boundaries"><span>${escapeHtml(project.sourceStatus)}</span>${project.deployment ? `<span>${escapeHtml(project.deployment)}</span>` : ""}</p>
-        <div class="card-links"><a href="${escapeHtml(project.url)}">Explore project ↗</a>${repository}</div>
+        ${repository ? `<div class="card-links">${repository}</div>` : ""}
       </div>
     </article>`;
 }
+
+const projectDisplayOrder = ["ax","astrolabe","arcane-os","arcane-os-sdk","precrisis","twin-compass","kempo","life-first-framework","toshokann","spellwire","scamurai","dbopfs","dbopfs-studio","redress","sentinel"];
 
 function renderProjects() {
   const grid = document.querySelector("#project-grid");
@@ -203,17 +205,12 @@ function renderProjects() {
     return;
   }
 
-  grid.innerHTML = projectPathways.map((pathway) => {
-    const projects = filtered.filter((project) => project.pathway === pathway.id);
-    if (!projects.length) return "";
-    return `<section class="project-pathway" aria-labelledby="pathway-${escapeHtml(pathway.id)}">
-      <header class="project-pathway-header">
-        <div><span>${escapeHtml(pathway.code)} // PUBLIC PATHWAY</span><h3 id="pathway-${escapeHtml(pathway.id)}">${escapeHtml(pathway.title)}</h3></div>
-        <p>${escapeHtml(pathway.description)}</p>
-      </header>
-      <div class="project-grid">${projects.map(renderProjectCard).join("")}</div>
-    </section>`;
-  }).join("");
+  const ordered = filtered.toSorted((a, b) => {
+    const aIndex = projectDisplayOrder.indexOf(a.slug);
+    const bIndex = projectDisplayOrder.indexOf(b.slug);
+    return (aIndex < 0 ? Infinity : aIndex) - (bIndex < 0 ? Infinity : bIndex);
+  });
+  grid.innerHTML = '<div class="project-grid">' + ordered.map(renderProjectCard).join("") + '</div>';
 
   for (const image of grid.querySelectorAll("img")) {
     const media = image.closest(".project-media");
@@ -313,7 +310,7 @@ function renderRepositorySummary() {
   setText("repo-original", numberFormatter.format(counts.original));
   setText("repo-stars", numberFormatter.format(counts.stars));
   const latest = [...repositories].sort((left, right) => new Date(right.updatedAt) - new Date(left.updatedAt))[0];
-  setText("repo-updated", latest ? formatMonthDay(latest.updatedAt.slice(0, 10)) : "—");
+  setText("repo-updated", latest ? formatMonthDay(latest.updatedAt.slice(0, 10)) : "Not available");
   const languageSelect = document.querySelector("#repo-language");
   if (languageSelect) {
     const languages = [...new Set(repositories.map((repo) => repo.language).filter(Boolean))].sort();
@@ -536,6 +533,13 @@ async function loadLinkedIn() {
 }
 
 function wireProjectControls() {
+  const requestedPathway = new URLSearchParams(location.search).get("pathway");
+  if (projectPathways.some((pathway) => pathway.id === requestedPathway)) {
+    state.projectFilter = requestedPathway;
+    for (const button of document.querySelectorAll("[data-project-filter]")) {
+      button.setAttribute("aria-pressed", String(button.dataset.projectFilter === requestedPathway));
+    }
+  }
   document.querySelector("#project-search")?.addEventListener("input", (event) => {
     state.projectQuery = event.target.value;
     renderProjects();
@@ -580,7 +584,148 @@ function wireChart() {
   window.addEventListener("resize", () => window.requestAnimationFrame(drawChart));
 }
 
+
+// Decorative sky: bounded work, independent star motion, and no input capture.
+function initializeConstellationSky() {
+  const canvas = document.createElement("canvas");
+  const context = canvas.getContext("2d");
+  if (!context) return;
+  canvas.className = "constellation-sky";
+  canvas.setAttribute("aria-hidden", "true");
+  document.body.prepend(canvas);
+  document.body.classList.add("sky-ready");
+  const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
+  const forcedColors = matchMedia("(forced-colors: active)");
+  let width = 0;
+  let height = 0;
+  let stars = [];
+  let frame = 0;
+  let previousTime = 0;
+  let elapsed = 0;
+  let suspended = false;
+
+  function resizeSky() {
+    width = innerWidth;
+    height = innerHeight;
+    const scale = Math.min(devicePixelRatio || 1, 2);
+    canvas.width = Math.round(width * scale);
+    canvas.height = Math.round(height * scale);
+    context.setTransform(scale, 0, 0, scale, 0, 0);
+    const count = Math.min(110, Math.max(45, Math.round(width * height / 10000)));
+    stars = Array.from({ length: count + 150 }, (_, index) => {
+      const angle = Math.random() * Math.PI * 2;
+      const speed = index < count ? 5 + Math.random() * 9 : 1 + Math.random() * 3;
+      return { x: Math.random() * width, y: Math.random() * height,
+        vx: Math.cos(angle) * speed, vy: Math.sin(angle) * speed,
+        radius: index < count ? .8 + Math.random() * 1.1 : .3 + Math.random() * .5,
+        phase: Math.random() * Math.PI * 2, gold: Math.random() > .7,
+        linked: index < count };
+    });
+    drawSky(0);
+  }
+
+  function drawSky(delta) {
+    elapsed += delta;
+    context.clearRect(0, 0, width, height);
+    for (const star of stars) {
+      star.x += star.vx * delta;
+      star.y += star.vy * delta;
+      if (star.x < -15) star.x = width + 15;
+      if (star.x > width + 15) star.x = -15;
+      if (star.y < -15) star.y = height + 15;
+      if (star.y > height + 15) star.y = -15;
+    }
+    const nodes = stars.filter((star) => star.linked);
+    const reach = Math.min(185, width * .3);
+    context.lineWidth = .7;
+    for (let i = 0; i < nodes.length; i++) {
+      for (let j = i + 1; j < nodes.length; j++) {
+        const a = nodes[i], b = nodes[j];
+        const distance = Math.hypot(a.x - b.x, a.y - b.y);
+        if (distance >= reach) continue;
+        const alpha = (1 - distance / reach) * .42;
+        context.strokeStyle = a.gold && b.gold
+          ? "rgba(223, 183, 108," + alpha + ")"
+          : "rgba(117, 169, 242," + alpha + ")";
+        context.beginPath();
+        context.moveTo(a.x, a.y);
+        context.lineTo(b.x, b.y);
+        context.stroke();
+      }
+    }
+    for (const star of stars) {
+      const shimmer = .55 + .25 * Math.sin(elapsed * .8 + star.phase);
+      const color = star.gold ? "239, 202, 131" : "190, 219, 255";
+      context.fillStyle = "rgba(" + color + "," + shimmer + ")";
+      context.beginPath();
+      context.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+      context.fill();
+      if (star.radius > 1.65) {
+        const glow = context.createRadialGradient(star.x, star.y, 0, star.x, star.y, 12);
+        glow.addColorStop(0, "rgba(" + color + ",.35)");
+        glow.addColorStop(1, "rgba(" + color + ",0)");
+        context.fillStyle = glow;
+        context.fillRect(star.x - 12, star.y - 12, 24, 24);
+      }
+    }
+  }
+
+  function animateSky(time) {
+    frame = 0;
+    if (document.hidden || reducedMotion.matches || forcedColors.matches || suspended) return;
+    if (!previousTime) previousTime = time;
+    if (time - previousTime >= 1000 / 30) {
+      drawSky(Math.min((time - previousTime) / 1000, .08) * .35);
+      previousTime = time;
+    }
+    frame = requestAnimationFrame(animateSky);
+  }
+
+  function syncSkyMotion() {
+    cancelAnimationFrame(frame);
+    frame = 0;
+    previousTime = 0;
+    canvas.hidden = forcedColors.matches;
+    if (!document.hidden && !reducedMotion.matches && !forcedColors.matches && !suspended) {
+      frame = requestAnimationFrame(animateSky);
+    } else if (!forcedColors.matches) drawSky(0);
+  }
+  window.addEventListener("resize", resizeSky);
+  document.addEventListener("visibilitychange", syncSkyMotion);
+  reducedMotion.addEventListener("change", syncSkyMotion);
+  forcedColors.addEventListener("change", syncSkyMotion);
+  window.addEventListener("pagehide", () => { suspended = true; syncSkyMotion(); });
+  window.addEventListener("pageshow", () => { suspended = false; syncSkyMotion(); });
+  resizeSky();
+  syncSkyMotion();
+}
+
+function initializeBackToTop() {
+  const button = document.createElement("button");
+  button.type = "button";
+  button.className = "back-to-top";
+  button.textContent = "↑ Back to top";
+  button.hidden = true;
+  document.body.append(button);
+
+  function updateBackToTop() {
+    button.hidden = window.scrollY < Math.max(400, window.innerHeight * 0.75);
+  }
+
+  button.addEventListener("click", () => {
+    const topLink = document.querySelector(".site-header .brand");
+    if (topLink) topLink.focus({ preventScroll: true });
+    window.scrollTo({ top: 0, behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth" });
+  });
+  window.addEventListener("scroll", updateBackToTop, { passive: true });
+  window.addEventListener("resize", updateBackToTop);
+  window.addEventListener("pageshow", updateBackToTop);
+  updateBackToTop();
+}
+
 function initialize() {
+  initializeBackToTop();
+  initializeConstellationSky();
   for (const year of document.querySelectorAll("[data-current-year]")) year.textContent = String(new Date().getFullYear());
   markCurrentPage();
   wireMenu();

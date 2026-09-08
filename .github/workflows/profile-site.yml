@@ -61,10 +61,13 @@ jobs:
         with:
           enablement: true
 
+      - name: Prepare public files only
+        run: node scripts/build-site.mjs
+
       - name: Upload the static website
         uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5
         with:
-          path: .
+          path: dist
 
   deploy:
     permissions:

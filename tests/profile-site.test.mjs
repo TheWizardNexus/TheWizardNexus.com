@@ -3,6 +3,8 @@ import assert from "node:assert/strict";
 import { access, readFile, readdir } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { execFile } from "node:child_process";
+import { promisify } from "node:util";
 import { classifyReferenceQuality, compareReferenceSeries, summarizeOfficialRange } from "../scripts/telemetry-quality.mjs";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
@@ -36,6 +38,17 @@ const PAGE_NAMES = [
   "linkedin-signal.html",
   "contact.html",
 ];
+
+test("publishing includes public pages and assets while excluding design previews and source tooling", async () => {
+  await promisify(execFile)(process.execPath, ["scripts/build-site.mjs"], { cwd: ROOT });
+  const entries = await readdir(path.join(ROOT, "dist"));
+  assert.deepEqual(entries.filter((name) => name.endsWith(".html")).sort(), [...PAGE_NAMES, "404.html"].sort());
+  for (const name of ["assets", "data", "app.js", "styles.css", "ecosystem-diagram.css", "robots.txt", "sitemap.xml", ".nojekyll"]) {
+    assert.ok(entries.includes(name), `missing published dependency: ${name}`);
+  }
+  for (const name of [".git", ".github", "tests", "scripts", "README.md"]) assert.ok(!entries.includes(name));
+  for (const page of PAGE_NAMES) assert.equal(await read(`dist/${page}`), await read(page));
+});
 
 test("curated ecosystem accounts for every published interface without confusing sites and source", async () => {
   const projects = await json("data/projects.json");
@@ -87,7 +100,7 @@ test("technology manifest preserves all canonical sites, headers, and five publi
     },
     "arcane-os-sdk": {
       site: "https://thewizardnexus.github.io/arcane-os-sdk/",
-      image: "https://thewizardnexus.github.io/arcane-os-sdk/assets/arcane-os-sdk-readme-header.png",
+      image: "assets/arcane-os-sdk-showcase-banner.png",
       repository: "https://github.com/TheWizardNexus/arcane-os-sdk",
     },
     ax: {
@@ -112,7 +125,7 @@ test("technology manifest preserves all canonical sites, headers, and five publi
     },
     spellwire: {
       site: "https://thewizardnexus.github.io/SpellWire/",
-      image: "assets/spellwire-readme-header.png",
+      image: "assets/spellwire-showcase-banner-v2.svg",
       repository: null,
     },
     toshokann: {
@@ -132,12 +145,12 @@ test("technology manifest preserves all canonical sites, headers, and five publi
     },
     kempo: {
       site: "https://thewizardnexus.github.io/KEMPO/",
-      image: "https://thewizardnexus.github.io/KEMPO/public/og.png",
+      image: "assets/kempo-header.png",
       repository: null,
     },
     precrisis: {
       site: "https://precrisis.ai/",
-      image: "https://precrisis.ai/og.png?v=20260825f",
+      image: "assets/precrisis-header.png",
       repository: null,
     },
     sentinel: {
@@ -147,7 +160,7 @@ test("technology manifest preserves all canonical sites, headers, and five publi
     },
     scamurai: {
       site: "https://thewizardnexus.github.io/Scamurai/",
-      image: "https://thewizardnexus.github.io/Scamurai/public/og.png",
+      image: "assets/scamurai-showcase-banner.png",
       repository: null,
     },
     redress: {
@@ -160,7 +173,7 @@ test("technology manifest preserves all canonical sites, headers, and five publi
   assert.equal(publicRepositories.length, 5);
   assert.ok(publicRepositories.every((project) => project.sourceBoundary === "Public repository"));
   await Promise.all([
-    access(path.join(ROOT, "assets", "spellwire-readme-header.png")),
+    access(path.join(ROOT, "assets", "spellwire-showcase-banner-v2.svg")),
     access(path.join(ROOT, "assets", "twin-compass-readme-header.png")),
     access(path.join(ROOT, "assets", "life-first-framework-header.png")),
   ]);
@@ -406,7 +419,7 @@ test("service-hour catalog is clear, one-time, quantity-adjustable, and consiste
     assert.match(detail, /One-time purchase/i);
     assert.match(detail, /choose 1–20 hours/i);
     assert.match(detail, /no subscription/i);
-    assert.match(detail, /Get time — choose hours/i);
+    assert.match(detail, /Get time: choose hours/i);
     assert.match(detail, /Discuss pricing/i);
     assert.match(detail, new RegExp(`href="${escapeRegex(product.purchaseUrl)}"`));
     assert.match(detail, new RegExp(`data-unit-price-cents="${product.unitPriceCents}"`));
@@ -437,7 +450,7 @@ test("the public nexus uses focused pages while preserving the complete ecosyste
 
   assert.match(readme, /assets\/twin-signal\.svg/);
   assert.match(readme, /thewizardnexus\.github\.io\/TheWizardNexus.com/);
-  for (const pageName of ["technology.html", "practice.html", "trust.html", "people.html", "zen-sentry.html", "work.html", "signal.html", "contact.html"]) {
+  for (const pageName of ["technology.html", "practice.html", "trust.html", "people.html", "work.html", "contact.html"]) {
     assert.match(byName.get("index.html"), new RegExp(`href="${pageName}"`));
   }
   assert.doesNotMatch(byName.get("index.html"), /id="project-grid"|id="repo-grid"|id="npm-chart"/);
@@ -448,18 +461,18 @@ test("the public nexus uses focused pages while preserving the complete ecosyste
   assert.match(technologyNoScript, /href="https:\/\/riaevangelist\.github\.io\/life-first-framework\/"/);
   assert.match(technologyNoScript, /href="https:\/\/precrisis\.ai\/"/);
   assert.doesNotMatch(byName.get("ecosystem.html"), /id="project-grid"|id="project-search"|id="project-filters"/);
-  assert.match(byName.get("ecosystem.html"), /Open the public pathways/);
+  assert.match(byName.get("ecosystem.html"), /How We Build/);
   assert.doesNotMatch(byName.get("technology.html"), /id="mapped-points"|id="mapped-relationships"|id="public-project-repo-total"/);
   assert.doesNotMatch(byName.get("ecosystem.html"), /id="project-total"|class="ecosystem-layer-grid"/);
   assert.match(byName.get("ecosystem.html"), /class="ecosystem-relationship-flow"/);
-  assert.match(byName.get("ecosystem.html"), /Foundations[\s\S]*Platforms[\s\S]*Products[\s\S]*Programs[\s\S]*Audiences[\s\S]*Funding[\s\S]*Native hosts/);
+  assert.match(byName.get("ecosystem.html"), /Foundations[\s\S]*Platforms[\s\S]*Products[\s\S]*Programs[\s\S]*Audiences[\s\S]*Funding[\s\S]*Native Hosts/);
   assert.match(byName.get("practice.html"), /Optimize[\s\S]*Detect[\s\S]*Prevent[\s\S]*Intervene/);
   assert.match(byName.get("practice.html"), /Knowledge[\s\S]*Empower[\s\S]*Monitor[\s\S]*Prevent[\s\S]*Optimize/);
   assert.match(byName.get("practice.html"), /PreCrisis helps people notice meaningful change\. KEMPO trains and tests/);
   assert.match(byName.get("practice.html"), /Where the practice is applied[\s\S]*Six application areas\./);
   const practiceApplications = byName.get("practice.html").match(/<section class="practice-section"[\s\S]*?<\/section>/)?.[0] || "";
   for (const servicePage of SERVICE_PAGES) assert.match(practiceApplications, new RegExp(`href="${servicePage}"`));
-  assert.match(byName.get("practice.html"), /One ethical operating system[\s\S]*An AI martial art[\s\S]*How does the system judge under pressure\?[\s\S]*KEMPO practice sequence/);
+  assert.match(byName.get("practice.html"), /One ethical operating system[\s\S]*An AI martial art[\s\S]*KEMPO practice sequence/);
   assert.match(byName.get("practice.html"), /href="https:\/\/thewizardnexus\.github\.io\/KEMPO\/">Open KEMPO/);
   assert.doesNotMatch(byName.get("practice.html"), /<span>KEMPO<\/span>/);
   assert.match(byName.get("practice.html"), /class="ethical-system-components"[\s\S]*KEMPO \/\/ practiced judgment[\s\S]*Life First Framework[\s\S]*TWiN Compass/);
@@ -470,8 +483,8 @@ test("the public nexus uses focused pages while preserving the complete ecosyste
   assert.match(byName.get("philosophy.html"), /https:\/\/github\.com\/RIAEvangelist\/life-first-framework/);
   assert.match(byName.get("trust.html"), /Morals before/);
   assert.match(byName.get("trust.html"), /Accountability and repair/);
-  assert.match(byName.get("trust.html"), /The Technology directory pairs each published interface/);
-  assert.match(byName.get("trust.html"), /href="technology\.html">Open the Technology directory/);
+  assert.match(byName.get("trust.html"), /The directory states both dimensions/);
+  assert.match(byName.get("trust.html"), /href="technology\.html">See project stages and source status/);
   assert.doesNotMatch(byName.get("trust.html"), /The ecosystem directory pairs each published interface/);
   assert.match(byName.get("people.html"), /Johanna “JZ” Zollmann, LCSW/);
   assert.match(byName.get("people.html"), /assets\/johanna-portrait\.jpg/);
@@ -485,14 +498,14 @@ test("the public nexus uses focused pages while preserving the complete ecosyste
   assert.match(byName.get("people.html"), /href="https:\/\/www\.linkedin\.com\/in\/turtlesallthewaydown\/"/);
   assert.match(byName.get("zen-sentry.html"), /href="https:\/\/thewizardnexus\.github\.io\/Zen-Sentry-Foundation\/"/);
   assert.match(byName.get("zen-sentry.html"), /href="https:\/\/github\.com\/TheWizardNexus\/Zen-Sentry-Foundation"/);
-  assert.match(byName.get("technology.html"), /Every card below opens a live public site/);
+  assert.match(byName.get("technology.html"), /Each project explains its purpose and current stage/);
   assert.match(byName.get("technology.html"), /Guide &amp; evaluate/);
   assert.match(byName.get("technology.html"), /Build &amp; connect/);
   assert.match(byName.get("technology.html"), /Applied systems/);
   assert.match(byName.get("technology.html"), /Map the Nexus/);
   assert.ok(byName.get("technology.html").indexOf('class="technology-paths"') < byName.get("technology.html").indexOf('class="directory-section technology-directory"'));
   assert.ok(byName.get("technology.html").indexOf('data-project-filter="map"') < byName.get("technology.html").indexOf('data-project-filter="guide"'));
-  assert.match(byName.get("index.html"), /TWiN develops systems, tools, and evaluation methods/);
+  assert.match(byName.get("index.html"), /TWiN and Zen Sentry are separate organizations/);
   assert.match(JSON.stringify(await json("data/projects.json")), /assets\/life-first-framework-header\.png/);
   assert.match(byName.get("code.html"), /id="repo-grid"/);
   assert.match(byName.get("code.html"), /Public code remains available without scripts/);
@@ -521,12 +534,12 @@ test("the public nexus uses focused pages while preserving the complete ecosyste
   assert.ok(byName.get("contact.html").indexOf('class="contact-preflight"') < byName.get("contact.html").indexOf('class="contact-grid"'));
   assert.ok(byName.get("work.html").indexOf('class="engagement-section"') < byName.get("work.html").indexOf('class="work-paths"'));
   for (const servicePage of SERVICE_PAGES) assert.match(byName.get("work.html"), new RegExp(`href="${servicePage}"`));
-  assert.match(errorPage, /href="\/TheWizardNexus\.com\/styles\.css\?v=\d{8}[a-z]"/);
+  assert.match(errorPage, /href="\/TheWizardNexus\.com\/styles\.css\?v=\d{8}[a-z0-9-]*"/);
   assert.match(errorPage, /href="\/TheWizardNexus\.com\/ecosystem\.html"/);
   assert.match(errorPage, /wizard-nexus-logo-96\.png/);
   for (const html of pages) {
-    assert.match(html, /href="styles\.css\?v=\d{8}[a-z]"/);
-    assert.match(html, /src="app\.js\?v=\d{8}[a-z]"/);
+    assert.match(html, /href="styles\.css\?v=\d{8}[a-z0-9-]*"/);
+    assert.match(html, /src="app\.js\?v=\d{8}[a-z0-9-]*"/);
     assert.match(html, /class="site-header"/);
     assert.match(html, /class="brand-mark"/);
     assert.equal([...html.matchAll(/class="footer-linkedin"/g)].length, 1);
@@ -543,10 +556,10 @@ test("the public nexus uses focused pages while preserving the complete ecosyste
     const primaryNav = html.match(/<nav id="primary-navigation"[^>]*>([\s\S]*?)<\/nav>/)?.[1] || "";
     const primaryHrefs = [...primaryNav.matchAll(/<a\b[^>]*href="([^"]+)"/g)].map((match) => match[1]);
     assert.deepEqual(primaryHrefs, [
-      "ecosystem.html",
-      "trust.html",
-      "technology.html",
       "practice.html",
+      "trust.html",
+      "ecosystem.html",
+      "technology.html",
       "work.html",
       "people.html",
       "https://thewizardnexus.github.io/Zen-Sentry-Foundation/",
@@ -560,16 +573,16 @@ test("the public nexus uses focused pages while preserving the complete ecosyste
   assert.match(script, /const projectPathways =/);
   assert.ok(script.indexOf('id: "map"') < script.indexOf('id: "guide"'));
   assert.match(script, /project\.pathway === state\.projectFilter/);
-  assert.match(script, /stage-badge/);
+  assert.match(script, /project-status/);
   assert.match(script, /image-loaded/);
   assert.match(script, /project\.repositoryUrl && project\.sourceBoundary === "Public repository"/);
-  assert.match(script, /aria-label="Open \$\{escapeHtml\(project\.name\)\} — \$\{escapeHtml\(maturity\)\}"/);
+  assert.match(script, /class="project-tile-link"/);
   assert.match(script, /data\/repos\.json/);
   assert.match(script, /data\/npm-history\.json/);
   assert.match(script, /data\/linkedin-stats\.json/);
   assert.match(css, /prefers-reduced-motion/);
   assert.doesNotMatch(css, /\.page-hero::(?:before|after)/);
-  assert.match(css, /border-left: 3px solid var\(--page-accent\)/);
+  assert.match(css, /font: italic 400 clamp\(27px, 3vw, 32px\)\/1\.25 Georgia/);
   assert.match(css, /\.ethics-grid/);
   assert.match(css, /@keyframes cosmos-drift/);
   assert.match(css, /body::after \{ animation: none !important; transform: none !important; \}/);
@@ -607,11 +620,11 @@ test("every focused page has canonical metadata and every internal HTML route re
     assert.equal([...html.matchAll(/<h1\b/g)].length, 1, `${pageName} should contain one primary heading`);
     assert.match(html, new RegExp(`<link rel="canonical" href="${canonical}"`));
     assert.match(html, new RegExp(`<meta property="og:url" content="${canonical}"`));
-    assert.match(html, /<meta property="og:image" content="https:\/\/thewizardnexus\.github\.io\/TheWizardNexus\.com\/assets\/wizard-nexus-social-preview-original\.png\?v=\d{8}[a-z]">/);
+    assert.match(html, /<meta property="og:image" content="https:\/\/thewizardnexus\.github\.io\/TheWizardNexus\.com\/assets\/wizard-nexus-social-preview-original\.png\?v=\d{8}[a-z0-9-]*">/);
     assert.match(html, /<meta property="og:image:type" content="image\/png">/);
     assert.match(html, /<meta property="og:image:width" content="1200">/);
     assert.match(html, /<meta property="og:image:height" content="630">/);
-    assert.match(html, /<meta name="twitter:image" content="https:\/\/thewizardnexus\.github\.io\/TheWizardNexus\.com\/assets\/wizard-nexus-social-preview-original\.png\?v=\d{8}[a-z]">/);
+    assert.match(html, /<meta name="twitter:image" content="https:\/\/thewizardnexus\.github\.io\/TheWizardNexus\.com\/assets\/wizard-nexus-social-preview-original\.png\?v=\d{8}[a-z0-9-]*">/);
     assert.doesNotMatch(html, /wizard-nexus-social-preview-metal/);
     assert.match(html, /<meta name="twitter:title" content="[^"]+">/);
     assert.match(html, /<meta name="twitter:description" content="[^"]+">/);
@@ -630,7 +643,7 @@ test("every focused page has canonical metadata and every internal HTML route re
   assert.match(workflow, /actions\/configure-pages@/);
   assert.match(workflow, /actions\/upload-pages-artifact@/);
   assert.match(workflow, /actions\/deploy-pages@/);
-  assert.match(workflow, /path: \./);
+  assert.match(workflow, /path: dist/);
   assert.match(workflow, /README\.md index\.html technology\.html ecosystem\.html/);
 });
 
@@ -650,7 +663,6 @@ test("no-script telemetry fallbacks agree across the focused pages", async () =>
   ]);
   const linkedinProfiles = Object.fromEntries(linkedin.profiles.map((profile) => [profile.key, profile]));
   const expectations = [
-    [home, { "project-total": projects.published.length, "mapped-points": projects.mapSnapshot.points, "mapped-relationships": projects.mapSnapshot.relationships, "repo-total-hero": repos.counts.total }],
     [technology, { "project-result-count": `${projects.published.length} public sites across four connected pathways.` }],
     [ecosystem, { "mapped-points": projects.mapSnapshot.points, "mapped-relationships": projects.mapSnapshot.relationships, "next-total": projects.publishingNext.length }],
     [code, { "repo-total": repos.counts.total, "repo-original": repos.counts.original, "repo-stars": repos.counts.stars }],
@@ -665,32 +677,21 @@ test("no-script telemetry fallbacks agree across the focused pages", async () =>
 });
 
 test("the homepage is a concise, consistently linked orientation to the public work", async () => {
-  const [home, projects] = await Promise.all([read("index.html"), json("data/projects.json")]);
-  const portfolioMarkup = home.match(/<section class="portfolio-overview"[\s\S]*?<\/section>/)?.[0] || "";
-  const projectLinks = [...home.matchAll(/<li><a href="([^"]+)">/g)].map((match) => match[1]);
-  const appliedMarkup = home.match(/<ul class="portfolio-project-links" aria-label="Applied systems projects">([\s\S]*?)<\/ul>/)?.[1] || "";
-  const appliedLinks = [...appliedMarkup.matchAll(/<a href="([^"]+)">/g)].map((match) => match[1]);
+  const home = await read("index.html");
+  const pathways = home.match(/<div class="home-pathway-grid">([\s\S]*?)<\/section>/)?.[1] || "";
+  for (const page of ["technology.html", "practice.html", "work.html"]) assert.ok(pathways.includes(`href="${page}"`));
+  assert.doesNotMatch(home, /class="team-preview-portraits"|class="portfolio-project-links"|id="project-grid"/);
+  assert.match(home, /The Wizard Nexus \(TWiN\)/);
+  assert.match(home, /class="home-zsf-feature"[\s\S]*assets\/zen-sentry-logo\.jpg/);
+  assert.ok(home.indexOf('class="home-zsf-feature"') < home.indexOf('practice-dojo home-dojo'));
 
-  assert.equal([...home.matchAll(/class="portfolio-project-links"/g)].length, 4);
-  assert.deepEqual(projectLinks.toSorted(), projects.published.map((project) => project.url).toSorted());
-  assert.deepEqual(appliedLinks, [
-    "https://precrisis.ai/",
-    "https://thewizardnexus.github.io/Scamurai/",
-    "https://thewizardnexus.github.io/Redress/",
-    "https://thewizardnexus.github.io/Sentinel/",
-  ]);
-  assert.doesNotMatch(home, /endless landing page|class="route-section"|portfolio-pathway-feature/i);
-  assert.match(portfolioMarkup, /Explore by purpose/);
-  assert.doesNotMatch(portfolioMarkup, /The public nexus|The individual sites keep their own identity/i);
-  assert.match(home, /class="team-preview-portraits"/);
-  assert.match(home, /<section class="zsf-boundary"[^>]*>\s*<div class="zsf-identity"><img class="zsf-logo"/);
 });
 
 test("every page identifies TWiN by its strategic role instead of a generic public label", async () => {
   const pages = await Promise.all([...PAGE_NAMES, "404.html"].map(read));
 
   for (const html of pages) {
-    assert.match(html, /<small>TWiN \/\/ Systems · Tools · Evaluation<\/small>/);
+    assert.match(html, /<small>Systems · Tools · Evaluation<\/small>/);
     assert.doesNotMatch(html, /TWiN \/\/ Public nexus/i);
   }
 });
@@ -708,8 +709,8 @@ test("the rebrand uses approved assets and requested profiles without excluded c
   assert.match(readme, /assets\/wizard-nexus-banner\.png/);
   assert.doesNotMatch(readme, /assets\/brand-banner\.png/);
   assert.match(home, /assets\/wizard-nexus-logo-96\.png/);
-  assert.match(home, /assets\/johanna-portrait\.jpg/);
-  assert.match(home, /assets\/roshi-portrait\.png/);
+  assert.match(people, /assets\/johanna-portrait\.jpg/);
+  assert.match(people, /assets\/roshi-portrait\.png/);
   assert.match(home, /assets\/zen-sentry-logo\.jpg/);
   assert.ok(assets.includes("zen-sentry-logo.jpg"), "missing official Zen Sentry Foundation logo");
   for (const html of [people, technology, contact]) {

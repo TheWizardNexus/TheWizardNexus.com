@@ -22,7 +22,7 @@
   "products": [
     {
       "slug": "behavioral-health-strategy",
-      "name": "Behavioral-Health Strategy — Service Hour",
+      "name": "Behavioral-Health Strategy: Service Hour",
       "servicePage": "service-strategy.html",
       "unitPriceCents": 25000,
       "paymentType": "one_time",
@@ -35,7 +35,7 @@
     },
     {
       "slug": "program-development-evaluation",
-      "name": "Program Development & Evaluation — Service Hour",
+      "name": "Program Development & Evaluation: Service Hour",
       "servicePage": "service-programs.html",
       "unitPriceCents": 35000,
       "paymentType": "one_time",
@@ -48,7 +48,7 @@
     },
     {
       "slug": "policy-procedure-engineering",
-      "name": "Policy & Procedure Engineering — Service Hour",
+      "name": "Policy & Procedure Engineering: Service Hour",
       "servicePage": "service-policy.html",
       "unitPriceCents": 55000,
       "paymentType": "one_time",
@@ -61,7 +61,7 @@
     },
     {
       "slug": "white-label-precrisis",
-      "name": "White-Label PreCrisis — Service Hour",
+      "name": "White-Label PreCrisis: Service Hour",
       "servicePage": "service-precrisis.html",
       "unitPriceCents": 25000,
       "paymentType": "one_time",
@@ -74,7 +74,7 @@
     },
     {
       "slug": "private-ai-cloud-local",
-      "name": "Private AI: Cloud or Local — Service Hour",
+      "name": "Private AI: Cloud or Local: Service Hour",
       "servicePage": "service-private-ai.html",
       "unitPriceCents": 35000,
       "paymentType": "one_time",
@@ -87,7 +87,7 @@
     },
     {
       "slug": "private-il2-il6-ai",
-      "name": "Private IL-2 through IL-6 AI — Service Hour",
+      "name": "Private IL-2 through IL-6 AI: Service Hour",
       "servicePage": "service-military-ai.html",
       "unitPriceCents": 55000,
       "paymentType": "one_time",
@@ -100,7 +100,7 @@
     },
     {
       "slug": "cyber-rainbow-6",
-      "name": "Cyber Rainbow 6 — Service Hour",
+      "name": "Cyber Rainbow 6: Service Hour",
       "servicePage": "service-cyber.html",
       "unitPriceCents": 110000,
       "paymentType": "one_time",
