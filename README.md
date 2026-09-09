@@ -79,17 +79,30 @@ A public interface does not automatically mean public source, production readine
 
 ## This repository
 
-This repository is the dependency-free static source for **TheWizardNexus.com**. It uses plain HTML, CSS, and JavaScript and publishes to GitHub Pages from `main` through [the Pages workflow](.github/workflows/profile-site.yml). The public, one-time Stripe service-hour catalog is recorded in [`data/service-products.json`](data/service-products.json); it contains public product, price, and Payment Link identifiers only—never secret keys.
+This repository is the plain HTML, CSS, and JavaScript source for **TheWizardNexus.com**, using **Arcane SDK 0.28.2** for its shared runtime, theme, installation, offline pages, DBOPFS storage, and mail integration. It publishes the selected browser package to GitHub Pages from `main` through [the Pages workflow](.github/workflows/profile-site.yml). The public, one-time Stripe service-hour catalog is recorded in [`data/service-products.json`](data/service-products.json); it contains public product, price, and Payment Link identifiers only—never secret keys.
 
-Local validation:
+Use Node.js 22.23.2 or newer. From this repository, install the exact committed dependency tree and start the local site:
 
-```text
-node --check app.js
-node --check scripts/telemetry-quality.mjs
-node --check scripts/update-profile-data.mjs
-node --test tests/profile-site.test.mjs
-git diff --check
+```sh
+npm ci --ignore-scripts --no-audit --no-fund
+npm start
 ```
+
+Open [localhost:8080](http://localhost:8080). This development command uses the Arcane SDK's HTTP mode on localhost, where browsers provide the secure context needed for local storage and service workers. `npm run dev` selects the SDK's HTTPS development mode and requires the local certificate configuration described in the [Arcane SDK documentation](https://thewizardnexus.github.io/arcane-os-sdk/).
+
+To create the selected static package:
+
+```sh
+npm run build
+```
+
+The build refreshes the SDK-managed import maps, then packages the website and its selected SDK runtime into `dist/wizard-nexus`. The authored [`arcane-app.json`](arcane-app.json) selects the public content; [`arcane-packager.json`](arcane-packager.json) keeps this application at the repository root. An optional root `CNAME` is copied into the hosting output when present. The Pages workflow retains its configured hosted checks and uploads `dist/wizard-nexus`.
+
+Visit the site online first and let its offline preparation finish before disconnecting. A browser that supports installation can add The Wizard Nexus through its install menu. Offline operation requires service workers and origin-private storage on HTTPS or localhost; opening the HTML directly from the filesystem does not provide that environment. The installed site retains its packaged pages, assets, and public data snapshots. External websites, live purchases, updates, and sending contact email require a connection.
+
+The contact form sends to `connect+website@thewizardnexus.com`. Mail uses `The Wizard Nexus website <twin@mail.precrisis.ai>` as its gateway sender and the visitor's email as `Reply-To`; the subject and message are sent as authored. Drafts are saved locally in DBOPFS and can be written offline. Sending begins only when the visitor submits while connected.
+
+DBOPFS also stores the contact ledger in the current browser: at least 15 minutes between submissions and at most 3 in any rolling 24 hours. Accepted messages are counted, and pending or unconfirmed deliveries reserve an allowance to avoid duplicates after a lost response. An explicit service rejection restores that allowance. The form shows accepted counts, remaining allowance, and the next available send time. These limits belong to this browser's local storage; another browser or cleared site data has separate state. Delivery is reported as accepted only after the mail provider confirms acceptance.
 
 <p align="center">
   <strong>The dojo is open.</strong><br>

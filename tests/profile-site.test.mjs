@@ -39,16 +39,46 @@ const PAGE_NAMES = [
   "contact.html",
 ];
 
-test("publishing includes public pages and assets while excluding design previews and source tooling", async () => {
-  await promisify(execFile)(process.execPath, ["scripts/build-site.mjs"], { cwd: ROOT });
-  const entries = await readdir(path.join(ROOT, "dist"));
-  assert.deepEqual(entries.filter((name) => name.endsWith(".html")).sort(), [...PAGE_NAMES, "404.html"].sort());
-  for (const name of ["assets", "data", "app.js", "styles.css", "ecosystem-diagram.css", "robots.txt", "sitemap.xml", ".nojekyll"]) {
-    assert.ok(entries.includes(name), `missing published dependency: ${name}`);
-  }
-  for (const name of [".git", ".github", "tests", "scripts", "README.md"]) assert.ok(!entries.includes(name));
-  for (const page of PAGE_NAMES) assert.equal(await read(`dist/${page}`), await read(page));
-});
+test(
+    'publishing includes public pages and offline runtime while excluding design previews and source tooling',
+    async function inspectPublishedSite() {
+        await promisify(execFile)(
+            process.execPath,
+            ['scripts/build-site.mjs'],
+            {cwd: ROOT}
+        );
+        const output = 'dist/wizard-nexus';
+        const entries = await readdir(path.join(ROOT, output));
+        const publishedPages = entries.filter(
+            function isHtmlPage(name) {
+                return name.endsWith('.html');
+            }
+        );
+        assert.deepEqual(
+            publishedPages.sort(),
+            [...PAGE_NAMES, '404.html'].sort()
+        );
+        for (const name of ['assets', 'data', 'app.js', 'styles.css', 'ecosystem-diagram.css', 'contact.js', 'contact-policy.js', 'contact.css', 'robots.txt', 'sitemap.xml', '.nojekyll', 'node_modules', 'ARCANE_APP_RELEASE.json', 'arcane.webmanifest', 'arcane-offline.json', 'arcane-sw.js', 'arcane-pwa.mjs']) {
+            assert.ok(entries.includes(name), `missing published dependency: ${name}`);
+        }
+        for (const name of ['.git', '.github', 'tests', 'scripts', 'README.md']) {
+            assert.ok(!entries.includes(name));
+        }
+        for (const page of PAGE_NAMES) {
+            const [published, source] = await Promise.all(
+                [read(`${output}/${page}`), read(page)]
+            );
+            assert.match(published, /The Wizard Nexus/);
+            const sourceMain = source.match(/<main\b[^>]*>([\s\S]*?)<\/main>/)?.[1];
+            assert.ok(sourceMain, `${page} should provide its main content`);
+            for (const [, content] of sourceMain.matchAll(/>([^<>]+)</g)) {
+                if (/\S/.test(content)) {
+                    assert.ok(published.includes(content), `${page} omitted authored content: ${content}`);
+                }
+            }
+        }
+    }
+);
 
 test("curated ecosystem accounts for every published interface without confusing sites and source", async () => {
   const projects = await json("data/projects.json");
@@ -489,7 +519,7 @@ test("the public nexus uses focused pages while preserving the complete ecosyste
   assert.match(byName.get("people.html"), /Johanna “JZ” Zollmann, LCSW/);
   assert.match(byName.get("people.html"), /assets\/johanna-portrait\.jpg/);
   assert.match(byName.get("people.html"), /assets\/roshi-portrait\.png/);
-  assert.match(byName.get("people.html"), /assets\/wizard-nexus-logo\.png\?v=\d{8}[a-z]/);
+  assert.match(byName.get("people.html"), /assets\/wizard-nexus-logo\.png(?:\?v=\d{8}[a-z0-9-]*)?"/);
   assert.match(byName.get("people.html"), /class="people-bearing"[\s\S]*The shared bearing[\s\S]*Earlier human connection is the point\./);
   assert.ok(byName.get("people.html").indexOf('class="people-bearing"') < byName.get("people.html").indexOf('class="people-section"'));
   assert.doesNotMatch(byName.get("people.html"), /<section class="mission-band"/);
@@ -519,27 +549,40 @@ test("the public nexus uses focused pages while preserving the complete ecosyste
   assert.match(byName.get("work.html"), /The dojo is open/);
   assert.match(byName.get("practice.html"), /The dojo is open[\s\S]*href="work\.html">Explore services/);
   assert.match(byName.get("contact.html"), /Step into[\s\S]*the dojo\./);
-  assert.match(byName.get("contact.html"), /class="email-chooser"/);
-  assert.match(byName.get("contact.html"), /https:\/\/mail\.google\.com\/mail\/\?view=cm/);
-  assert.match(byName.get("contact.html"), /https:\/\/outlook\.office\.com\/mail\/deeplink\/compose/);
-  assert.match(byName.get("contact.html"), /mailto:connect@thewizardnexus\.com\?subject=[^\"]+&amp;body=People%3A/);
-  assert.match(byName.get("contact.html"), /Purpose%3A[\s\S]*Boundary%3A/);
+  const contact = byName.get("contact.html");
+  assert.match(contact, /<form\b[^>]*id="contact-form"/);
+  assert.match(contact, /<label for="contact-email">Your email<\/label>/);
+  assert.match(contact, /<input\b[^>]*name="email"[^>]*type="email"[^>]*required/);
+  assert.match(contact, /<label for="contact-subject">Subject<\/label>/);
+  assert.match(contact, /<input\b[^>]*name="subject"[^>]*required/);
+  assert.match(contact, /<label for="contact-message">Your message<\/label>/);
+  assert.match(contact, /<textarea\b[^>]*name="message"[^>]*required/);
+  assert.match(contact, /<button\b[^>]*id="contact-submit"[^>]*type="submit"[^>]*disabled/);
+  assert.match(contact, /id="contact-status"[^>]*aria-live="polite"/);
+  assert.match(contact, /id="contact-allowance"/);
+  assert.match(contact, /id="contact-draft-status"/);
+  assert.match(contact, /connect\+website@thewizardnexus\.com/);
+  assert.match(contact, /15 minutes between messages[\s\S]*3 messages in any 24 hours from this browser/);
+  assert.match(contact, /write your message offline[\s\S]*Reconnect to send/);
+  assert.match(contact, /<script\b[^>]*type="module"[^>]*src="contact\.js(?:\?[^\"]*)?"/);
+  assert.doesNotMatch(contact, /class="email-chooser"|mailto:|mail\.google\.com\/mail\/|outlook\.office\.com\/mail\/deeplink\/compose|maxlength=/);
   assert.match(byName.get("contact.html"), /Follow the work[\s\S]*TWiN across the web\./);
   assert.ok(byName.get("contact.html").indexOf("https://www.linkedin.com/company/the-wizard-nexus/") < byName.get("contact.html").indexOf("https://www.linkedin.com/in/johannazollmann/"));
   assert.ok(byName.get("contact.html").indexOf("https://github.com/TheWizardNexus") < byName.get("contact.html").indexOf("https://www.linkedin.com/in/johannazollmann/"));
-  for (const inquiryPage of ["contact.html", "work.html", ...SERVICE_PAGES]) {
+  assert.doesNotMatch(contact, /flashevangelist@gmail\.com/);
+  for (const inquiryPage of ["work.html", ...SERVICE_PAGES]) {
     assert.match(byName.get(inquiryPage), /mailto:connect@thewizardnexus\.com/);
     assert.doesNotMatch(byName.get(inquiryPage), /flashevangelist@gmail\.com/);
   }
   assert.ok(byName.get("contact.html").indexOf('class="contact-preflight"') < byName.get("contact.html").indexOf('class="contact-grid"'));
   assert.ok(byName.get("work.html").indexOf('class="engagement-section"') < byName.get("work.html").indexOf('class="work-paths"'));
   for (const servicePage of SERVICE_PAGES) assert.match(byName.get("work.html"), new RegExp(`href="${servicePage}"`));
-  assert.match(errorPage, /href="\/TheWizardNexus\.com\/styles\.css\?v=\d{8}[a-z0-9-]*"/);
-  assert.match(errorPage, /href="\/TheWizardNexus\.com\/ecosystem\.html"/);
+  assert.match(errorPage, /href="\.\/styles\.css(?:\?v=\d{8}[a-z0-9-]*)?"/);
+  assert.match(errorPage, /href="\.\/ecosystem\.html"/);
   assert.match(errorPage, /wizard-nexus-logo-96\.png/);
   for (const html of pages) {
-    assert.match(html, /href="styles\.css\?v=\d{8}[a-z0-9-]*"/);
-    assert.match(html, /src="app\.js\?v=\d{8}[a-z0-9-]*"/);
+    assert.match(html, /href="\.\/styles\.css(?:\?v=\d{8}[a-z0-9-]*)?"/);
+    assert.match(html, /<script\b[^>]*type="module"[^>]*src="\.\/app\.js(?:\?v=\d{8}[a-z0-9-]*)?"/);
     assert.match(html, /class="site-header"/);
     assert.match(html, /class="brand-mark"/);
     assert.equal([...html.matchAll(/class="footer-linkedin"/g)].length, 1);
@@ -548,10 +591,10 @@ test("the public nexus uses focused pages while preserving the complete ecosyste
     const footerHrefs = [...footerNav.matchAll(/<a\b[^>]*href="([^"]+)"/g)].map((match) => match[1]);
     assert.deepEqual(footerHrefs, ["technology.html", "practice.html", "work.html", "contact.html"]);
     assert.doesNotMatch(html, /class="page-code"/);
-    assert.match(html, /wizard-nexus-favicon-32\.png\?v=\d{8}[a-z]/);
-    assert.match(html, /wizard-nexus-favicon-16\.png\?v=\d{8}[a-z]/);
+    assert.match(html, /wizard-nexus-favicon-32\.png(?:\?v=\d{8}[a-z0-9-]*)?"/);
+    assert.match(html, /wizard-nexus-favicon-16\.png(?:\?v=\d{8}[a-z0-9-]*)?"/);
     assert.match(html, /wizard-nexus-apple-touch-icon\.png\?v=\d{8}[a-z]/);
-    assert.match(html, /wizard-nexus-logo-96\.png\?v=\d{8}[a-z]/);
+    assert.match(html, /wizard-nexus-logo-96\.png(?:\?v=\d{8}[a-z0-9-]*)?"/);
     assert.doesNotMatch(html, /brand-sigil/);
     const primaryNav = html.match(/<nav id="primary-navigation"[^>]*>([\s\S]*?)<\/nav>/)?.[1] || "";
     const primaryHrefs = [...primaryNav.matchAll(/<a\b[^>]*href="([^"]+)"/g)].map((match) => match[1]);
@@ -643,7 +686,7 @@ test("every focused page has canonical metadata and every internal HTML route re
   assert.match(workflow, /actions\/configure-pages@/);
   assert.match(workflow, /actions\/upload-pages-artifact@/);
   assert.match(workflow, /actions\/deploy-pages@/);
-  assert.match(workflow, /path: dist/);
+  assert.match(workflow, /path: dist\/wizard-nexus/);
   assert.match(workflow, /README\.md index\.html technology\.html ecosystem\.html/);
 });
 
@@ -739,7 +782,7 @@ test("the rebrand uses approved assets and requested profiles without excluded c
   const residue = [];
   async function scan(directory) {
     for (const entry of await readdir(directory, { withFileTypes: true })) {
-      if (entry.name === ".git") continue;
+      if ([".git", "node_modules"].includes(entry.name)) continue;
       const fullPath = path.join(directory, entry.name);
       if (entry.isDirectory()) await scan(fullPath);
       if (entry.isFile() && textExtensions.test(entry.name)) {
@@ -782,7 +825,7 @@ test("implementation introduces no TypeScript, TSX, or TypeScript toolchain", as
 
   async function walk(directory) {
     for (const entry of await readdir(directory, { withFileTypes: true })) {
-      if (entry.name === ".git" || entry.name === "dist") continue;
+      if ([".git", "dist", "node_modules"].includes(entry.name)) continue;
       const fullPath = path.join(directory, entry.name);
       if (entry.isDirectory()) await walk(fullPath);
       if (entry.isFile() && (/\.(ts|tsx)$/i.test(entry.name) || /^tsconfig(?:\..+)?\.json$/i.test(entry.name))) {

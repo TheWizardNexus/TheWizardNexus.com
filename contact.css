@@ -1,0 +1,100 @@
+.contact-recipient {
+    overflow-wrap: anywhere;
+    color: var(--text-color);
+}
+
+.contact-form {
+    display: grid;
+    gap: 1.25rem;
+    margin-top: 1.5rem;
+}
+
+.contact-field {
+    display: grid;
+    min-width: 0;
+    gap: 0.45rem;
+}
+
+.contact-field label {
+    color: var(--text-color);
+    font-weight: 650;
+}
+
+.contact-field input,
+.contact-field textarea {
+    width: 100%;
+    min-width: 0;
+    padding: 0.8rem 0.9rem;
+    border: 1px solid var(--border-color);
+    border-radius: 0.5rem;
+    background: var(--modal-background);
+    color: var(--text-color);
+    font: inherit;
+    line-height: 1.5;
+}
+
+.contact-field textarea {
+    resize: vertical;
+}
+
+.contact-field input:focus-visible,
+.contact-field textarea:focus-visible,
+.contact-form .button:focus-visible {
+    outline: 2px solid var(--focus-color);
+    outline-offset: 3px;
+}
+
+.contact-field-note,
+.contact-send-details p {
+    margin: 0;
+    color: var(--muted-text-color);
+    font-size: 0.875rem;
+    line-height: 1.6;
+}
+
+.contact-send-details {
+    display: grid;
+    gap: 0.75rem;
+    padding: 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 0.5rem;
+    background: var(--secondary-color);
+}
+
+.contact-send-details .contact-allowance {
+    color: var(--text-color);
+    font-weight: 650;
+}
+
+.contact-form .button {
+    justify-self: start;
+    margin-top: 0;
+    border-color: var(--focus-color);
+    background: var(--focus-color);
+    color: var(--background);
+    cursor: pointer;
+}
+
+.contact-form .button:disabled {
+    border-color: var(--border-color);
+    background: var(--secondary-color);
+    color: var(--muted-text-color);
+    cursor: default;
+    transform: none;
+}
+
+.contact-status {
+    margin: 0;
+    color: var(--text-color);
+    line-height: 1.6;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+.contact-status[data-state="error"] {
+    color: var(--danger-color);
+}
+
+.contact-status[data-state="success"] {
+    color: var(--success-color);
+}

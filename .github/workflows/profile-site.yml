@@ -37,12 +37,15 @@ jobs:
             node scripts/update-profile-data.mjs --force
           fi
 
+      - name: Install the pinned Arcane SDK
+        run: npm ci --ignore-scripts --no-audit --no-fund
+
       - name: Verify data and site contracts
         run: |
           node --check app.js
           node --check scripts/telemetry-quality.mjs
           node --check scripts/update-profile-data.mjs
-          node --test tests/profile-site.test.mjs
+          node --test tests/profile-site.test.mjs tests/contact-policy.test.mjs
           git diff --check
 
       - name: Record a refreshed snapshot when needed
@@ -67,7 +70,7 @@ jobs:
       - name: Upload the static website
         uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5
         with:
-          path: dist
+          path: dist/wizard-nexus
 
   deploy:
     permissions:

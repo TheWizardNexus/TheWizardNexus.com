@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 1,
+  "id": "wizard-nexus",
+  "displayName": "The Wizard Nexus",
+  "version": "0.1.0",
+  "entry": "index.html",
+  "strategy": "static",
+  "pwa": {
+    "enabled": true,
+    "manifest": {
+      "id": "./",
+      "name": "The Wizard Nexus",
+      "short_name": "TWiN",
+      "description": "Explore The Wizard Nexus online or offline.",
+      "start_url": "./index.html",
+      "scope": "./",
+      "display": "standalone",
+      "theme_color": "rgb(3, 8, 18)",
+      "background_color": "rgb(3, 8, 18)",
+      "icons": [
+        {
+          "src": "assets/wizard-nexus-logo.png",
+          "sizes": "360x360",
+          "type": "image/png",
+          "purpose": "any"
+        },
+        {
+          "src": "assets/wizard-nexus-logo-premium.png",
+          "sizes": "1000x1000",
+          "type": "image/png",
+          "purpose": "any"
+        }
+      ]
+    },
+    "offline": {
+      "include": [],
+      "exclude": [
+        ".nojekyll"
+      ]
+    }
+  },
+  "include": [
+    "index.html",
+    "404.html",
+    "technology.html",
+    "ecosystem.html",
+    "practice.html",
+    "philosophy.html",
+    "trust.html",
+    "people.html",
+    "zen-sentry.html",
+    "zen-sentry-foundation",
+    "work.html",
+    "service-strategy.html",
+    "service-programs.html",
+    "service-policy.html",
+    "service-precrisis.html",
+    "service-private-ai.html",
+    "service-military-ai.html",
+    "service-cyber.html",
+    "code.html",
+    "signal.html",
+    "linkedin-signal.html",
+    "contact.html",
+    "assets",
+    "data",
+    "styles.css",
+    "ecosystem-diagram.css",
+    "app.js",
+    "contact.js",
+    "contact-policy.js",
+    "contact.css",
+    "robots.txt",
+    "sitemap.xml",
+    ".nojekyll"
+  ],
+  "exclude": [],
+  "shared": [
+    "browser-runtime"
+  ]
+}
