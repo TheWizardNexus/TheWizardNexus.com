@@ -1,17 +1,17 @@
 /* Site semantics inherit the shared Arcane appearance selected by the user. */
 :root {
-    --void: var(--background);
+    --void: light-dark(var(--background), #03070f);
     --deep: var(--secondary-color);
-    --panel: var(--modal-background);
-    --panel-strong: var(--secondary-color);
+    --panel: light-dark(var(--modal-background), #080f1b);
+    --panel-strong: light-dark(var(--secondary-color), #0c1625);
     --paper: var(--button-text-color);
     --ink: var(--text-color);
-    --muted: var(--muted-text-color);
-    --quiet: var(--muted-text-color);
+    --muted: light-dark(var(--muted-text-color), #dce5ef);
+    --quiet: light-dark(var(--muted-text-color), #c6d3e2);
     --line: var(--border-color);
     --line-strong: color-mix(in srgb, var(--border-color), var(--text-color) 25%);
-    --teal: var(--accent-color);
-    --logo-blue: var(--primary-color);
+    --teal: light-dark(#806019, #dfc37c);
+    --logo-blue: #173c8c;
     --cyan: var(--accent-color);
     --indigo: var(--review-color);
     --brass: var(--warning-color);
@@ -1312,8 +1312,8 @@ body[data-page="people"] .page-next { margin-bottom: clamp(3.5rem, 6vw, 6rem); p
   min-height: 0;
   padding: 1.5rem;
   margin-bottom: .5rem;
-  border: 1px solid #3e718e;
-  border-top: 3px solid #78ddf3;
+  border: 1px solid var(--line-strong);
+  border-top: 3px solid var(--teal);
   border-radius: .85rem;
   background: linear-gradient(145deg, var(--panel-strong), var(--panel));
   box-shadow: 0 10px 28px #00000024;
@@ -1321,15 +1321,15 @@ body[data-page="people"] .page-next { margin-bottom: clamp(3.5rem, 6vw, 6rem); p
 .service-grid article > span { color: var(--brass); }
 .service-grid h3 { margin: 0; font-size: 1.45rem; line-height: 1.25; }
 .service-grid article > p:not([class]) { font-size: 1rem; line-height: 1.6; }
-.service-rate { display: flex; align-items: baseline; flex-wrap: wrap; gap: .6rem; margin: .5rem 0 0; padding-top: 1rem; border-top: 1px solid #3e718e80; }
+.service-rate { display: flex; align-items: baseline; flex-wrap: wrap; gap: .6rem; margin: .5rem 0 0; padding-top: 1rem; border-top: 1px solid var(--line); }
 .service-rate strong { color: var(--brass); font: 750 2.6rem/1.15 var(--sans); letter-spacing: -.04em; }
 .service-rate span { color: var(--muted); font: 400 .875rem/1.5 var(--sans); }
 .service-grid .service-buying-note { color: var(--muted); font: 400 .875rem/1.55 var(--sans); }
 .service-grid .service-extra { min-height: 0; margin: 0; color: var(--brass); font-size: .875rem; line-height: 1.5; }
 .service-card-actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); padding-top: .75rem; gap: .65rem; align-content: end; }
 .service-card-actions .button { width: 100%; min-height: 2.9rem; padding: .7rem .6rem; font-size: .875rem; white-space: nowrap; }
-.service-card-actions .button-secondary { background: transparent; border-color: #3e718e; box-shadow: none; }
-.service-card-actions .service-detail-link { grid-column: 1 / -1; justify-self: center; margin-top: .2rem; padding: .35rem 0; border-bottom: 1px solid #3e718e; color: var(--teal); font: 600 .875rem/1.5 var(--sans); }
+.service-card-actions .button-secondary { background: transparent; border-color: var(--line-strong); box-shadow: none; }
+.service-card-actions .service-detail-link { grid-column: 1 / -1; justify-self: center; margin-top: .2rem; padding: .35rem 0; border-bottom: 1px solid var(--line-strong); color: var(--teal); font: 600 .875rem/1.5 var(--sans); }
 .service-card-actions .service-detail-link:hover { border-color: var(--teal); }
 @media (max-width: 38rem) {
   .work-grid.service-grid { grid-template-columns: minmax(0, 1fr); gap: 1rem; }
@@ -2164,7 +2164,7 @@ body h1 span,
 body h2 span,
 body .page-hero:not(.service-hero):not(.contact-hero) h1 span {
     color: var(--teal);
-    text-shadow: 0 0 25px color-mix(in srgb, var(--teal) 20%, transparent);
+    text-shadow: none;
 }
 
 body .brand-hero .eyebrow,
@@ -2193,7 +2193,7 @@ body .home-pathway-grid > a {
 
 body .brand-hero-copy,
 body .page-hero:not(.service-hero):not(.contact-hero) {
-    background: radial-gradient(ellipse at 75% 40%, color-mix(in srgb, var(--teal) 15%, transparent), transparent 70%);
+    background: radial-gradient(ellipse at 75% 40%, color-mix(in srgb, var(--teal) 5%, transparent), transparent 70%);
 }
 
 body .button-primary,
