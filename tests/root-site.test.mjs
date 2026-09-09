@@ -26,12 +26,13 @@ test(
         const inventory = JSON.parse(inventoryText);
         const releaseManifest = JSON.parse(releaseText);
         const tracked = new Set(trackedResult.stdout.split('\0'));
+        assert.ok(!releaseManifest.files.some(function oldLayout(resource) {
+            return resource.startsWith('apps/') || resource.startsWith('arcane/');
+        }), 'prepared delivery uses the application root and installed SDK paths');
         const required = new Set([
             ...pwaFiles,
             'ARCANE_APP_RELEASE.json',
             ...releaseManifest.files,
-            'apps/wizard-nexus/arcane-offline.json',
-            'apps/wizard-nexus/arcane-sw.js',
             ...inventory.assets.map(function localAssetPath(asset) {
                 const url = new URL(asset, 'http://localhost/');
                 return decodeURIComponent(url.pathname).replace(/^\//, '');
@@ -85,7 +86,11 @@ test(
                 const contentType = response.headers.get('content-type');
                 if (resource === 'arcane.webmanifest') {
                     assert.match(contentType, /^application\/manifest\+json\b/);
-                    assert.equal(JSON.parse(content).name, 'The Wizard Nexus');
+                    const manifest = JSON.parse(content);
+                    assert.equal(manifest.name, 'The Wizard Nexus');
+                    assert.equal(manifest.id, './');
+                    assert.equal(manifest.start_url, './index.html');
+                    assert.equal(manifest.scope, './');
                 } else if (resource === 'arcane-offline.json') {
                     assert.match(contentType, /^application\/json\b/);
                     assert.equal(JSON.parse(content).appId, 'wizard-nexus');

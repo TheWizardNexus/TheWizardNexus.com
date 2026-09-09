@@ -26,7 +26,7 @@ test(
         for (const name of ['assets', 'data', 'app.js', 'styles.css', 'ecosystem-diagram.css', 'contact.js', 'contact-policy.js', 'contact.css', 'robots.txt', 'sitemap.xml', '.nojekyll', 'node_modules', 'ARCANE_APP_RELEASE.json', 'arcane.webmanifest', 'arcane-offline.json', 'arcane-sw.js', 'arcane-pwa.mjs']) {
             assert.ok(entries.includes(name), `missing published dependency: ${name}`);
         }
-        for (const name of ['.git', '.github', 'tests', 'scripts', 'README.md']) {
+        for (const name of ['.git', '.github', 'tests', 'scripts', 'README.md', 'apps', 'arcane']) {
             assert.ok(!entries.includes(name));
         }
         for (const page of expectedPages) {

@@ -1,4 +1,4 @@
-import {copyFile, mkdir, readFile, writeFile} from 'node:fs/promises';
+import {copyFile, mkdir, writeFile} from 'node:fs/promises';
 import {fileURLToPath} from 'node:url';
 import path from 'node:path';
 import {createToolchain, projectPackageManifest} from 'arcane-os';
@@ -23,14 +23,9 @@ await writeFile(
 );
 await toolchain.importMap();
 const {release} = await toolchain.package();
-const releaseManifestPath = path.join(release.outputRoot, 'ARCANE_APP_RELEASE.json');
-const releaseManifest = JSON.parse(await readFile(releaseManifestPath, 'utf8'));
 const preparedFiles = new Set([
     ...appDescriptor.package.include.filter(function managedDocument(file) {
         return file.endsWith('.html');
-    }),
-    ...releaseManifest.files.filter(function generatedNavigation(file) {
-        return file.startsWith(`apps/${appDescriptor.id}/`);
     }),
     'arcane.webmanifest',
     'arcane-pwa.mjs',

@@ -79,7 +79,7 @@ A public interface does not automatically mean public source, production readine
 
 ## This repository
 
-This repository is the plain HTML, CSS, and JavaScript source for **TheWizardNexus.com**, using **Arcane SDK 0.29.0** for its shared runtime, theme, installation, offline pages, DBOPFS storage, and mail integration. It publishes the selected browser package to GitHub Pages from `main` through [the Pages workflow](.github/workflows/profile-site.yml). The public, one-time Stripe service-hour catalog is recorded in [`data/service-products.json`](data/service-products.json); it contains public product, price, and Payment Link identifiers only—never secret keys.
+This repository is the plain HTML, CSS, and JavaScript source for **TheWizardNexus.com**, using **Arcane SDK 0.29.1** for its shared runtime, theme, installation, offline pages, DBOPFS storage, and mail integration. It publishes the selected browser package to GitHub Pages from `main` through [the Pages workflow](.github/workflows/profile-site.yml). The public, one-time Stripe service-hour catalog is recorded in [`data/service-products.json`](data/service-products.json); it contains public product, price, and Payment Link identifiers only—never secret keys.
 
 Use Node.js 22.23.2 or newer. From this repository, install the exact committed dependency tree and start the local site:
 
@@ -90,7 +90,7 @@ npm start
 
 Open [localhost:8080](http://localhost:8080). This development command uses the Arcane SDK's HTTP mode on localhost, where browsers provide the secure context needed for local storage and service workers. `npm run dev` selects the SDK's HTTPS development mode and requires the local certificate configuration described in the [Arcane SDK documentation](https://thewizardnexus.github.io/arcane-os-sdk/).
 
-The repository root is a complete serving layout. Keep your existing server pointed at this checkout. The SDK-generated `arcane.webmanifest`, `arcane-pwa.mjs`, `arcane-sw.js`, `arcane-offline.json`, and navigation files under `apps/wizard-nexus` are committed alongside the pages, so pulling the repository supplies the offline files. Install the exact SDK dependency tree on initial setup and when the committed dependency changes:
+The repository root is a complete serving layout. Keep your existing server pointed at this checkout. The SDK-generated `arcane.webmanifest`, `arcane-pwa.mjs`, `arcane-sw.js`, and `arcane-offline.json` are committed alongside the pages, so pulling the repository supplies the offline files. `appsRoot: "."` and `legacyAppPaths: false` keep generated application files at the root, with the SDK supplied by its installed `node_modules/arcane-os` paths. Install the exact SDK dependency tree on initial setup and when the committed dependency changes:
 
 ```sh
 npm ci --ignore-scripts --no-audit --no-fund
