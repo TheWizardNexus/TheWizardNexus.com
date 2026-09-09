@@ -467,7 +467,7 @@ for (let page = 1; ; page += 1) {
 const repositories = githubRepos.filter((repo) => !EXCLUDED_REPOSITORIES.has(repo.name.toLowerCase())).map((repo) => ({
   name: repo.name,
   fullName: repo.full_name,
-  description: repo.description,
+  description: repo.description?.replaceAll(" — ", ": "),
   explanation: repositoryExplanation(repo),
   url: repo.html_url,
   homepage: curatedHomepages.get(repo.name) || repo.homepage || null,
