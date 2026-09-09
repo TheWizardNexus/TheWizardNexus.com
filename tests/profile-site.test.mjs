@@ -130,7 +130,7 @@ test("technology manifest preserves all canonical sites, headers, and five publi
     },
     toshokann: {
       site: "https://thewizardnexus.github.io/Toshokann/",
-      image: "https://thewizardnexus.github.io/Toshokann/assets/toshokann-knowledge-hall.png",
+      image: "assets/toshokann-showcase-banner.png",
       repository: null,
     },
     "twin-compass": {
