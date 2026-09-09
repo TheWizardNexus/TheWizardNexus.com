@@ -79,7 +79,7 @@ A public interface does not automatically mean public source, production readine
 
 ## This repository
 
-This repository is the plain HTML, CSS, and JavaScript source for **TheWizardNexus.com**, using **Arcane SDK 0.28.2** for its shared runtime, theme, installation, offline pages, DBOPFS storage, and mail integration. It publishes the selected browser package to GitHub Pages from `main` through [the Pages workflow](.github/workflows/profile-site.yml). The public, one-time Stripe service-hour catalog is recorded in [`data/service-products.json`](data/service-products.json); it contains public product, price, and Payment Link identifiers only—never secret keys.
+This repository is the plain HTML, CSS, and JavaScript source for **TheWizardNexus.com**, using **Arcane SDK 0.28.4** for its shared runtime, theme, installation, offline pages, DBOPFS storage, and mail integration. It publishes the selected browser package to GitHub Pages from `main` through [the Pages workflow](.github/workflows/profile-site.yml). The public, one-time Stripe service-hour catalog is recorded in [`data/service-products.json`](data/service-products.json); it contains public product, price, and Payment Link identifiers only—never secret keys.
 
 Use Node.js 22.23.2 or newer. From this repository, install the exact committed dependency tree and start the local site:
 
@@ -97,6 +97,15 @@ npm run build
 ```
 
 The build refreshes the SDK-managed import maps, then packages the website and its selected SDK runtime into `dist/wizard-nexus`. The authored [`arcane-app.json`](arcane-app.json) selects the public content; [`arcane-packager.json`](arcane-packager.json) keeps this application at the repository root. An optional root `CNAME` is copied into the hosting output when present. The Pages workflow retains its configured hosted checks and uploads `dist/wizard-nexus`.
+
+For deployment on your own server, run these commands in its website checkout after updating the source:
+
+```sh
+npm ci --ignore-scripts --no-audit --no-fund
+npm run build
+```
+
+Serve the contents of `dist/wizard-nexus` as the website root, including its `node_modules` directory. This package contains `arcane.webmanifest`, `arcane-pwa.mjs`, `arcane-sw.js`, and `arcane-offline.json` beside `index.html`. Keep the complete output together when copying it to another document root. Dependency installation and `git pull` alone do not generate those files; repeat the build when deploying updated source or SDK dependencies. The build also refreshes those four generated files at the repository root for an existing server that serves the checkout directly. They remain generated SDK output and are excluded from Git.
 
 Visit the site online first and let its offline preparation finish before disconnecting. A browser that supports installation can add The Wizard Nexus through its install menu. Offline operation requires service workers and origin-private storage on HTTPS or localhost; opening the HTML directly from the filesystem does not provide that environment. The installed site retains its packaged pages, assets, and public data snapshots. External websites, live purchases, updates, and sending contact email require a connection.
 
