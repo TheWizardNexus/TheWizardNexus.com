@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-09T15:25:45.371Z",
+  "generatedAt": "2026-09-09T16:49:05.056Z",
   "source": {
     "profile": "https://api.github.com/users/TheWizardNexus",
     "repositories": "https://api.github.com/users/TheWizardNexus/repos?per_page=100&type=owner"
@@ -23,6 +23,26 @@
   },
   "repositories": [
     {
+      "name": "arcane-os-sdk",
+      "fullName": "TheWizardNexus/arcane-os-sdk",
+      "description": "sdk for building apps for Acane OS",
+      "explanation": "A standalone SDK and CLI for building, testing, packaging, and managing Arcane applications inside or outside ARCANE OS.",
+      "url": "https://github.com/TheWizardNexus/arcane-os-sdk",
+      "homepage": "https://thewizardnexus.github.io/arcane-os-sdk/",
+      "language": "JavaScript",
+      "stars": 0,
+      "forks": 0,
+      "openIssues": 0,
+      "watchers": 0,
+      "archived": false,
+      "disabled": false,
+      "fork": false,
+      "topics": [],
+      "license": "AGPL-3.0",
+      "createdAt": "2026-08-13T23:55:03Z",
+      "updatedAt": "2026-09-09T16:32:05Z"
+    },
+    {
       "name": "TheWizardNexus.com",
       "fullName": "TheWizardNexus/TheWizardNexus.com",
       "description": "The public facing website",
@@ -40,7 +60,54 @@
       "topics": [],
       "license": null,
       "createdAt": "2026-08-24T15:14:01Z",
-      "updatedAt": "2026-09-09T15:00:14Z"
+      "updatedAt": "2026-09-09T15:47:57Z"
+    },
+    {
+      "name": "Zen-Sentry-Foundation",
+      "fullName": "TheWizardNexus/Zen-Sentry-Foundation",
+      "description": "Veteran-owned and operated Texas 501(c)(3) nonprofit advancing earlier support, trusted connection, and responsible technology.",
+      "explanation": "Veteran-owned and operated Texas 501(c)(3) nonprofit advancing earlier support, trusted connection, and responsible technology.",
+      "url": "https://github.com/TheWizardNexus/Zen-Sentry-Foundation",
+      "homepage": "https://thewizardnexus.github.io/Zen-Sentry-Foundation/",
+      "language": "HTML",
+      "stars": 0,
+      "forks": 0,
+      "openIssues": 0,
+      "watchers": 0,
+      "archived": false,
+      "disabled": false,
+      "fork": false,
+      "topics": [
+        "behavioral-health",
+        "human-centered-design",
+        "responsible-ai",
+        "texas-nonprofit",
+        "veteran-suicide-prevention",
+        "veterans"
+      ],
+      "license": null,
+      "createdAt": "2026-08-24T17:06:34Z",
+      "updatedAt": "2026-09-09T15:38:31Z"
+    },
+    {
+      "name": "Astrolabe",
+      "fullName": "TheWizardNexus/Astrolabe",
+      "description": "An astrolabe makes a complex sky understandable and navigable just like this repo does for the TWiN ecosystem",
+      "explanation": "An interactive map that makes the TWiN ecosystem understandable and navigable across systems, programs, people, evidence, and hosts.",
+      "url": "https://github.com/TheWizardNexus/Astrolabe",
+      "homepage": "https://thewizardnexus.github.io/Astrolabe/",
+      "language": "HTML",
+      "stars": 0,
+      "forks": 0,
+      "openIssues": 0,
+      "watchers": 0,
+      "archived": false,
+      "disabled": false,
+      "fork": false,
+      "topics": [],
+      "license": null,
+      "createdAt": "2026-08-13T23:20:42Z",
+      "updatedAt": "2026-09-09T15:38:30Z"
     },
     {
       "name": "TheWizardNexus",
@@ -61,26 +128,6 @@
       "license": null,
       "createdAt": "2026-07-13T18:33:00Z",
       "updatedAt": "2026-09-09T11:49:51Z"
-    },
-    {
-      "name": "arcane-os-sdk",
-      "fullName": "TheWizardNexus/arcane-os-sdk",
-      "description": "sdk for building apps for Acane OS",
-      "explanation": "A standalone SDK and CLI for building, testing, packaging, and managing Arcane applications inside or outside ARCANE OS.",
-      "url": "https://github.com/TheWizardNexus/arcane-os-sdk",
-      "homepage": "https://thewizardnexus.github.io/arcane-os-sdk/",
-      "language": "JavaScript",
-      "stars": 0,
-      "forks": 0,
-      "openIssues": 0,
-      "watchers": 0,
-      "archived": false,
-      "disabled": false,
-      "fork": false,
-      "topics": [],
-      "license": "AGPL-3.0",
-      "createdAt": "2026-08-13T23:55:03Z",
-      "updatedAt": "2026-09-09T08:33:22Z"
     },
     {
       "name": "DBOPFS-Studio",
@@ -121,53 +168,6 @@
       "license": "PolyForm-Noncommercial-1.0.0",
       "createdAt": "2026-08-11T20:08:22Z",
       "updatedAt": "2026-09-07T19:55:38Z"
-    },
-    {
-      "name": "Astrolabe",
-      "fullName": "TheWizardNexus/Astrolabe",
-      "description": "An astrolabe makes a complex sky understandable and navigable just like this repo does for the TWiN ecosystem",
-      "explanation": "An interactive map that makes the TWiN ecosystem understandable and navigable across systems, programs, people, evidence, and hosts.",
-      "url": "https://github.com/TheWizardNexus/Astrolabe",
-      "homepage": "https://thewizardnexus.github.io/Astrolabe/",
-      "language": "HTML",
-      "stars": 0,
-      "forks": 0,
-      "openIssues": 0,
-      "watchers": 0,
-      "archived": false,
-      "disabled": false,
-      "fork": false,
-      "topics": [],
-      "license": null,
-      "createdAt": "2026-08-13T23:20:42Z",
-      "updatedAt": "2026-09-01T01:11:50Z"
-    },
-    {
-      "name": "Zen-Sentry-Foundation",
-      "fullName": "TheWizardNexus/Zen-Sentry-Foundation",
-      "description": "Veteran-owned and operated Texas 501(c)(3) nonprofit advancing earlier support, trusted connection, and responsible technology.",
-      "explanation": "Veteran-owned and operated Texas 501(c)(3) nonprofit advancing earlier support, trusted connection, and responsible technology.",
-      "url": "https://github.com/TheWizardNexus/Zen-Sentry-Foundation",
-      "homepage": "https://thewizardnexus.github.io/Zen-Sentry-Foundation/",
-      "language": "HTML",
-      "stars": 0,
-      "forks": 0,
-      "openIssues": 0,
-      "watchers": 0,
-      "archived": false,
-      "disabled": false,
-      "fork": false,
-      "topics": [
-        "behavioral-health",
-        "human-centered-design",
-        "responsible-ai",
-        "texas-nonprofit",
-        "veteran-suicide-prevention",
-        "veterans"
-      ],
-      "license": null,
-      "createdAt": "2026-08-24T17:06:34Z",
-      "updatedAt": "2026-08-30T23:24:23Z"
     }
   ]
 }
