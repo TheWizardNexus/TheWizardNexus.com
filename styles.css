@@ -820,10 +820,10 @@ h1 span, h2 span { color: var(--teal); font-weight: 450; font-style: italic; -we
 .life-first-callout > div:last-child > p { margin-top: 0; color: var(--muted); }
 
 /* Philosophy */
-.ethics-grid { display: grid; margin-top: 2.5rem; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; border: 1px solid var(--line); background: var(--line); }
-.ethics-grid article { display: grid; min-height: 13rem; padding: 1.35rem; align-content: start; background: color-mix(in srgb, var(--panel) 95%, transparent); }
-.ethics-grid b { color: var(--brass); font: 700 0.875rem/1.5 var(--mono); }
-.ethics-grid h3 { margin: 1.75rem 0 0.65rem; font-size: 1.3rem; line-height: 1.15; }
+.ethics-grid { display: grid; margin-top: 2.5rem; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.25rem; }
+.ethics-grid article { display: grid; min-height: 13rem; padding: 1.5rem; align-content: start; border: 1px solid var(--line-strong); border-top: 3px solid var(--teal); border-radius: .85rem; background: linear-gradient(145deg, var(--panel-strong), var(--panel)); box-shadow: 0 8px 22px rgba(0, 0, 0, .18); }
+.ethics-grid b { display: inline-flex; align-items: center; justify-content: center; width: 2.65rem; height: 2.65rem; border: 1px solid var(--teal); border-radius: 50%; background: var(--teal); color: var(--void); font: 700 1rem/1 var(--mono); }
+.ethics-grid h3 { margin: 1.15rem 0 .7rem; color: var(--teal); font: 400 1.5rem/1.2 Georgia, serif; }
 .ethics-grid p { margin: 0; color: var(--muted); font-size: 1rem; }
 .philosophy-instruments .technology-paths { margin-top: 2rem; }
 .philosophy-instruments .technology-paths > a { min-height: 14rem; padding: 1.5rem; }
@@ -1848,7 +1848,7 @@ body[data-page="people"] .page-next { margin-bottom: clamp(3.5rem, 6vw, 6rem); p
 [data-page="practice"] .practice-section { padding-block: 2rem; }
 [data-page="practice"] .section-heading { gap: 1.5rem; margin-bottom: 1.5rem; }
 [data-page="practice"] .section-heading > p { font-size: .95rem; line-height: 1.6; }
-[data-page="practice"] .kempo-feature { padding: clamp(1.25rem,2.5vw,2rem); }
+[data-page="practice"] .kempo-feature, .philosophy-instrument-grid .instrument-kempo { padding: clamp(1.25rem,2.5vw,2rem); }
 [data-page="practice"] .kempo-feature .section-heading h3 { font-size: clamp(2rem,3.6vw,3.5rem); line-height: 1.08; }
 [data-page="practice"] .kempo-summary > p { font-size: .95rem; }
 [data-page="practice"] .kempo-question { margin-top: 1rem; padding-top: 1rem; }
@@ -1875,7 +1875,7 @@ body[data-page="people"] .page-next { margin-bottom: clamp(3.5rem, 6vw, 6rem); p
 [data-page="practice"] .practice-lifecycle + .judgment-section { border-top: 0; }
 @media(max-width:38rem) { [data-page="practice"] .practice-lifecycle .method-flow { padding: 1.1rem; gap: 1.5rem; } }
 /* Carry KEMPO's own serif typography and warm ink palette into its feature. */
-[data-page="practice"] .kempo-feature { --kempo-serif: Iowan Old Style, Baskerville, "Times New Roman", serif; background: radial-gradient(ellipse at 0 0,rgba(100,42,43,.22),transparent 65%),#0b0a0a; color: #efe5d6; border-top: 2px solid #c4a15a; }
+[data-page="practice"] .kempo-feature, .philosophy-instrument-grid .instrument-kempo { --kempo-serif: Iowan Old Style, Baskerville, "Times New Roman", serif; background: radial-gradient(ellipse at 0 0,rgba(100,42,43,.22),transparent 65%),#0b0a0a; color: #efe5d6; border-top: 2px solid #c4a15a; }
 [data-page="practice"] .kempo-feature .section-heading h3 { font-family: var(--kempo-serif); font-weight: 400; font-size: clamp(2.5rem,4.2vw,4rem); letter-spacing: -.025em; line-height: 1; }
 [data-page="practice"] .kempo-feature h3 em { color: #d7ba7a; font-weight: 400; }
 [data-page="practice"] .kempo-feature .eyebrow { color: #d7ba7a; font-family: var(--sans); letter-spacing: .12em; }
@@ -1891,17 +1891,17 @@ body[data-page="people"] .page-next { margin-bottom: clamp(3.5rem, 6vw, 6rem); p
 /* Partner identities retain their own typography within TWiN's dark panels. */
 .instrument-identity { display: flex; align-items: center; gap: 1rem; min-height: 5rem; }
 .instrument-identity img { width: 4.5rem; height: 5rem; object-fit: contain; flex-shrink: 0; }
-[data-page="practice"] .kempo-connected .instrument-life-first { background: linear-gradient(130deg,rgba(21,94,73,.25),transparent 75%),#08121d; border-top: 2px solid #d3a83d; }
+[data-page="practice"] .kempo-connected .instrument-life-first, .philosophy-instrument-grid .instrument-life-first { background: linear-gradient(130deg,rgba(21,94,73,.25),transparent 75%),#08121d; border-top: 2px solid #d3a83d; }
 [data-page="practice"] .instrument-life-first .instrument-identity span { font: 400 1.5rem/1.2 Georgia,serif; color: #efdfaf; letter-spacing: 0; }
 [data-page="practice"] .kempo-connected .instrument-life-first > strong { font: 400 1.45rem/1.25 Georgia,serif; color: #f1eee4; }
-[data-page="practice"] .kempo-connected .instrument-compass { background: linear-gradient(130deg,rgba(13,107,101,.17),rgba(76,51,88,.14)),#071426; border-top: 2px solid #75a9f2; }
+[data-page="practice"] .kempo-connected .instrument-compass, .philosophy-instrument-grid .instrument-compass { background: linear-gradient(130deg,rgba(13,107,101,.17),rgba(76,51,88,.14)),#071426; border-top: 2px solid #75a9f2; }
 .instrument-compass .instrument-identity img { width: 5rem; border-radius: 50%; }
 [data-page="practice"] .instrument-compass .instrument-identity span { font: 600 1.4rem/1.2 var(--sans); color: #d7b66e; letter-spacing: -.025em; }
 [data-page="practice"] .kempo-connected .instrument-compass > strong { font: 600 1.3rem/1.3 var(--sans); color: #eaf1f4; }
 [data-page="practice"] .kempo-connected .technology-paths > a:hover { box-shadow: inset 0 0 0 1px #d7ba7a; }
 /* Original KEMPO artwork sits behind the copy as a quiet watermark. */
-[data-page="practice"] .kempo-feature { position: relative; isolation: isolate; overflow: hidden; }
-[data-page="practice"] .kempo-feature::before { content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: url('assets/kempo-ring-background.png') center top / cover no-repeat; opacity: .22; }
+[data-page="practice"] .kempo-feature, .philosophy-instrument-grid .instrument-kempo { position: relative; isolation: isolate; overflow: hidden; }
+[data-page="practice"] .kempo-feature::before, .philosophy-instrument-grid .instrument-kempo::before { content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: url('assets/kempo-ring-background.png') center top / cover no-repeat; opacity: .22; }
 [data-page="practice"] .kempo-feature .kempo-flow { background: rgba(15,13,13,.88); }
 /* Selected dojo entrance: gilded frame and button around the existing crest. */
 /* Service details: a clear introduction, compact purchase panel, and balanced rows. */
@@ -2250,3 +2250,36 @@ body .dojo-callout > div:last-child > p { margin: 0; }
   .dojo-callout { grid-template-columns: minmax(0, 1fr); }
   .dojo-callout .dojo-mark { width: min(13rem, 50vw); }
 }
+
+/* Philosophy reuses the instrument artwork and palette from Practice. */
+.philosophy-instrument-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1.25rem; margin-top: 2rem; }
+.philosophy-instrument-grid > article { display: flex; flex-direction: column; gap: 1.15rem; padding: 1.5rem; border: 1px solid var(--line-strong); border-radius: .85rem; color: #eaf1f4; }
+.philosophy-instrument-grid .instrument-identity span { color: #dfc37c; font: 400 1.45rem/1.2 Georgia, serif; }
+.philosophy-instrument-grid h3 { margin: 0; font: 400 1.5rem/1.25 Georgia, serif; color: #f1eee4; }
+.philosophy-instrument-grid p { margin: 0; color: #dce5ef; font-size: 1rem; }
+.instrument-boundary { border-top: 1px solid #dfc37c66; padding-top: 1.15rem; }
+.instrument-boundary h4 { margin: 0 0 .65rem; color: #dfc37c; font-size: 1rem; }
+.philosophy-instrument-grid > article > :last-child { margin-top: auto; }
+.philosophy-instrument-grid .text-link { color: #dfc37c; }
+.instrument-shared-boundary { margin-top: 1.25rem; padding: 1.5rem; border: 1px solid var(--line-strong); border-radius: .85rem; background: var(--panel); }
+.instrument-shared-boundary h3 { margin: 0 0 .65rem; color: var(--teal); }
+.instrument-shared-boundary p { margin: 0; color: var(--muted); }
+
+.philosophy-next { grid-template-columns: minmax(0, 1fr); gap: 1.5rem; padding: clamp(1.5rem, 3vw, 2.5rem); border-top: 3px solid var(--teal); border-radius: .85rem; background: linear-gradient(145deg, var(--panel-strong), var(--panel)); box-shadow: 0 8px 22px rgba(0, 0, 0, .18); text-align: center; }
+.philosophy-next h2 { margin: 0; color: var(--teal); font: 400 clamp(1.65rem, 3vw, 2.2rem)/1.2 Georgia, serif; letter-spacing: normal; }
+.philosophy-next .button-row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; width: min(100%, 38rem); margin: 0 auto; }
+.philosophy-next .button { min-height: 3.25rem; white-space: normal; }
+@media (max-width: 38rem) { .philosophy-next .button-row { grid-template-columns: minmax(0, 1fr); } }
+
+/* Complete footer directory, grouped by visitor purpose. */
+.site-footer { grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "brand social" "nav nav" "note note"; align-items: start; gap: 2rem; }
+.site-footer nav { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2rem; padding-block: 1.75rem; border-block: 1px solid var(--line); font-family: var(--sans); }
+.footer-group { min-width: 0; }
+.footer-group h2 { margin: 0 0 .8rem; color: var(--teal); font: 400 1.25rem/1.25 Georgia, serif; letter-spacing: normal; }
+.footer-group p { margin: 0 0 .65rem; color: var(--muted); font-size: .875rem; }
+.footer-group ul { list-style: none; margin: 0; padding: 0; display: grid; gap: .25rem; }
+.footer-group a { display: inline-block; padding: .35rem 0; color: var(--muted); font-size: .95rem; font-weight: 400; line-height: 1.5; }
+.site-footer .footer-group a:hover { text-decoration: underline; text-underline-offset: .2em; }
+@media (min-width: 80rem) { .site-footer nav { grid-template-columns: 1fr 1.1fr 1.1fr 1.6fr 1.2fr; } }
+@media (max-width: 48rem) { .site-footer nav { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 32rem) { .site-footer nav { grid-template-columns: minmax(0, 1fr); } .footer-brand { min-width: 0; } }

@@ -546,7 +546,7 @@ test("the public nexus uses focused pages while preserving the complete ecosyste
     assert.match(html, /class="footer-linkedin" href="https:\/\/www\.linkedin\.com\/company\/the-wizard-nexus\/" aria-label="TWiN on LinkedIn"/);
     const footerNav = html.match(/<nav aria-label="Footer navigation">([\s\S]*?)<\/nav>/)?.[1] || "";
     const footerHrefs = [...footerNav.matchAll(/<a\b[^>]*href="([^"]+)"/g)].map((match) => match[1]);
-    assert.deepEqual(footerHrefs, ["technology.html", "practice.html", "work.html", "contact.html"]);
+    assert.deepEqual(footerHrefs, ["index.html", "people.html", "contact.html", "practice.html", "philosophy.html", "trust.html", "technology.html", "ecosystem.html", "code.html", "signal.html", "linkedin-signal.html", "work.html", "service-strategy.html", "service-programs.html", "service-policy.html", "service-precrisis.html", "service-private-ai.html", "service-military-ai.html", "service-cyber.html", "zen-sentry.html", "https://thewizardnexus.github.io/Zen-Sentry-Foundation/"]);
     assert.doesNotMatch(html, /class="page-code"/);
     assert.match(html, /wizard-nexus-favicon-32\.png(?:\?v=\d{8}[a-z0-9-]*)?"/);
     assert.match(html, /wizard-nexus-favicon-16\.png(?:\?v=\d{8}[a-z0-9-]*)?"/);
@@ -629,14 +629,14 @@ test("every focused page has canonical metadata and every internal HTML route re
     assert.match(html, /<meta name="twitter:title" content="[^"]+">/);
     assert.match(html, /<meta name="twitter:description" content="[^"]+">/);
     assert.match(html, /<meta name="twitter:image:alt" content="[^"]+">/);
-    assert.match(sitemap, new RegExp(`<loc>${canonical}</loc>`));
+    assert.match(sitemap, new RegExp(`<loc>${canonical.replace(canonicalRoot, "https://thewizardnexus.com/")}</loc>`));
     const localLinks = [...html.matchAll(/<a\b[^>]*\bhref="([^"#]+\.html)"/g)]
       .map((match) => match[1])
       .filter((href) => !/^https?:\/\//.test(href));
     for (const link of localLinks) assert.ok(rootEntries.includes(link), `${pageName} links to missing ${link}`);
   }
   assert.equal([...sitemap.matchAll(/<loc>/g)].length, pageNames.length);
-  assert.match(robots, new RegExp(`${canonicalRoot}sitemap\\.xml`));
+  assert.match(robots, new RegExp(`https://thewizardnexus.com/sitemap\\.xml`));
   assert.match(workflow, /branches: \[main\]/);
   assert.match(workflow, /node --check app\.js/);
   assert.match(workflow, /node --test tests\/profile-site\.test\.mjs/);

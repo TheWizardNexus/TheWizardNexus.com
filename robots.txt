@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://thewizardnexus.github.io/TheWizardNexus.com/sitemap.xml
+Sitemap: https://thewizardnexus.com/sitemap.xml
