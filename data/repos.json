@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-09T11:43:32.855Z",
+  "generatedAt": "2026-09-09T12:51:40.259Z",
   "source": {
     "profile": "https://api.github.com/users/TheWizardNexus",
     "repositories": "https://api.github.com/users/TheWizardNexus/repos?per_page=100&type=owner"
@@ -23,6 +23,46 @@
   },
   "repositories": [
     {
+      "name": "TheWizardNexus",
+      "fullName": "TheWizardNexus/TheWizardNexus",
+      "description": "GitHub profile for The Wizard Nexus: behavioral health innovation powered by PreCrisis AI.",
+      "explanation": "The public profile, ecosystem directory, verified telemetry, and project atlas for The Wizard Nexus.",
+      "url": "https://github.com/TheWizardNexus/TheWizardNexus",
+      "homepage": "https://thewizardnexus.github.io/TheWizardNexus/",
+      "language": "JavaScript",
+      "stars": 1,
+      "forks": 0,
+      "openIssues": 0,
+      "watchers": 1,
+      "archived": false,
+      "disabled": false,
+      "fork": false,
+      "topics": [],
+      "license": null,
+      "createdAt": "2026-07-13T18:33:00Z",
+      "updatedAt": "2026-09-09T11:49:51Z"
+    },
+    {
+      "name": "TheWizardNexus.com",
+      "fullName": "TheWizardNexus/TheWizardNexus.com",
+      "description": "The public facing website",
+      "explanation": "The public facing website",
+      "url": "https://github.com/TheWizardNexus/TheWizardNexus.com",
+      "homepage": "https://thewizardnexus.github.io/TheWizardNexus.com/",
+      "language": "HTML",
+      "stars": 0,
+      "forks": 0,
+      "openIssues": 0,
+      "watchers": 0,
+      "archived": false,
+      "disabled": false,
+      "fork": false,
+      "topics": [],
+      "license": null,
+      "createdAt": "2026-08-24T15:14:01Z",
+      "updatedAt": "2026-09-09T11:47:54Z"
+    },
+    {
       "name": "arcane-os-sdk",
       "fullName": "TheWizardNexus/arcane-os-sdk",
       "description": "sdk for building apps for Acane OS",
@@ -43,26 +83,6 @@
       "updatedAt": "2026-09-09T08:33:22Z"
     },
     {
-      "name": "TheWizardNexus.com",
-      "fullName": "TheWizardNexus/TheWizardNexus.com",
-      "description": "The public facing website",
-      "explanation": "The public facing website",
-      "url": "https://github.com/TheWizardNexus/TheWizardNexus.com",
-      "homepage": "https://thewizardnexus.github.io/TheWizardNexus.com/",
-      "language": "HTML",
-      "stars": 0,
-      "forks": 0,
-      "openIssues": 0,
-      "watchers": 0,
-      "archived": false,
-      "disabled": false,
-      "fork": false,
-      "topics": [],
-      "license": null,
-      "createdAt": "2026-08-24T15:14:01Z",
-      "updatedAt": "2026-09-09T08:27:08Z"
-    },
-    {
       "name": "DBOPFS-Studio",
       "fullName": "TheWizardNexus/DBOPFS-Studio",
       "description": "An OPFS and DBOPFS workspace for Chrome, Edge, Brave, Vivaldi, Opera, and other Chromium browsers: explore, edit, preview, print, and manage site storage.",
@@ -81,26 +101,6 @@
       "license": "PolyForm-Noncommercial-1.0.0",
       "createdAt": "2026-08-13T19:17:47Z",
       "updatedAt": "2026-09-08T17:15:26Z"
-    },
-    {
-      "name": "TheWizardNexus",
-      "fullName": "TheWizardNexus/TheWizardNexus",
-      "description": "GitHub profile for The Wizard Nexus: behavioral health innovation powered by PreCrisis AI.",
-      "explanation": "The public profile, ecosystem directory, verified telemetry, and project atlas for The Wizard Nexus.",
-      "url": "https://github.com/TheWizardNexus/TheWizardNexus",
-      "homepage": "https://thewizardnexus.github.io/TheWizardNexus/",
-      "language": "JavaScript",
-      "stars": 1,
-      "forks": 0,
-      "openIssues": 0,
-      "watchers": 1,
-      "archived": false,
-      "disabled": false,
-      "fork": false,
-      "topics": [],
-      "license": null,
-      "createdAt": "2026-07-13T18:33:00Z",
-      "updatedAt": "2026-09-08T11:40:29Z"
     },
     {
       "name": "DBOPFS",

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-09-09T11:43:32.855Z",
+  "generatedAt": "2026-09-09T12:51:40.259Z",
   "maintainer": "thewizardnexus",
   "source": {
     "referenceProvider": "npm-stat.com",
@@ -534,10 +534,10 @@
     "officialMinusNpmStat": 0,
     "publishedTotalSource": "official npm range series",
     "correctedPointCount": 0,
-    "referenceMissingPointCount": 0,
+    "referenceMissingPointCount": 4,
     "referenceAvailable": true,
-    "exactMatch": true,
-    "status": "official range series matches the optional npm-stat comparison point for point"
+    "exactMatch": false,
+    "status": "official range series published unchanged; optional npm-stat comparison differs"
   },
   "firstRecordedDay": {
     "date": "2026-08-11",
