@@ -166,7 +166,7 @@ test("technology manifest preserves all canonical sites, headers, and five publi
   ]);
 });
 
-test("legacy Zen Sentry path redirects to the separate-organization relationship page", async () => {
+test("existing Zen Sentry path redirects to the separate-organization relationship page", async () => {
   const redirect = await read("zen-sentry-foundation/index.html");
 
   assert.match(redirect, /url=\.\.\/zen-sentry\.html/i);

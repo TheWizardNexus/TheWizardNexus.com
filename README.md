@@ -90,7 +90,7 @@ npm start
 
 Open [localhost:8080](http://localhost:8080). This development command uses the Arcane SDK's HTTP mode on localhost, where browsers provide the secure context needed for local storage and service workers. `npm run dev` selects the SDK's HTTPS development mode and requires the local certificate configuration described in the [Arcane SDK documentation](https://thewizardnexus.github.io/arcane-os-sdk/).
 
-The repository root is a complete serving layout. Keep your existing server pointed at this checkout. The SDK-generated `arcane.webmanifest`, `arcane-pwa.mjs`, `arcane-sw.js`, and `arcane-offline.json` are committed alongside the pages, so pulling the repository supplies the offline files. `appsRoot: "."` and `legacyAppPaths: false` keep generated application files at the root, with the SDK supplied by its installed `node_modules/arcane-os` paths. Install the exact SDK dependency tree on initial setup and when the committed dependency changes:
+This application lives directly at its repository root. Keep your existing server pointed at this checkout. The SDK-generated `arcane.webmanifest`, `arcane-pwa.mjs`, `arcane-sw.js`, and `arcane-offline.json` are committed alongside the pages, so pulling the repository supplies the offline files. The SDK is supplied by its installed `node_modules/arcane-os` paths. Keep application files at the repository root, with no root `arcane/` or internal `apps/<appname>/` directory and no redirects recreating those paths. Install the exact SDK dependency tree on initial setup and when the committed dependency changes:
 
 ```sh
 npm ci --ignore-scripts --no-audit --no-fund
