@@ -794,3 +794,17 @@ test("implementation introduces no TypeScript, TSX, or TypeScript toolchain", as
   await walk(ROOT);
   assert.deepEqual(forbidden, []);
 });
+
+
+test("telemetry refresh targets exist in the current page layouts", async () => {
+  const generator = await read("scripts/update-profile-data.mjs");
+  const mapping = generator.slice(generator.indexOf("const pageFallbacks ="), generator.indexOf("const updatedPages ="));
+  const entries = [...mapping.matchAll(/\[path\.join\(ROOT, "([^"]+)"\), \[([\s\S]*?)\]\]/g)];
+  assert.equal(entries.length, 4);
+  for (const [, page, ids] of entries) {
+    const html = await read(page);
+    for (const [, id] of ids.matchAll(/"([^"]+)"/g)) {
+      assert.notEqual(textById(html, id), undefined, `${page} lacks refresh target #${id}`);
+    }
+  }
+});

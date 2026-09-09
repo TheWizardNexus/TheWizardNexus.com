@@ -578,7 +578,6 @@ const sharedFallbacks = {
 };
 
 const pageFallbacks = new Map([
-  [path.join(ROOT, "index.html"), ["project-total", "mapped-points", "mapped-relationships", "repo-total-hero"]],
   [path.join(ROOT, "technology.html"), ["project-result-count"]],
   [path.join(ROOT, "ecosystem.html"), ["mapped-points", "mapped-relationships", "next-total"]],
   [path.join(ROOT, "code.html"), ["repo-total", "repo-original", "repo-stars", "repo-updated", "repo-result-count"]],
