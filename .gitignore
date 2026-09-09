@@ -5,8 +5,3 @@ node_modules/
 /.arcane/
 /output/
 .arcane.env.json
-arcane.webmanifest
-arcane-offline.json
-arcane-sw.js
-arcane-pwa.mjs
-/apps/wizard-nexus/

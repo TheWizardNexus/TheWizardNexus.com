@@ -1,10 +1,9 @@
-import {access, copyFile, writeFile} from 'node:fs/promises';
+import {access, copyFile} from 'node:fs/promises';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
-import {createToolchain, projectPackageManifest} from 'arcane-os';
-import appDescriptor from '../arcane-app.json' with {type: 'json'};
+import {createToolchain} from 'arcane-os';
 
-console.info('Preparing The Wizard Nexus installation and offline package…');
+console.info('Packaging The Wizard Nexus for static hosting…');
 
 const repositoryUrl = new URL('..', import.meta.url);
 const root = fileURLToPath(repositoryUrl);
@@ -19,11 +18,6 @@ const toolchain = createToolchain(
     }
 );
 
-await writeFile(
-    new URL('../arcane-package.json', import.meta.url),
-    `${JSON.stringify(projectPackageManifest(appDescriptor), null, 2)}\n`
-);
-await toolchain.importMap();
 const {release} = await toolchain.package();
 
 const cnamePath = path.join(root, 'CNAME');

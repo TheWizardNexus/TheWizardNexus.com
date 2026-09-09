@@ -90,22 +90,17 @@ npm start
 
 Open [localhost:8080](http://localhost:8080). This development command uses the Arcane SDK's HTTP mode on localhost, where browsers provide the secure context needed for local storage and service workers. `npm run dev` selects the SDK's HTTPS development mode and requires the local certificate configuration described in the [Arcane SDK documentation](https://thewizardnexus.github.io/arcane-os-sdk/).
 
-To create the selected static package:
-
-```sh
-npm run build
-```
-
-The build refreshes the SDK-managed import maps, then packages the website and its selected SDK runtime into `dist/wizard-nexus`. The authored [`arcane-app.json`](arcane-app.json) selects the public content; [`arcane-packager.json`](arcane-packager.json) keeps this application at the repository root. An optional root `CNAME` is copied into the hosting output when present. The Pages workflow retains its configured hosted checks and uploads `dist/wizard-nexus`.
-
-For deployment on your own server, run these commands in its website checkout after updating the source:
+The repository root is a complete serving layout. Keep your existing server pointed at this checkout. The SDK-generated `arcane.webmanifest`, `arcane-pwa.mjs`, `arcane-sw.js`, `arcane-offline.json`, and navigation files under `apps/wizard-nexus` are committed alongside the pages, so pulling the repository supplies the offline files. Install the exact SDK dependency tree on initial setup and when the committed dependency changes:
 
 ```sh
 npm ci --ignore-scripts --no-audit --no-fund
-npm run build
 ```
 
-Serve the contents of `dist/wizard-nexus` as the website root, including its `node_modules` directory. This package contains `arcane.webmanifest`, `arcane-pwa.mjs`, `arcane-sw.js`, and `arcane-offline.json` beside `index.html`. Keep the complete output together when copying it to another document root. Dependency installation and `git pull` alone do not generate those files; repeat the build when deploying updated source or SDK dependencies. The build also refreshes those four generated files at the repository root for an existing server that serves the checkout directly. They remain generated SDK output and are excluded from Git.
+Serving this checkout requires no build or preparation command. Maintainers refresh the committed SDK-generated files through `npm run prepare:site` when changing the SDK, page inventory, or application descriptor, and include that output in the same commit. This uses the SDK's public generator and packager once to prepare relative URLs that work at both the domain root and a subdirectory. Generated files remain owned by the SDK generator and must not be hand-edited.
+
+GitHub Actions installs the pinned runtime, refreshes public telemetry, and runs the configured source checks. After synchronizing its snapshot commit, it copies the files listed in the committed `ARCANE_APP_RELEASE.json` into `output/pages` once, checks that upload, and deploys it. It does not regenerate the repository or run the SDK packager. The copy preserves an optional root `CNAME`.
+
+For an optional separate static export, `npm run build` packages the prepared website and its selected SDK runtime into `dist/wizard-nexus`, including an optional root `CNAME`. The authored [`arcane-app.json`](arcane-app.json) selects the public content; [`arcane-packager.json`](arcane-packager.json) keeps this application at the repository root. When using that export, copy its complete contents, including its `node_modules` directory, to the selected document root.
 
 Visit the site online first and let its offline preparation finish before disconnecting. A browser that supports installation can add The Wizard Nexus through its install menu. Offline operation requires service workers and origin-private storage on HTTPS or localhost; opening the HTML directly from the filesystem does not provide that environment. The installed site retains its packaged pages, assets, and public data snapshots. External websites, live purchases, updates, and sending contact email require a connection.
 

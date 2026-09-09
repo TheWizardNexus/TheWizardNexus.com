@@ -3,8 +3,6 @@ import assert from "node:assert/strict";
 import { access, readFile, readdir } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { execFile } from "node:child_process";
-import { promisify } from "node:util";
 import { classifyReferenceQuality, compareReferenceSeries, summarizeOfficialRange } from "../scripts/telemetry-quality.mjs";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
@@ -38,47 +36,6 @@ const PAGE_NAMES = [
   "linkedin-signal.html",
   "contact.html",
 ];
-
-test(
-    'publishing includes public pages and offline runtime while excluding design previews and source tooling',
-    async function inspectPublishedSite() {
-        await promisify(execFile)(
-            process.execPath,
-            ['scripts/build-site.mjs'],
-            {cwd: ROOT}
-        );
-        const output = 'dist/wizard-nexus';
-        const entries = await readdir(path.join(ROOT, output));
-        const publishedPages = entries.filter(
-            function isHtmlPage(name) {
-                return name.endsWith('.html');
-            }
-        );
-        assert.deepEqual(
-            publishedPages.sort(),
-            [...PAGE_NAMES, '404.html'].sort()
-        );
-        for (const name of ['assets', 'data', 'app.js', 'styles.css', 'ecosystem-diagram.css', 'contact.js', 'contact-policy.js', 'contact.css', 'robots.txt', 'sitemap.xml', '.nojekyll', 'node_modules', 'ARCANE_APP_RELEASE.json', 'arcane.webmanifest', 'arcane-offline.json', 'arcane-sw.js', 'arcane-pwa.mjs']) {
-            assert.ok(entries.includes(name), `missing published dependency: ${name}`);
-        }
-        for (const name of ['.git', '.github', 'tests', 'scripts', 'README.md']) {
-            assert.ok(!entries.includes(name));
-        }
-        for (const page of PAGE_NAMES) {
-            const [published, source] = await Promise.all(
-                [read(`${output}/${page}`), read(page)]
-            );
-            assert.match(published, /The Wizard Nexus/);
-            const sourceMain = source.match(/<main\b[^>]*>([\s\S]*?)<\/main>/)?.[1];
-            assert.ok(sourceMain, `${page} should provide its main content`);
-            for (const [, content] of sourceMain.matchAll(/>([^<>]+)</g)) {
-                if (/\S/.test(content)) {
-                    assert.ok(published.includes(content), `${page} omitted authored content: ${content}`);
-                }
-            }
-        }
-    }
-);
 
 test("curated ecosystem accounts for every published interface without confusing sites and source", async () => {
   const projects = await json("data/projects.json");
@@ -686,7 +643,7 @@ test("every focused page has canonical metadata and every internal HTML route re
   assert.match(workflow, /actions\/configure-pages@/);
   assert.match(workflow, /actions\/upload-pages-artifact@/);
   assert.match(workflow, /actions\/deploy-pages@/);
-  assert.match(workflow, /path: dist\/wizard-nexus/);
+  assert.match(workflow, /path: output\/pages/);
   assert.match(workflow, /README\.md index\.html technology\.html ecosystem\.html/);
 });
 

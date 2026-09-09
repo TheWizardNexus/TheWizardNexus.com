@@ -40,6 +40,9 @@ jobs:
       - name: Install the pinned Arcane SDK
         run: npm ci --ignore-scripts --no-audit --no-fund
 
+      - name: Verify committed repository-root delivery
+        run: node --test tests/root-site.test.mjs
+
       - name: Verify data and site contracts
         run: |
           node --check app.js
@@ -64,13 +67,16 @@ jobs:
         with:
           enablement: true
 
-      - name: Prepare public files only
-        run: node scripts/build-site.mjs
+      - name: Copy the synchronized prepared website
+        run: node scripts/copy-site.mjs
+
+      - name: Verify the Pages upload
+        run: node --test tests/published-site.test.mjs
 
       - name: Upload the static website
         uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5
         with:
-          path: dist/wizard-nexus
+          path: output/pages
 
   deploy:
     permissions:

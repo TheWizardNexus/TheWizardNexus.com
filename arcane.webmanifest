@@ -1,0 +1,25 @@
+{
+  "id": "./",
+  "name": "The Wizard Nexus",
+  "short_name": "TWiN",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "description": "Explore The Wizard Nexus online or offline.",
+  "theme_color": "rgb(3, 8, 18)",
+  "background_color": "rgb(3, 8, 18)",
+  "icons": [
+    {
+      "src": "./assets/wizard-nexus-logo.png",
+      "sizes": "360x360",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./assets/wizard-nexus-logo-premium.png",
+      "sizes": "1000x1000",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
