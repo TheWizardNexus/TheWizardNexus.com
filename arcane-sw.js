@@ -462,8 +462,8 @@
     "schemaVersion": 1,
     "appId": "wizard-nexus",
     "appVersion": "0.1.0",
-    "sdkVersion": "0.29.1",
-    "revision": "bfdd6fb5-72ce-4dd3-89cb-4b978a1b6279",
+    "sdkVersion": "0.31.0",
+    "revision": "df990fd9-9339-4bfc-8781-1e88baae10b9",
     "mode": "release",
     "assets": [
         "./404.html",
@@ -531,6 +531,7 @@
         "./node_modules/arcane-os/browser-runtime/ai/speech-worker-client.mjs",
         "./node_modules/arcane-os/browser-runtime/ai/speech-worker-runtime.mjs",
         "./node_modules/arcane-os/browser-runtime/ai/tool-text-stream.mjs",
+        "./node_modules/arcane-os/browser-runtime/ai/twin-cloud.mjs",
         "./node_modules/arcane-os/browser-runtime/ai/wllama/LICENCE",
         "./node_modules/arcane-os/browser-runtime/ai/wllama/index.mjs",
         "./node_modules/arcane-os/browser-runtime/ai/wllama/llama.cpp-LICENSE",
