@@ -141,7 +141,7 @@ const projectPathways = [
     id: "guide",
     code: "02",
     title: "Guide & evaluate",
-    description: "Principles, model foundations, and evaluation methods that keep consequential work human-governed.",
+    description: "Principles, model foundations, evaluation methods, and reflective writing that connect human judgment with meaning.",
   },
   {
     id: "build",
@@ -188,7 +188,7 @@ function renderProjectCard(project) {
     </article>`;
 }
 
-const projectDisplayOrder = ["ax","astrolabe","arcane-os","arcane-os-sdk","precrisis","twin-compass","kempo","life-first-framework","toshokann","spellwire","scamurai","dbopfs","dbopfs-studio","redress","sentinel"];
+const projectDisplayOrder = ["ax","astrolabe","arcane-os","arcane-os-sdk","precrisis","twin-compass","kempo","life-first-framework","toshokann","spellwire","scamurai","dbopfs","dbopfs-studio","redress","sentinel","mystics-and-minds"];
 
 function renderProjects() {
   const grid = document.querySelector("#project-grid");

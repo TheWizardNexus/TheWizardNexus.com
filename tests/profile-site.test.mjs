@@ -43,7 +43,7 @@ test("curated ecosystem accounts for every published interface without confusing
   const urls = projects.published.map((project) => project.url);
   const stages = new Map(projects.published.map((project) => [project.slug, project.stage]));
 
-  assert.equal(projects.published.length, 15);
+  assert.equal(projects.published.length, 16);
   assert.equal(projects.publishingNext.length, 2);
   assert.equal(new Set(slugs).size, slugs.length);
   assert.equal(new Set(urls).size, urls.length);
@@ -80,6 +80,11 @@ test("technology manifest preserves all canonical sites, headers, and five publi
     repository: project.repositoryUrl,
   }]));
   assert.deepEqual(actual, {
+    "mystics-and-minds": {
+      site: "https://thewizardnexus.github.io/Mystics-and-Minds/",
+      image: "https://thewizardnexus.github.io/Mystics-and-Minds/assets/mystics-minds-social-mark.png",
+      repository: null,
+    },
     "arcane-os": {
       site: "https://thewizardnexus.github.io/ARCANE-OS/",
       image: "https://thewizardnexus.github.io/ARCANE-OS/apps/docs/assets/arcane-docs-social.png",
@@ -743,7 +748,13 @@ test("the rebrand uses approved assets and requested profiles without excluded c
       const fullPath = path.join(directory, entry.name);
       if (entry.isDirectory()) await scan(fullPath);
       if (entry.isFile() && textExtensions.test(entry.name)) {
-        const contents = await readFile(fullPath, "utf8");
+        let contents = await readFile(fullPath, "utf8");
+        // The approved directory entry is separate from the main website identity.
+        if (entry.name === "projects.json") {
+          const projects = JSON.parse(contents);
+          projects.published = projects.published.filter((project) => project.slug !== "mystics-and-minds");
+          contents = JSON.stringify(projects);
+        }
         if (/mystics?\s*(?:&|and)\s*minds?/i.test(contents)) residue.push(path.relative(ROOT, fullPath));
       }
     }

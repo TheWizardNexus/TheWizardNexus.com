@@ -74,7 +74,11 @@
     "sitemap.xml",
     ".nojekyll"
   ],
-  "exclude": [],
+  "exclude": [
+    "assets/dbopfs-studio-logo.svg",
+    "assets/life-first-lantern-mark.svg",
+    "assets/spellwire-showcase-banner.svg"
+  ],
   "shared": [
     "browser-runtime"
   ]

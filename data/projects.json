@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-09T20:00:42.951Z",
+  "generatedAt": "2026-09-10T02:22:55.028Z",
   "source": {
     "profile": "https://github.com/TheWizardNexus/TheWizardNexus",
     "note": "Curated from the public TWiN profile, project-owned public interfaces, and the related public Life First project independently stewarded by Roshi. Public interfaces preserve separate maturity and source-boundary labels."
@@ -275,6 +275,23 @@
       "sourceBoundary": "Private repository",
       "featured": false,
       "accent": "cyan"
+    },
+    {
+      "slug": "mystics-and-minds",
+      "name": "Mystics & Minds",
+      "category": "Writing collection",
+      "pathway": "guide",
+      "relationship": "Explores connections across science, meaning, and story",
+      "stage": "Published monthly",
+      "maturity": "Published monthly",
+      "description": "Monthly writing by Johanna “JZ” Zollmann exploring psychology, spirituality, culture, story, and the unknown with curiosity, care, and discernment.",
+      "url": "https://thewizardnexus.github.io/Mystics-and-Minds/",
+      "repositoryUrl": null,
+      "image": "https://thewizardnexus.github.io/Mystics-and-Minds/assets/mystics-minds-social-mark.png",
+      "sourceStatus": "Public writing",
+      "sourceBoundary": "Public collection",
+      "featured": false,
+      "accent": "gold"
     }
   ],
   "publishingNext": [
