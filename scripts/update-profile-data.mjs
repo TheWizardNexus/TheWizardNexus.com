@@ -22,11 +22,13 @@ const PERIODS = [
 ];
 
 const curatedHomepages = new Map([
-  ["Astrolabe", "https://thewizardnexus.github.io/Astrolabe/"],
-  ["arcane-os-sdk", "https://thewizardnexus.github.io/arcane-os-sdk/"],
-  ["DBOPFS", "https://thewizardnexus.github.io/DBOPFS/"],
-  ["DBOPFS-Studio", "https://thewizardnexus.github.io/DBOPFS-Studio/"],
-  ["TheWizardNexus", "https://thewizardnexus.github.io/TheWizardNexus/"],
+  ["Astrolabe", "https://astrolabe.thewizardnexus.com/"],
+  ["arcane-os-sdk", "https://arcane-os-sdk.thewizardnexus.com/"],
+  ["DBOPFS", "https://dbopfs.thewizardnexus.com/"],
+  ["DBOPFS-Studio", "https://dbopfs-studio.thewizardnexus.com/"],
+  ["TheWizardNexus", "https://www.thewizardnexus.com/"],
+  ["TheWizardNexus.com", "https://www.thewizardnexus.com/"],
+  ["Zen-Sentry-Foundation", "https://zen-sentry-foundation.thewizardnexus.com/"],
 ]);
 
 const curatedDescriptions = new Map([
@@ -534,7 +536,7 @@ const readmeSummary = `${readmeStart}
 <p align="center">
   <strong>${projects.published.length} published project sites · ${projects.mapSnapshot.points} mapped ecosystem points · ${projects.mapSnapshot.relationships} relationships · ${repoSnapshot.counts.total} public repositories</strong><br>
   <sub><strong>${fullNumber(historySnapshot.total)} official npm range downloads</strong> from ${longDate(historySnapshot.period.availableFrom)} through ${longDate(historySnapshot.period.availableUntil)} · npm-stat is an optional comparison only</sub><br>
-  <a href="https://thewizardnexus.github.io/TheWizardNexus.com/technology.html"><strong>Navigate the live TWiN technology directory →</strong></a>
+  <a href="https://www.thewizardnexus.com/technology.html"><strong>Navigate the live TWiN technology directory →</strong></a>
 </p>
 ${readmeEnd}`;
 const updatedReadme = readme.replace(readmePattern, readmeSummary);
