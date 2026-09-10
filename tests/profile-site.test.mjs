@@ -81,82 +81,82 @@ test("technology manifest preserves all canonical sites, headers, and five publi
   }]));
   assert.deepEqual(actual, {
     "mystics-and-minds": {
-      site: "https://thewizardnexus.github.io/Mystics-and-Minds/",
+      site: "https://mystics-and-minds.thewizardnexus.com/",
       image: "assets/mystics-and-minds-banner.png",
       repository: null,
     },
     "arcane-os": {
-      site: "https://thewizardnexus.github.io/ARCANE-OS/",
+      site: "https://arcane-os.thewizardnexus.com/",
       image: "https://thewizardnexus.github.io/ARCANE-OS/apps/docs/assets/arcane-docs-social.png",
       repository: null,
     },
     "arcane-os-sdk": {
-      site: "https://thewizardnexus.github.io/arcane-os-sdk/",
+      site: "https://arcane-os-sdk.thewizardnexus.com/",
       image: "assets/arcane-os-sdk-showcase-banner.png",
       repository: "https://github.com/TheWizardNexus/arcane-os-sdk",
     },
     ax: {
-      site: "https://thewizardnexus.github.io/AX/",
+      site: "https://ax.thewizardnexus.com/",
       image: "https://thewizardnexus.github.io/AX/public/og.png",
       repository: null,
     },
     astrolabe: {
-      site: "https://thewizardnexus.github.io/Astrolabe/",
+      site: "https://astrolabe.thewizardnexus.com/",
       image: "https://thewizardnexus.github.io/Astrolabe/assets/astrolabe-readme-header.png",
       repository: "https://github.com/TheWizardNexus/Astrolabe",
     },
     dbopfs: {
-      site: "https://thewizardnexus.github.io/DBOPFS/",
+      site: "https://dbopfs.thewizardnexus.com/",
       image: "assets/dbopfs-showcase-banner.png",
       repository: "https://github.com/TheWizardNexus/DBOPFS",
     },
     "dbopfs-studio": {
-      site: "https://thewizardnexus.github.io/DBOPFS-Studio/",
+      site: "https://dbopfs-studio.thewizardnexus.com/",
       image: "https://raw.githubusercontent.com/TheWizardNexus/DBOPFS-Studio/main/assets/dbopfs-studio-readme-header.png",
       repository: "https://github.com/TheWizardNexus/DBOPFS-Studio",
     },
     spellwire: {
-      site: "https://thewizardnexus.github.io/SpellWire/",
+      site: "https://spellwire.thewizardnexus.com/",
       image: "assets/spellwire-showcase-banner-v2.svg",
       repository: null,
     },
     toshokann: {
-      site: "https://thewizardnexus.github.io/Toshokann/",
+      site: "https://toshokann.thewizardnexus.com/",
       image: "assets/toshokann-showcase-banner.png",
       repository: null,
     },
     "twin-compass": {
-      site: "https://thewizardnexus.github.io/TWiN-Compass/",
+      site: "https://twin-compass.thewizardnexus.com/",
       image: "assets/twin-compass-readme-header.png",
       repository: null,
     },
     "life-first-framework": {
-      site: "https://riaevangelist.github.io/life-first-framework/",
+      site: "https://life-first-framework.thewizardnexus.com/",
       image: "assets/life-first-framework-header.png?v=20260902",
       repository: "https://github.com/RIAEvangelist/life-first-framework",
     },
     kempo: {
-      site: "https://thewizardnexus.github.io/KEMPO/",
+      site: "https://kempo.thewizardnexus.com/",
       image: "assets/kempo-header.png",
       repository: null,
     },
     precrisis: {
-      site: "https://precrisis.ai/",
+      site: "https://precrisis.thewizardnexus.com/",
       image: "assets/precrisis-header.png",
       repository: null,
     },
     sentinel: {
-      site: "https://thewizardnexus.github.io/Sentinel/",
+      site: "https://sentinel.thewizardnexus.com/",
       image: "https://thewizardnexus.github.io/Sentinel/public/og.png",
       repository: null,
     },
     scamurai: {
-      site: "https://thewizardnexus.github.io/Scamurai/",
+      site: "https://scamurai.thewizardnexus.com/",
       image: "assets/scamurai-showcase-banner.png",
       repository: null,
     },
     redress: {
-      site: "https://thewizardnexus.github.io/Redress/",
+      site: "https://redress.thewizardnexus.com/",
       image: "https://thewizardnexus.github.io/Redress/public/og.png",
       repository: null,
     },
@@ -441,7 +441,7 @@ test("the public nexus uses focused pages while preserving the complete ecosyste
   const officialTotal = history.total.toLocaleString("en-US");
 
   assert.match(readme, /assets\/twin-signal\.svg/);
-  assert.match(readme, /thewizardnexus\.github\.io\/TheWizardNexus.com/);
+  assert.match(readme, /https:\/\/www\.thewizardnexus\.com\//);
   for (const pageName of ["technology.html", "practice.html", "trust.html", "people.html", "work.html", "contact.html"]) {
     assert.match(byName.get("index.html"), new RegExp(`href="${pageName}"`));
   }
@@ -449,9 +449,9 @@ test("the public nexus uses focused pages while preserving the complete ecosyste
   assert.match(byName.get("technology.html"), /id="project-grid"/);
   assert.match(byName.get("technology.html"), /All live sites remain directly available without scripts/);
   const technologyNoScript = byName.get("technology.html").match(/<noscript>([\s\S]*?)<\/noscript>/)?.[1] || "";
-  assert.equal([...technologyNoScript.matchAll(/href="https:\/\/thewizardnexus\.github\.io\/(?!TheWizardNexus\.com)/g)].length, 13);
-  assert.match(technologyNoScript, /href="https:\/\/riaevangelist\.github\.io\/life-first-framework\/"/);
-  assert.match(technologyNoScript, /href="https:\/\/precrisis\.ai\/"/);
+  assert.equal([...technologyNoScript.matchAll(/href="https:\/\/[a-z0-9-]+\.thewizardnexus\.com\//g)].length, 15);
+  assert.match(technologyNoScript, /href="https:\/\/life-first-framework\.thewizardnexus\.com\/"/);
+  assert.match(technologyNoScript, /href="https:\/\/precrisis\.thewizardnexus\.com\/"/);
   assert.doesNotMatch(byName.get("ecosystem.html"), /id="project-grid"|id="project-search"|id="project-filters"/);
   assert.match(byName.get("ecosystem.html"), /How We Build/);
   assert.doesNotMatch(byName.get("technology.html"), /id="mapped-points"|id="mapped-relationships"|id="public-project-repo-total"/);
@@ -465,13 +465,13 @@ test("the public nexus uses focused pages while preserving the complete ecosyste
   const practiceApplications = byName.get("practice.html").match(/<section class="practice-section"[\s\S]*?<\/section>/)?.[0] || "";
   for (const servicePage of SERVICE_PAGES) assert.match(practiceApplications, new RegExp(`href="${servicePage}"`));
   assert.match(byName.get("practice.html"), /One ethical operating system[\s\S]*An AI martial art[\s\S]*KEMPO practice sequence/);
-  assert.match(byName.get("practice.html"), /href="https:\/\/thewizardnexus\.github\.io\/KEMPO\/">Open KEMPO/);
+  assert.match(byName.get("practice.html"), /href="https:\/\/kempo\.thewizardnexus\.com\/">Open KEMPO/);
   assert.doesNotMatch(byName.get("practice.html"), /<span>KEMPO<\/span>/);
   assert.match(byName.get("practice.html"), /class="ethical-system-components"[\s\S]*KEMPO \/\/ practiced judgment[\s\S]*Life First Framework[\s\S]*TWiN Compass/);
   assert.doesNotMatch(byName.get("practice.html"), /Other parts of the system/);
   assert.match(byName.get("philosophy.html"), /Life and dignity first/);
-  assert.match(byName.get("philosophy.html"), /https:\/\/thewizardnexus\.github\.io\/KEMPO\/philosophy\.html/);
-  assert.match(byName.get("philosophy.html"), /https:\/\/riaevangelist\.github\.io\/life-first-framework\//);
+  assert.match(byName.get("philosophy.html"), /https:\/\/kempo\.thewizardnexus\.com\/philosophy\.html/);
+  assert.match(byName.get("philosophy.html"), /https:\/\/life-first-framework\.thewizardnexus\.com\//);
   assert.match(byName.get("philosophy.html"), /https:\/\/github\.com\/RIAEvangelist\/life-first-framework/);
   assert.match(byName.get("trust.html"), /Morals before/);
   assert.match(byName.get("trust.html"), /Accountability and repair/);
@@ -488,7 +488,7 @@ test("the public nexus uses focused pages while preserving the complete ecosyste
   assert.match(byName.get("people.html"), /href="https:\/\/github\.com\/RIAEvangelist"/);
   assert.match(byName.get("people.html"), /href="https:\/\/riaevangelist\.github\.io\/RIAEvangelist\/"/);
   assert.match(byName.get("people.html"), /href="https:\/\/www\.linkedin\.com\/in\/turtlesallthewaydown\/"/);
-  assert.match(byName.get("zen-sentry.html"), /href="https:\/\/thewizardnexus\.github\.io\/Zen-Sentry-Foundation\/"/);
+  assert.match(byName.get("zen-sentry.html"), /href="https:\/\/zen-sentry-foundation\.thewizardnexus\.com\/"/);
   assert.match(byName.get("zen-sentry.html"), /href="https:\/\/github\.com\/TheWizardNexus\/Zen-Sentry-Foundation"/);
   assert.match(byName.get("technology.html"), /Each project explains its purpose and current stage/);
   assert.match(byName.get("technology.html"), /Guide &amp; evaluate/);
@@ -551,7 +551,7 @@ test("the public nexus uses focused pages while preserving the complete ecosyste
     assert.match(html, /class="footer-linkedin" href="https:\/\/www\.linkedin\.com\/company\/the-wizard-nexus\/" aria-label="TWiN on LinkedIn"/);
     const footerNav = html.match(/<nav aria-label="Footer navigation">([\s\S]*?)<\/nav>/)?.[1] || "";
     const footerHrefs = [...footerNav.matchAll(/<a\b[^>]*href="([^"]+)"/g)].map((match) => match[1]);
-    assert.deepEqual(footerHrefs, ["index.html", "people.html", "contact.html", "practice.html", "philosophy.html", "trust.html", "technology.html", "ecosystem.html", "code.html", "signal.html", "linkedin-signal.html", "work.html", "service-strategy.html", "service-programs.html", "service-policy.html", "service-precrisis.html", "service-private-ai.html", "service-military-ai.html", "service-cyber.html", "zen-sentry.html", "https://thewizardnexus.github.io/Zen-Sentry-Foundation/"]);
+    assert.deepEqual(footerHrefs, ["index.html", "people.html", "contact.html", "practice.html", "philosophy.html", "trust.html", "technology.html", "ecosystem.html", "code.html", "signal.html", "linkedin-signal.html", "work.html", "service-strategy.html", "service-programs.html", "service-policy.html", "service-precrisis.html", "service-private-ai.html", "service-military-ai.html", "service-cyber.html", "zen-sentry.html", "https://zen-sentry-foundation.thewizardnexus.com/"]);
     assert.doesNotMatch(html, /class="page-code"/);
     assert.match(html, /wizard-nexus-favicon-32\.png(?:\?v=\d{8}[a-z0-9-]*)?"/);
     assert.match(html, /wizard-nexus-favicon-16\.png(?:\?v=\d{8}[a-z0-9-]*)?"/);
@@ -567,10 +567,10 @@ test("the public nexus uses focused pages while preserving the complete ecosyste
       "technology.html",
       "work.html",
       "people.html",
-      "https://thewizardnexus.github.io/Zen-Sentry-Foundation/",
+      "https://zen-sentry-foundation.thewizardnexus.com/",
       "contact.html",
     ]);
-    assert.match(primaryNav, /class="nav-external" href="https:\/\/thewizardnexus\.github\.io\/Zen-Sentry-Foundation\/">Zen Sentry ↗<\/a>/);
+    assert.match(primaryNav, /class="nav-external" href="https:\/\/zen-sentry-foundation\.thewizardnexus\.com\/">Zen Sentry ↗<\/a>/);
     assert.match(primaryNav, /class="nav-cta nav-contact" href="contact\.html">Contact/);
     assert.doesNotMatch(primaryNav, /nav-philosophy|>Philosophy\b/);
   }
