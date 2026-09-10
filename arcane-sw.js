@@ -463,7 +463,7 @@
     "appId": "wizard-nexus",
     "appVersion": "0.1.0",
     "sdkVersion": "0.31.0",
-    "revision": "545df19b-8ab0-4c62-b6fa-0c5b34e776f0",
+    "revision": "cf3b39c3-dcde-4771-bdaf-28d9a2989ac1",
     "mode": "release",
     "assets": [
         "./404.html",
@@ -480,6 +480,7 @@
         "./assets/kempo-ring-background.png",
         "./assets/life-first-framework-header.png",
         "./assets/life-first-lantern-mark.png",
+        "./assets/mystics-and-minds-banner.png",
         "./assets/nexus-constellation.svg",
         "./assets/precrisis-header.png",
         "./assets/roshi-portrait.png",

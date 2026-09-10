@@ -82,7 +82,7 @@ test("technology manifest preserves all canonical sites, headers, and five publi
   assert.deepEqual(actual, {
     "mystics-and-minds": {
       site: "https://thewizardnexus.github.io/Mystics-and-Minds/",
-      image: "https://thewizardnexus.github.io/Mystics-and-Minds/assets/mystics-minds-social-mark.png",
+      image: "assets/mystics-and-minds-banner.png",
       repository: null,
     },
     "arcane-os": {

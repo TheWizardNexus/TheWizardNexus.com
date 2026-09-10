@@ -2284,5 +2284,5 @@ body .dojo-callout > div:last-child > p { margin: 0; }
 @media (max-width: 48rem) { .site-footer nav { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 32rem) { .site-footer nav { grid-template-columns: minmax(0, 1fr); } .footer-brand { min-width: 0; } }
 
-/* Preserve the full square publication artwork inside the shared banner frame. */
+/* Preserve the full approved publication banner inside the shared frame. */
 .project-card[data-project-slug="mystics-and-minds"] .banner-art { object-fit: contain; background: #0d0e1b; }
