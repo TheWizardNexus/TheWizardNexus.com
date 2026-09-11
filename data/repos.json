@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-10T11:40:44.449Z",
+  "generatedAt": "2026-09-11T11:41:05.498Z",
   "source": {
     "profile": "https://api.github.com/users/TheWizardNexus",
     "repositories": "https://api.github.com/users/TheWizardNexus/repos?per_page=100&type=owner"
@@ -23,26 +23,6 @@
   },
   "repositories": [
     {
-      "name": "DBOPFS-Studio",
-      "fullName": "TheWizardNexus/DBOPFS-Studio",
-      "description": "An OPFS and DBOPFS workspace for Chrome, Edge, Brave, Vivaldi, Opera, and other Chromium browsers: explore, edit, preview, print, and manage site storage.",
-      "explanation": "A Chromium workspace for exploring, editing, previewing, printing, and managing DBOPFS application data stored in OPFS.",
-      "url": "https://github.com/TheWizardNexus/DBOPFS-Studio",
-      "homepage": "https://thewizardnexus.github.io/DBOPFS-Studio/",
-      "language": "JavaScript",
-      "stars": 0,
-      "forks": 0,
-      "openIssues": 0,
-      "watchers": 0,
-      "archived": false,
-      "disabled": false,
-      "fork": false,
-      "topics": [],
-      "license": "PolyForm-Noncommercial-1.0.0",
-      "createdAt": "2026-08-13T19:17:47Z",
-      "updatedAt": "2026-09-10T03:48:01Z"
-    },
-    {
       "name": "arcane-os-sdk",
       "fullName": "TheWizardNexus/arcane-os-sdk",
       "description": "sdk for building apps for Acane OS",
@@ -60,47 +40,7 @@
       "topics": [],
       "license": "AGPL-3.0",
       "createdAt": "2026-08-13T23:55:03Z",
-      "updatedAt": "2026-09-10T03:22:35Z"
-    },
-    {
-      "name": "TheWizardNexus.com",
-      "fullName": "TheWizardNexus/TheWizardNexus.com",
-      "description": "The public facing website",
-      "explanation": "The public facing website",
-      "url": "https://github.com/TheWizardNexus/TheWizardNexus.com",
-      "homepage": "https://thewizardnexus.github.io/TheWizardNexus.com/",
-      "language": "HTML",
-      "stars": 0,
-      "forks": 0,
-      "openIssues": 0,
-      "watchers": 0,
-      "archived": false,
-      "disabled": false,
-      "fork": false,
-      "topics": [],
-      "license": null,
-      "createdAt": "2026-08-24T15:14:01Z",
-      "updatedAt": "2026-09-10T02:36:03Z"
-    },
-    {
-      "name": "DBOPFS",
-      "fullName": "TheWizardNexus/DBOPFS",
-      "description": "OPFS based Database",
-      "explanation": "A browser-native, source-available database that maps tables and records to the Origin Private File System.",
-      "url": "https://github.com/TheWizardNexus/DBOPFS",
-      "homepage": "https://thewizardnexus.github.io/DBOPFS/",
-      "language": "JavaScript",
-      "stars": 1,
-      "forks": 0,
-      "openIssues": 0,
-      "watchers": 1,
-      "archived": false,
-      "disabled": false,
-      "fork": false,
-      "topics": [],
-      "license": "PolyForm-Noncommercial-1.0.0",
-      "createdAt": "2026-08-11T20:08:22Z",
-      "updatedAt": "2026-09-10T02:18:07Z"
+      "updatedAt": "2026-09-10T18:55:34Z"
     },
     {
       "name": "Zen-Sentry-Foundation",
@@ -127,7 +67,47 @@
       ],
       "license": null,
       "createdAt": "2026-08-24T17:06:34Z",
-      "updatedAt": "2026-09-09T15:38:31Z"
+      "updatedAt": "2026-09-10T14:30:18Z"
+    },
+    {
+      "name": "DBOPFS",
+      "fullName": "TheWizardNexus/DBOPFS",
+      "description": "OPFS based Database",
+      "explanation": "A browser-native, source-available database that maps tables and records to the Origin Private File System.",
+      "url": "https://github.com/TheWizardNexus/DBOPFS",
+      "homepage": "https://thewizardnexus.github.io/DBOPFS/",
+      "language": "JavaScript",
+      "stars": 1,
+      "forks": 0,
+      "openIssues": 0,
+      "watchers": 1,
+      "archived": false,
+      "disabled": false,
+      "fork": false,
+      "topics": [],
+      "license": "PolyForm-Noncommercial-1.0.0",
+      "createdAt": "2026-08-11T20:08:22Z",
+      "updatedAt": "2026-09-10T14:28:54Z"
+    },
+    {
+      "name": "DBOPFS-Studio",
+      "fullName": "TheWizardNexus/DBOPFS-Studio",
+      "description": "An OPFS and DBOPFS workspace for Chrome, Edge, Brave, Vivaldi, Opera, and other Chromium browsers: explore, edit, preview, print, and manage site storage.",
+      "explanation": "A Chromium workspace for exploring, editing, previewing, printing, and managing DBOPFS application data stored in OPFS.",
+      "url": "https://github.com/TheWizardNexus/DBOPFS-Studio",
+      "homepage": "https://thewizardnexus.github.io/DBOPFS-Studio/",
+      "language": "JavaScript",
+      "stars": 0,
+      "forks": 0,
+      "openIssues": 0,
+      "watchers": 0,
+      "archived": false,
+      "disabled": false,
+      "fork": false,
+      "topics": [],
+      "license": "PolyForm-Noncommercial-1.0.0",
+      "createdAt": "2026-08-13T19:17:47Z",
+      "updatedAt": "2026-09-10T14:27:13Z"
     },
     {
       "name": "Astrolabe",
@@ -147,7 +127,7 @@
       "topics": [],
       "license": null,
       "createdAt": "2026-08-13T23:20:42Z",
-      "updatedAt": "2026-09-09T15:38:30Z"
+      "updatedAt": "2026-09-10T14:27:05Z"
     },
     {
       "name": "TheWizardNexus",
@@ -167,7 +147,27 @@
       "topics": [],
       "license": null,
       "createdAt": "2026-07-13T18:33:00Z",
-      "updatedAt": "2026-09-09T11:49:51Z"
+      "updatedAt": "2026-09-10T11:43:58Z"
+    },
+    {
+      "name": "TheWizardNexus.com",
+      "fullName": "TheWizardNexus/TheWizardNexus.com",
+      "description": "The public facing website",
+      "explanation": "The public facing website",
+      "url": "https://github.com/TheWizardNexus/TheWizardNexus.com",
+      "homepage": "https://thewizardnexus.github.io/TheWizardNexus.com/",
+      "language": "HTML",
+      "stars": 0,
+      "forks": 0,
+      "openIssues": 1,
+      "watchers": 0,
+      "archived": false,
+      "disabled": false,
+      "fork": false,
+      "topics": [],
+      "license": null,
+      "createdAt": "2026-08-24T15:14:01Z",
+      "updatedAt": "2026-09-10T11:42:01Z"
     }
   ]
 }
