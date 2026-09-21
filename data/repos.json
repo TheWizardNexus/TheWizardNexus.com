@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-20T11:42:55.512Z",
+  "generatedAt": "2026-09-21T13:09:39.632Z",
   "source": {
     "profile": "https://api.github.com/users/TheWizardNexus",
     "repositories": "https://api.github.com/users/TheWizardNexus/repos?per_page=100&type=owner"
@@ -23,26 +23,6 @@
   },
   "repositories": [
     {
-      "name": "arcane-os-sdk",
-      "fullName": "TheWizardNexus/arcane-os-sdk",
-      "description": "sdk for building apps for Acane OS",
-      "explanation": "A standalone SDK and CLI for building, testing, packaging, and managing Arcane applications inside or outside ARCANE OS.",
-      "url": "https://github.com/TheWizardNexus/arcane-os-sdk",
-      "homepage": "https://thewizardnexus.github.io/arcane-os-sdk/",
-      "language": "JavaScript",
-      "stars": 0,
-      "forks": 0,
-      "openIssues": 0,
-      "watchers": 0,
-      "archived": false,
-      "disabled": false,
-      "fork": false,
-      "topics": [],
-      "license": "AGPL-3.0",
-      "createdAt": "2026-08-13T23:55:03Z",
-      "updatedAt": "2026-09-20T03:28:34Z"
-    },
-    {
       "name": "TheWizardNexus",
       "fullName": "TheWizardNexus/TheWizardNexus",
       "description": "GitHub profile for The Wizard Nexus: behavioral health innovation powered by PreCrisis AI.",
@@ -60,7 +40,7 @@
       "topics": [],
       "license": null,
       "createdAt": "2026-07-13T18:33:00Z",
-      "updatedAt": "2026-09-19T11:24:48Z"
+      "updatedAt": "2026-09-20T11:44:56Z"
     },
     {
       "name": "TheWizardNexus.com",
@@ -80,7 +60,27 @@
       "topics": [],
       "license": null,
       "createdAt": "2026-08-24T15:14:01Z",
-      "updatedAt": "2026-09-19T11:21:02Z"
+      "updatedAt": "2026-09-20T11:43:07Z"
+    },
+    {
+      "name": "arcane-os-sdk",
+      "fullName": "TheWizardNexus/arcane-os-sdk",
+      "description": "sdk for building apps for Acane OS",
+      "explanation": "A standalone SDK and CLI for building, testing, packaging, and managing Arcane applications inside or outside ARCANE OS.",
+      "url": "https://github.com/TheWizardNexus/arcane-os-sdk",
+      "homepage": "https://thewizardnexus.github.io/arcane-os-sdk/",
+      "language": "JavaScript",
+      "stars": 0,
+      "forks": 0,
+      "openIssues": 0,
+      "watchers": 0,
+      "archived": false,
+      "disabled": false,
+      "fork": false,
+      "topics": [],
+      "license": "AGPL-3.0",
+      "createdAt": "2026-08-13T23:55:03Z",
+      "updatedAt": "2026-09-20T03:28:34Z"
     },
     {
       "name": "DBOPFS",
