@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "appId": "wizard-nexus",
   "appVersion": "0.1.0",
-  "sdkVersion": "0.31.0",
-  "revision": "cf3b39c3-dcde-4771-bdaf-28d9a2989ac1",
+  "sdkVersion": "0.33.6",
+  "revision": "86589af6-7d48-4c32-87d2-46a5dfe7d218",
   "mode": "release",
   "assets": [
     "./404.html",
@@ -163,6 +163,7 @@
     "./node_modules/arcane-os/runtime/arcane/img/trash.svg",
     "./node_modules/arcane-os/runtime/arcane/img/upload.svg",
     "./node_modules/arcane-os/runtime/arcane/modules/AI.js",
+    "./node_modules/arcane-os/runtime/arcane/modules/AIModelSelectionController.js",
     "./node_modules/arcane-os/runtime/arcane/modules/AIPreferenceRuntime.js",
     "./node_modules/arcane-os/runtime/arcane/modules/AIPreferenceTuple.js",
     "./node_modules/arcane-os/runtime/arcane/modules/AIProviderRuntime.js",
