@@ -490,13 +490,39 @@
         return {location: destination.href, resource: cacheUrl(selected)};
     }
 
+    function staticNavigationResource(url) {
+        const document = new URL(url);
+        if (document.origin !== scopeOrigin || !document.search
+            || !/\.html?$/iu.test(document.pathname)) {
+            return null;
+        }
+        document.search = '';
+        return ownedUrls.has(document.href) ? document.href : null;
+    }
+
     async function requestedResource(request, url) {
         await restored;
-        const redirect = request.mode === 'navigate' ? navigationRedirect(url) : null;
+        const selectedQuery = ownedUrls.has(url) && new URL(url).search;
+        const redirect = request.mode === 'navigate' && !selectedQuery ? navigationRedirect(url) : null;
         if (redirect && cacheUrl(redirect.location) !== url && ownedUrls.has(redirect.resource)) {
             return {response: Response.redirect(redirect.location, 302), done: Promise.resolve(null)};
         }
         if (!ownedUrls.has(url)) {
+            const document = request.mode === 'navigate' ? staticNavigationResource(url) : null;
+            if (document) {
+                // Reuse only the selected static document body. Keep the navigation URL
+                // intact; a query-specific response must never replace this shared entry.
+                const cached = await findCachedResource(document);
+                if (cached.response) {
+                    return {
+                        response: cached.response,
+                        done: cached.current ? Promise.resolve(null)
+                            : cached.cache.put(document, cached.response.clone()).then(function retainedDocument() {
+                                return null;
+                            })
+                    };
+                }
+            }
             return {response: await fetch(request), done: Promise.resolve(null)};
         }
         const cache = await caches.open(cacheName);
@@ -518,7 +544,7 @@
             return;
         }
         if (manifestRestored && !ownedUrls.has(url)
-            && !(request.mode === 'navigate' && navigationRedirect(url))) {
+            && !(request.mode === 'navigate' && (navigationRedirect(url) || staticNavigationResource(url)))) {
             return;
         }
         const resource = requestedResource(request, url);
@@ -548,8 +574,8 @@
     "schemaVersion": 1,
     "appId": "wizard-nexus",
     "appVersion": "0.1.0",
-    "sdkVersion": "0.39.1",
-    "revision": "0ada9ba0-7aa5-42e6-9f9b-b38e9d6389a1",
+    "sdkVersion": "0.40.0",
+    "revision": "a21df7cb-0e9a-4a6b-951b-8e1a5ae9cb9f",
     "mode": "release",
     "assets": [
         "./404.html",
