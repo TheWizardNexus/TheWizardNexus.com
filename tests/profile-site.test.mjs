@@ -86,12 +86,12 @@ test("technology manifest preserves all canonical sites, headers, and five publi
       repository: null,
     },
     "arcane-os": {
-      site: "https://arcane-os.thewizardnexus.com/",
+      site: "https://thewizardnexus.github.io/ARCANE-OS/",
       image: "https://thewizardnexus.github.io/ARCANE-OS/apps/docs/assets/arcane-docs-social.png",
       repository: null,
     },
     "arcane-os-sdk": {
-      site: "https://arcane-os-sdk.thewizardnexus.com/",
+      site: "https://thewizardnexus.github.io/arcane-os-sdk/",
       image: "assets/arcane-os-sdk-showcase-banner.png",
       repository: "https://github.com/TheWizardNexus/arcane-os-sdk",
     },
@@ -106,17 +106,17 @@ test("technology manifest preserves all canonical sites, headers, and five publi
       repository: "https://github.com/TheWizardNexus/Astrolabe",
     },
     dbopfs: {
-      site: "https://dbopfs.thewizardnexus.com/",
+      site: "https://thewizardnexus.github.io/DBOPFS/",
       image: "assets/dbopfs-showcase-banner.png",
       repository: "https://github.com/TheWizardNexus/DBOPFS",
     },
     "dbopfs-studio": {
-      site: "https://dbopfs-studio.thewizardnexus.com/",
+      site: "https://thewizardnexus.github.io/DBOPFS-Studio/",
       image: "https://raw.githubusercontent.com/TheWizardNexus/DBOPFS-Studio/main/assets/dbopfs-studio-readme-header.png",
       repository: "https://github.com/TheWizardNexus/DBOPFS-Studio",
     },
     spellwire: {
-      site: "https://spellwire.thewizardnexus.com/",
+      site: "https://thewizardnexus.github.io/SpellWire/",
       image: "assets/spellwire-showcase-banner-v2.svg",
       repository: null,
     },
@@ -126,12 +126,12 @@ test("technology manifest preserves all canonical sites, headers, and five publi
       repository: null,
     },
     "twin-compass": {
-      site: "https://twin-compass.thewizardnexus.com/",
+      site: "https://thewizardnexus.github.io/TWiN-Compass/",
       image: "assets/twin-compass-readme-header.png",
       repository: null,
     },
     "life-first-framework": {
-      site: "https://life-first-framework.thewizardnexus.com/",
+      site: "https://riaevangelist.github.io/life-first-framework/",
       image: "assets/life-first-framework-header.png?v=20260902",
       repository: "https://github.com/RIAEvangelist/life-first-framework",
     },
@@ -141,7 +141,7 @@ test("technology manifest preserves all canonical sites, headers, and five publi
       repository: null,
     },
     precrisis: {
-      site: "https://precrisis.thewizardnexus.com/",
+      site: "https://precrisis.ai/",
       image: "assets/precrisis-header.png",
       repository: null,
     },
@@ -449,9 +449,9 @@ test("the public nexus uses focused pages while preserving the complete ecosyste
   assert.match(byName.get("technology.html"), /id="project-grid"/);
   assert.match(byName.get("technology.html"), /All live sites remain directly available without scripts/);
   const technologyNoScript = byName.get("technology.html").match(/<noscript>([\s\S]*?)<\/noscript>/)?.[1] || "";
-  assert.equal([...technologyNoScript.matchAll(/href="https:\/\/[a-z0-9-]+\.thewizardnexus\.com\//g)].length, 15);
-  assert.match(technologyNoScript, /href="https:\/\/life-first-framework\.thewizardnexus\.com\/"/);
-  assert.match(technologyNoScript, /href="https:\/\/precrisis\.thewizardnexus\.com\/"/);
+  assert.equal([...technologyNoScript.matchAll(/href="https:\/\/[a-z0-9-]+\.thewizardnexus\.com\//g)].length, 7);
+  assert.match(technologyNoScript, /href="https:\/\/riaevangelist\.github\.io\/life-first-framework\/"/);
+  assert.match(technologyNoScript, /href="https:\/\/precrisis\.ai\/"/);
   assert.doesNotMatch(byName.get("ecosystem.html"), /id="project-grid"|id="project-search"|id="project-filters"/);
   assert.match(byName.get("ecosystem.html"), /How We Build/);
   assert.doesNotMatch(byName.get("technology.html"), /id="mapped-points"|id="mapped-relationships"|id="public-project-repo-total"/);
@@ -471,7 +471,7 @@ test("the public nexus uses focused pages while preserving the complete ecosyste
   assert.doesNotMatch(byName.get("practice.html"), /Other parts of the system/);
   assert.match(byName.get("philosophy.html"), /Life and dignity first/);
   assert.match(byName.get("philosophy.html"), /https:\/\/kempo\.thewizardnexus\.com\/philosophy\.html/);
-  assert.match(byName.get("philosophy.html"), /https:\/\/life-first-framework\.thewizardnexus\.com\//);
+  assert.match(byName.get("philosophy.html"), /https:\/\/riaevangelist\.github\.io\/life-first-framework\//);
   assert.match(byName.get("philosophy.html"), /https:\/\/github\.com\/RIAEvangelist\/life-first-framework/);
   assert.match(byName.get("trust.html"), /Morals before/);
   assert.match(byName.get("trust.html"), /Accountability and repair/);

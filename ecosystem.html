@@ -24,6 +24,7 @@
     "./node_modules/arcane-os/runtime/arcane/entities/User.js": "./node_modules/arcane-os/runtime/arcane/entities/User.js",
     "./node_modules/arcane-os/runtime/arcane/entities/Weather.js": "./node_modules/arcane-os/runtime/arcane/entities/Weather.js",
     "./node_modules/arcane-os/runtime/arcane/modules/AI.js": "./node_modules/arcane-os/runtime/arcane/modules/AI.js",
+    "./node_modules/arcane-os/runtime/arcane/modules/AIModelSelectionController.js": "./node_modules/arcane-os/runtime/arcane/modules/AIModelSelectionController.js",
     "./node_modules/arcane-os/runtime/arcane/modules/AIPreferenceRuntime.js": "./node_modules/arcane-os/runtime/arcane/modules/AIPreferenceRuntime.js",
     "./node_modules/arcane-os/runtime/arcane/modules/AIPreferenceTuple.js": "./node_modules/arcane-os/runtime/arcane/modules/AIPreferenceTuple.js",
     "./node_modules/arcane-os/runtime/arcane/modules/AIProviderRuntime.js": "./node_modules/arcane-os/runtime/arcane/modules/AIProviderRuntime.js",
@@ -47,6 +48,7 @@
     "./node_modules/arcane-os/runtime/arcane/modules/CommunicationProviderRegistry.js": "./node_modules/arcane-os/runtime/arcane/modules/CommunicationProviderRegistry.js",
     "./node_modules/arcane-os/runtime/arcane/modules/ComponentContracts.js": "./node_modules/arcane-os/runtime/arcane/modules/ComponentContracts.js",
     "./node_modules/arcane-os/runtime/arcane/modules/ConfiguredAIChatSession.js": "./node_modules/arcane-os/runtime/arcane/modules/ConfiguredAIChatSession.js",
+    "./node_modules/arcane-os/runtime/arcane/modules/ContinuousVoiceCapture.js": "./node_modules/arcane-os/runtime/arcane/modules/ContinuousVoiceCapture.js",
     "./node_modules/arcane-os/runtime/arcane/modules/ConversationActionItems.js": "./node_modules/arcane-os/runtime/arcane/modules/ConversationActionItems.js",
     "./node_modules/arcane-os/runtime/arcane/modules/ConversationClosingReport.js": "./node_modules/arcane-os/runtime/arcane/modules/ConversationClosingReport.js",
     "./node_modules/arcane-os/runtime/arcane/modules/ConversationTimebox.js": "./node_modules/arcane-os/runtime/arcane/modules/ConversationTimebox.js",
@@ -102,8 +104,10 @@
     "./node_modules/arcane-os/runtime/arcane/modules/TerminalCommandRegistry.js": "./node_modules/arcane-os/runtime/arcane/modules/TerminalCommandRegistry.js",
     "./node_modules/arcane-os/runtime/arcane/modules/ThemeBootstrap.js": "./node_modules/arcane-os/runtime/arcane/modules/ThemeBootstrap.js",
     "./node_modules/arcane-os/runtime/arcane/modules/ThemeManager.js": "./node_modules/arcane-os/runtime/arcane/modules/ThemeManager.js",
+    "./node_modules/arcane-os/runtime/arcane/modules/ThemePresentation.js": "./node_modules/arcane-os/runtime/arcane/modules/ThemePresentation.js",
     "./node_modules/arcane-os/runtime/arcane/modules/TimeGuard.js": "./node_modules/arcane-os/runtime/arcane/modules/TimeGuard.js",
     "./node_modules/arcane-os/runtime/arcane/modules/ToolCallRouter.js": "./node_modules/arcane-os/runtime/arcane/modules/ToolCallRouter.js",
+    "./node_modules/arcane-os/runtime/arcane/modules/VoiceCaptureWorklet.js": "./node_modules/arcane-os/runtime/arcane/modules/VoiceCaptureWorklet.js",
     "./node_modules/arcane-os/runtime/arcane/modules/WaitForComponent.js": "./node_modules/arcane-os/runtime/arcane/modules/WaitForComponent.js",
     "./node_modules/arcane-os/runtime/arcane/modules/YouTubeMedia.js": "./node_modules/arcane-os/runtime/arcane/modules/YouTubeMedia.js",
     "./node_modules/arcane-os/runtime/arcane/modules/uPlot.iife.min.js": "./node_modules/arcane-os/runtime/arcane/modules/uPlot.iife.min.js",
@@ -125,6 +129,8 @@
     "./node_modules/arcane-os/runtime/arcane/sdk/ai/browser-whisper-worker.mjs": "./node_modules/arcane-os/browser-runtime/ai/browser-whisper-worker.mjs",
     "./node_modules/arcane-os/browser-runtime/ai/browser-wllama-runtime.mjs": "./node_modules/arcane-os/browser-runtime/ai/browser-wllama-runtime.mjs",
     "./node_modules/arcane-os/runtime/arcane/sdk/ai/browser-wllama-runtime.mjs": "./node_modules/arcane-os/browser-runtime/ai/browser-wllama-runtime.mjs",
+    "./node_modules/arcane-os/browser-runtime/ai/digitalocean-speech.mjs": "./node_modules/arcane-os/browser-runtime/ai/digitalocean-speech.mjs",
+    "./node_modules/arcane-os/runtime/arcane/sdk/ai/digitalocean-speech.mjs": "./node_modules/arcane-os/browser-runtime/ai/digitalocean-speech.mjs",
     "./node_modules/arcane-os/browser-runtime/ai/model-controller.mjs": "./node_modules/arcane-os/browser-runtime/ai/model-controller.mjs",
     "./node_modules/arcane-os/runtime/arcane/sdk/ai/model-controller.mjs": "./node_modules/arcane-os/browser-runtime/ai/model-controller.mjs",
     "./node_modules/arcane-os/browser-runtime/ai/speech-worker-client.mjs": "./node_modules/arcane-os/browser-runtime/ai/speech-worker-client.mjs",
@@ -194,6 +200,7 @@
     "arcane-os/mail": "./node_modules/arcane-os/runtime/arcane/modules/MailApi.mjs",
     "arcane-os/model-definition": "./node_modules/arcane-os/runtime/arcane/modules/ModelDefinition.js",
     "arcane-os/modules/AI.js": "./node_modules/arcane-os/runtime/arcane/modules/AI.js",
+    "arcane-os/modules/AIModelSelectionController.js": "./node_modules/arcane-os/runtime/arcane/modules/AIModelSelectionController.js",
     "arcane-os/modules/AIPreferenceRuntime.js": "./node_modules/arcane-os/runtime/arcane/modules/AIPreferenceRuntime.js",
     "arcane-os/modules/AIPreferenceTuple.js": "./node_modules/arcane-os/runtime/arcane/modules/AIPreferenceTuple.js",
     "arcane-os/modules/AIProviderRuntime.js": "./node_modules/arcane-os/runtime/arcane/modules/AIProviderRuntime.js",
@@ -217,6 +224,7 @@
     "arcane-os/modules/CommunicationProviderRegistry.js": "./node_modules/arcane-os/runtime/arcane/modules/CommunicationProviderRegistry.js",
     "arcane-os/modules/ComponentContracts.js": "./node_modules/arcane-os/runtime/arcane/modules/ComponentContracts.js",
     "arcane-os/modules/ConfiguredAIChatSession.js": "./node_modules/arcane-os/runtime/arcane/modules/ConfiguredAIChatSession.js",
+    "arcane-os/modules/ContinuousVoiceCapture.js": "./node_modules/arcane-os/runtime/arcane/modules/ContinuousVoiceCapture.js",
     "arcane-os/modules/ConversationActionItems.js": "./node_modules/arcane-os/runtime/arcane/modules/ConversationActionItems.js",
     "arcane-os/modules/ConversationClosingReport.js": "./node_modules/arcane-os/runtime/arcane/modules/ConversationClosingReport.js",
     "arcane-os/modules/ConversationTimebox.js": "./node_modules/arcane-os/runtime/arcane/modules/ConversationTimebox.js",
@@ -272,8 +280,10 @@
     "arcane-os/modules/TerminalCommandRegistry.js": "./node_modules/arcane-os/runtime/arcane/modules/TerminalCommandRegistry.js",
     "arcane-os/modules/ThemeBootstrap.js": "./node_modules/arcane-os/runtime/arcane/modules/ThemeBootstrap.js",
     "arcane-os/modules/ThemeManager.js": "./node_modules/arcane-os/runtime/arcane/modules/ThemeManager.js",
+    "arcane-os/modules/ThemePresentation.js": "./node_modules/arcane-os/runtime/arcane/modules/ThemePresentation.js",
     "arcane-os/modules/TimeGuard.js": "./node_modules/arcane-os/runtime/arcane/modules/TimeGuard.js",
     "arcane-os/modules/ToolCallRouter.js": "./node_modules/arcane-os/runtime/arcane/modules/ToolCallRouter.js",
+    "arcane-os/modules/VoiceCaptureWorklet.js": "./node_modules/arcane-os/runtime/arcane/modules/VoiceCaptureWorklet.js",
     "arcane-os/modules/WaitForComponent.js": "./node_modules/arcane-os/runtime/arcane/modules/WaitForComponent.js",
     "arcane-os/modules/YouTubeMedia.js": "./node_modules/arcane-os/runtime/arcane/modules/YouTubeMedia.js",
     "arcane-os/modules/uPlot.iife.min.js": "./node_modules/arcane-os/runtime/arcane/modules/uPlot.iife.min.js",
@@ -346,13 +356,13 @@
 <div class="brand"><img src="assets/wizard-nexus-logo-96.png" alt=""><strong>The Wizard Nexus</strong><small>Behavioral Health and Systems Engineering</small></div>
 <div class="branch" aria-hidden="true"></div>
 <div class="columns">
-<article class="pillar"><header><small>GUIDANCE &amp; JUDGMENT</small><h2>How We Reason</h2></header><div class="inside"><a class="node project-node brand-twin-compass" href="https://twin-compass.thewizardnexus.com/"><img class="project-banner" src="assets/twin-compass-readme-header.png" alt=""><div class="project-copy"><h3>TWiN Compass <span aria-hidden="true">↗</span></h3><p>Source material for moral reasoning and behavioral-health awareness.</p></div></a><a class="node project-node brand-kempo" href="https://kempo.thewizardnexus.com/"><img class="project-banner" src="assets/kempo-header.png" alt=""><div class="project-copy"><h3>KEMPO <span aria-hidden="true">↗</span></h3><p>Human-scored scenarios for examining AI judgment under pressure.</p></div></a><p class="caption">Distinct roles: material for reasoning, and a practice for evaluating judgment.</p></div></article>
-<article class="pillar"><header><small>TECHNICAL FOUNDATIONS</small><h2>How We Build</h2></header><div class="inside"><a class="node project-node brand-arcane-os-sdk" href="https://arcane-os-sdk.thewizardnexus.com/"><img class="project-banner" src="assets/arcane-os-sdk-showcase-banner.png" alt=""><div class="project-copy"><h3>Arcane OS SDK <span aria-hidden="true">↗</span></h3><p>Developer tools</p></div></a><div class="connector">builds &amp; packages<b aria-hidden="true">↓</b></div><div class="node"><h3>Arcane applications</h3><p>Individual applications with their own scope.</p></div><div class="connector"><b aria-hidden="true">↑</b>provides an environment for</div><a class="node project-node brand-arcane-os" href="https://arcane-os.thewizardnexus.com/"><img class="project-banner" src="https://thewizardnexus.github.io/ARCANE-OS/apps/docs/assets/arcane-docs-social.png" alt=""><div class="project-copy"><h3>ARCANE OS <span aria-hidden="true">↗</span></h3><p>Application environment · in development</p></div></a></div></article>
-<article class="pillar"><header><small>APPLICATIONS</small><h2>Where It Is Applied</h2></header><div class="inside"><a class="node project-node brand-precrisis" href="https://precrisis.thewizardnexus.com/"><img class="project-banner" src="assets/precrisis-header.png" alt=""><div class="project-copy"><h3>PreCrisis AI <span aria-hidden="true">↗</span></h3><p>Earlier recognition of risk and human-led intervention.</p><small>One part of TWiN, not the whole organization.</small></div></a><a class="node project-node brand-redress" href="https://redress.thewizardnexus.com/"><img class="project-banner" src="https://thewizardnexus.github.io/Redress/public/og.png" alt=""><div class="project-copy"><h3>Redress <span aria-hidden="true">↗</span></h3><p>Legal-practice workspace in development within ARCANE OS.</p></div></a><a class="node project-node brand-sentinel" href="https://sentinel.thewizardnexus.com/"><img class="project-banner" src="https://thewizardnexus.github.io/Sentinel/public/og.png" alt=""><div class="project-copy"><h3>Sentinel <span aria-hidden="true">↗</span></h3><p>Source-cited leads and reports from complex records.</p></div></a></div></article>
+<article class="pillar"><header><small>GUIDANCE &amp; JUDGMENT</small><h2>How We Reason</h2></header><div class="inside"><a class="node project-node brand-twin-compass" href="https://thewizardnexus.github.io/TWiN-Compass/"><img class="project-banner" src="assets/twin-compass-readme-header.png" alt=""><div class="project-copy"><h3>TWiN Compass <span aria-hidden="true">↗</span></h3><p>Source material for moral reasoning and behavioral-health awareness.</p></div></a><a class="node project-node brand-kempo" href="https://kempo.thewizardnexus.com/"><img class="project-banner" src="assets/kempo-header.png" alt=""><div class="project-copy"><h3>KEMPO <span aria-hidden="true">↗</span></h3><p>Human-scored scenarios for examining AI judgment under pressure.</p></div></a><p class="caption">Distinct roles: material for reasoning, and a practice for evaluating judgment.</p></div></article>
+<article class="pillar"><header><small>TECHNICAL FOUNDATIONS</small><h2>How We Build</h2></header><div class="inside"><a class="node project-node brand-arcane-os-sdk" href="https://thewizardnexus.github.io/arcane-os-sdk/"><img class="project-banner" src="assets/arcane-os-sdk-showcase-banner.png" alt=""><div class="project-copy"><h3>Arcane OS SDK <span aria-hidden="true">↗</span></h3><p>Developer tools</p></div></a><div class="connector">builds &amp; packages<b aria-hidden="true">↓</b></div><div class="node"><h3>Arcane applications</h3><p>Individual applications with their own scope.</p></div><div class="connector"><b aria-hidden="true">↑</b>provides an environment for</div><a class="node project-node brand-arcane-os" href="https://thewizardnexus.github.io/ARCANE-OS/"><img class="project-banner" src="https://thewizardnexus.github.io/ARCANE-OS/apps/docs/assets/arcane-docs-social.png" alt=""><div class="project-copy"><h3>ARCANE OS <span aria-hidden="true">↗</span></h3><p>Application environment · in development</p></div></a></div></article>
+<article class="pillar"><header><small>APPLICATIONS</small><h2>Where It Is Applied</h2></header><div class="inside"><a class="node project-node brand-precrisis" href="https://precrisis.ai/"><img class="project-banner" src="assets/precrisis-header.png" alt=""><div class="project-copy"><h3>PreCrisis AI <span aria-hidden="true">↗</span></h3><p>Earlier recognition of risk and human-led intervention.</p><small>One part of TWiN, not the whole organization.</small></div></a><a class="node project-node brand-redress" href="https://redress.thewizardnexus.com/"><img class="project-banner" src="https://thewizardnexus.github.io/Redress/public/og.png" alt=""><div class="project-copy"><h3>Redress <span aria-hidden="true">↗</span></h3><p>Legal-practice workspace in development within ARCANE OS.</p></div></a><a class="node project-node brand-sentinel" href="https://sentinel.thewizardnexus.com/"><img class="project-banner" src="https://thewizardnexus.github.io/Sentinel/public/og.png" alt=""><div class="project-copy"><h3>Sentinel <span aria-hidden="true">↗</span></h3><p>Source-cited leads and reports from complex records.</p></div></a></div></article>
 </div>
 <div class="legend">The top branches show areas of TWiN’s work. Arrows explain the specific Arcane development relationship; they do not imply that every tool is integrated into every application. Project maturity remains separate.</div>
 <p class="outside-label">DISTINCT IDENTITIES &amp; STEWARDSHIP</p>
-<div class="outside"><article><img src="assets/life-first-lantern-mark.png" alt="Life First lantern"><div><h4><a href="https://life-first-framework.thewizardnexus.com/">Life First Framework ↗</a></h4><p>A related ethical framework independently stewarded by Roshi.</p></div></article><article><img src="assets/zen-sentry-logo.jpg" alt="Zen Sentry Foundation logo"><div><h4><a href="https://zen-sentry-foundation.thewizardnexus.com/">Zen Sentry Foundation ↗</a></h4><p>Separate nonprofit organization, with its own programs, assets, and responsibilities.</p></div></article></div>
+<div class="outside"><article><img src="assets/life-first-lantern-mark.png" alt="Life First lantern"><div><h4><a href="https://riaevangelist.github.io/life-first-framework/">Life First Framework ↗</a></h4><p>A related ethical framework independently stewarded by Roshi.</p></div></article><article><img src="assets/zen-sentry-logo.jpg" alt="Zen Sentry Foundation logo"><div><h4><a href="https://zen-sentry-foundation.thewizardnexus.com/">Zen Sentry Foundation ↗</a></h4><p>Separate nonprofit organization, with its own programs, assets, and responsibilities.</p></div></article></div>
 </section>        </div>
       </section>
       <section class="directory-section ecosystem-overview" aria-labelledby="wider-map-title">

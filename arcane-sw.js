@@ -4,6 +4,7 @@
     const cachePrefix = `arcane-pwa|${JSON.stringify([manifest.appId, scope])}|`;
     const cacheName = `${cachePrefix}resources`;
     const manifestUrl = cacheUrl('arcane-offline.json');
+    const refreshStateUrl = cacheUrl('.arcane-pwa/refresh-state');
     const protocolUrls = new Set([cacheUrl('arcane-pwa.mjs'), cacheUrl(clientUrl)]);
     const installationAssets = [...new Set(manifest.assets.map(cacheUrl))];
     const resourceJobs = new Map();
@@ -16,6 +17,10 @@
     let previousCaches = null;
     let manifestRestored = false;
     let lastChecked = null;
+    let refreshState = null;
+    let priorUrls = null;
+    let changeSaved = null;
+    let refreshStateWrite = Promise.resolve();
 
     function cacheUrl(value) {
         const url = new URL(value, scope);
@@ -76,6 +81,15 @@
         for (const client of clients) {
             if (client.url.startsWith(scope)) {
                 client.postMessage(message);
+            }
+        }
+    }
+
+    async function reportUpdate(result) {
+        const clients = await self.clients.matchAll({type: 'window', includeUncontrolled: true});
+        for (const client of clients) {
+            if (client.url.startsWith(scope)) {
+                client.postMessage({type: 'arcane.pwa.refreshed', ...result});
             }
         }
     }
@@ -193,10 +207,22 @@
                 // Parse the control document before replacing the last usable inventory.
                 await readManifest(response.clone());
             }
+            const previousModified = Date.parse(cached.response?.headers.get('last-modified'));
+            const nextModified = Date.parse(response.headers.get('last-modified'));
+            const changed = Number.isFinite(previousModified) && Number.isFinite(nextModified)
+                && previousModified !== nextModified;
+            if (validate && priorUrls && changed) {
+                // Keep the prior date before replacement so a failed later metadata write
+                // cannot erase a completed resource change across worker termination.
+                refreshState.previousModified ??= {};
+                refreshState.previousModified[url] ??= previousModified;
+                await saveRefreshState();
+            }
             return {
                 response,
                 saved: cached.cache.put(url, response.clone()),
                 checked: true,
+                modified: changed,
                 error: null
             };
         } catch (cause) {
@@ -222,6 +248,13 @@
                 job.checked = result.checked;
                 try {
                     await result.saved;
+                    if (!result.error && result.checked && priorUrls
+                        && (result.modified || (url !== manifestUrl && !priorUrls.has(url)))) {
+                        // Record only completed cache writes; a partial cycle may outlive this worker.
+                        refreshState.changed = true;
+                        changeSaved ??= saveRefreshState();
+                        await changeSaved;
+                    }
                     return result.error;
                 } catch (cause) {
                     return resourceError(url, cause);
@@ -301,11 +334,54 @@
         return lastChecked === null || Date.now() - lastChecked > interval;
     }
 
+    function saveRefreshState() {
+        const content = JSON.stringify(refreshState);
+        async function writeRefreshState() {
+            const cache = await caches.open(cacheName);
+            await cache.put(refreshStateUrl, new Response(content));
+        }
+        // Only writes to this one shared metadata entry require ordering.
+        refreshStateWrite = refreshStateWrite.then(writeRefreshState, writeRefreshState);
+        return refreshStateWrite;
+    }
+
+    async function beginRefresh() {
+        const cache = await caches.open(cacheName);
+        const pending = await cache.match(refreshStateUrl);
+        if (pending) {
+            refreshState = await pending.json();
+            for (const [url, previousModified] of Object.entries(refreshState.previousModified ?? {})) {
+                const response = await cache.match(url);
+                const modified = Date.parse(response?.headers.get('last-modified'));
+                if (Number.isFinite(modified) && modified !== previousModified) {
+                    refreshState.changed = true;
+                }
+            }
+        } else {
+            const cached = await findCachedResource(manifestUrl);
+            let prior = null;
+            if (cached.response) {
+                try {
+                    prior = await readManifest(cached.response);
+                } catch (error) {
+                    // An unreadable prior inventory cannot establish additions; normal refresh can replace it.
+                    console.error('PWA update detection could not read the prior inventory.', error);
+                }
+            }
+            refreshState = {assets: prior?.assets ?? null, changed: false};
+            // Preserve the pre-refresh inventory before its cached response is replaced.
+            await saveRefreshState();
+        }
+        priorUrls = refreshState.assets === null ? null : new Set(refreshState.assets);
+        changeSaved = null;
+    }
+
     async function refreshResources() {
         await restored;
         if (!checkDue()) {
-            return {lastChecked, error: null};
+            return {lastChecked, updateAvailable: false, error: null};
         }
+        await beginRefresh();
         const failures = [];
         let inventory = resourceJob(new Request(manifestUrl), manifestUrl, true);
         let error = await inventory.done;
@@ -333,11 +409,16 @@
         }
         const checked = await populateResources(urls, true);
         failures.push(...checked.failures);
+        let updateAvailable = false;
         if (failures.length === 0) {
+            const cache = await caches.open(cacheName);
+            await cache.delete(refreshStateUrl);
+            updateAvailable = refreshState.changed;
             lastChecked = Date.now();
         }
         return {
             lastChecked,
+            updateAvailable,
             error: failures.length > 0
                 ? errorDetails(new AggregateError(failures, 'PWA resources could not all be updated.'))
                 : null
@@ -353,6 +434,9 @@
                 function releaseRefresh() {
                     refreshTask = null;
                     refreshJobs.clear();
+                    refreshState = null;
+                    priorUrls = null;
+                    changeSaved = null;
                 }
             );
         }
@@ -379,10 +463,12 @@
                     port?.close();
                     if (result.error) {
                         await reportFailure(result.error);
+                    } else if (result.updateAvailable) {
+                        await reportUpdate(result);
                     }
                 },
                 async function failRefresh(error) {
-                    port?.postMessage({type: 'arcane.pwa.refreshed', lastChecked, error: errorDetails(error)});
+                    port?.postMessage({type: 'arcane.pwa.refreshed', lastChecked, updateAvailable: false, error: errorDetails(error)});
                     port?.close();
                     await reportFailure(error);
                 }
@@ -404,13 +490,39 @@
         return {location: destination.href, resource: cacheUrl(selected)};
     }
 
+    function staticNavigationResource(url) {
+        const document = new URL(url);
+        if (document.origin !== scopeOrigin || !document.search
+            || !/\.html?$/iu.test(document.pathname)) {
+            return null;
+        }
+        document.search = '';
+        return ownedUrls.has(document.href) ? document.href : null;
+    }
+
     async function requestedResource(request, url) {
         await restored;
-        const redirect = request.mode === 'navigate' ? navigationRedirect(url) : null;
+        const selectedQuery = ownedUrls.has(url) && new URL(url).search;
+        const redirect = request.mode === 'navigate' && !selectedQuery ? navigationRedirect(url) : null;
         if (redirect && cacheUrl(redirect.location) !== url && ownedUrls.has(redirect.resource)) {
             return {response: Response.redirect(redirect.location, 302), done: Promise.resolve(null)};
         }
         if (!ownedUrls.has(url)) {
+            const document = request.mode === 'navigate' ? staticNavigationResource(url) : null;
+            if (document) {
+                // Reuse only the selected static document body. Keep the navigation URL
+                // intact; a query-specific response must never replace this shared entry.
+                const cached = await findCachedResource(document);
+                if (cached.response) {
+                    return {
+                        response: cached.response,
+                        done: cached.current ? Promise.resolve(null)
+                            : cached.cache.put(document, cached.response.clone()).then(function retainedDocument() {
+                                return null;
+                            })
+                    };
+                }
+            }
             return {response: await fetch(request), done: Promise.resolve(null)};
         }
         const cache = await caches.open(cacheName);
@@ -432,7 +544,7 @@
             return;
         }
         if (manifestRestored && !ownedUrls.has(url)
-            && !(request.mode === 'navigate' && navigationRedirect(url))) {
+            && !(request.mode === 'navigate' && (navigationRedirect(url) || staticNavigationResource(url)))) {
             return;
         }
         const resource = requestedResource(request, url);
@@ -462,8 +574,8 @@
     "schemaVersion": 1,
     "appId": "wizard-nexus",
     "appVersion": "0.1.0",
-    "sdkVersion": "0.31.0",
-    "revision": "cf3b39c3-dcde-4771-bdaf-28d9a2989ac1",
+    "sdkVersion": "0.40.1",
+    "revision": "ba15a475-767b-4936-9384-591a08c938d3",
     "mode": "release",
     "assets": [
         "./404.html",
@@ -528,6 +640,7 @@
         "./node_modules/arcane-os/browser-runtime/ai/browser-wasm.mjs",
         "./node_modules/arcane-os/browser-runtime/ai/browser-whisper-worker.mjs",
         "./node_modules/arcane-os/browser-runtime/ai/browser-wllama-runtime.mjs",
+        "./node_modules/arcane-os/browser-runtime/ai/digitalocean-speech.mjs",
         "./node_modules/arcane-os/browser-runtime/ai/model-controller.mjs",
         "./node_modules/arcane-os/browser-runtime/ai/speech-worker-client.mjs",
         "./node_modules/arcane-os/browser-runtime/ai/speech-worker-runtime.mjs",
@@ -623,6 +736,7 @@
         "./node_modules/arcane-os/runtime/arcane/img/trash.svg",
         "./node_modules/arcane-os/runtime/arcane/img/upload.svg",
         "./node_modules/arcane-os/runtime/arcane/modules/AI.js",
+        "./node_modules/arcane-os/runtime/arcane/modules/AIModelSelectionController.js",
         "./node_modules/arcane-os/runtime/arcane/modules/AIPreferenceRuntime.js",
         "./node_modules/arcane-os/runtime/arcane/modules/AIPreferenceTuple.js",
         "./node_modules/arcane-os/runtime/arcane/modules/AIProviderRuntime.js",
@@ -646,6 +760,7 @@
         "./node_modules/arcane-os/runtime/arcane/modules/CommunicationProviderRegistry.js",
         "./node_modules/arcane-os/runtime/arcane/modules/ComponentContracts.js",
         "./node_modules/arcane-os/runtime/arcane/modules/ConfiguredAIChatSession.js",
+        "./node_modules/arcane-os/runtime/arcane/modules/ContinuousVoiceCapture.js",
         "./node_modules/arcane-os/runtime/arcane/modules/ConversationActionItems.js",
         "./node_modules/arcane-os/runtime/arcane/modules/ConversationClosingReport.js",
         "./node_modules/arcane-os/runtime/arcane/modules/ConversationTimebox.js",
@@ -701,8 +816,10 @@
         "./node_modules/arcane-os/runtime/arcane/modules/TerminalCommandRegistry.js",
         "./node_modules/arcane-os/runtime/arcane/modules/ThemeBootstrap.js",
         "./node_modules/arcane-os/runtime/arcane/modules/ThemeManager.js",
+        "./node_modules/arcane-os/runtime/arcane/modules/ThemePresentation.js",
         "./node_modules/arcane-os/runtime/arcane/modules/TimeGuard.js",
         "./node_modules/arcane-os/runtime/arcane/modules/ToolCallRouter.js",
+        "./node_modules/arcane-os/runtime/arcane/modules/VoiceCaptureWorklet.js",
         "./node_modules/arcane-os/runtime/arcane/modules/WaitForComponent.js",
         "./node_modules/arcane-os/runtime/arcane/modules/YouTubeMedia.js",
         "./node_modules/arcane-os/runtime/arcane/modules/uPlot.LICENSE.txt",
@@ -730,6 +847,13 @@
         "./work.html",
         "./zen-sentry-foundation/index.html",
         "./zen-sentry.html",
+        "./node_modules/arcane-os/browser-runtime/ai/browser-whisper-worker.mjs?arcaneSpeechWorkerMode=artifact-module-worker",
+        "./node_modules/arcane-os/browser-runtime/ai/browser-kokoro-worker.mjs?arcaneSpeechWorkerMode=artifact-module-worker",
+        "./node_modules/arcane-os/runtime/arcane/css/primitives.css?v=1",
+        "./node_modules/arcane-os/runtime/arcane/css/theme.css?v=1",
+        "./node_modules/arcane-os/runtime/arcane/css/layout.css?v=3",
+        "./node_modules/arcane-os/runtime/arcane/css/dashboard-config.css?v=2",
+        "./node_modules/arcane-os/runtime/arcane/components/modal.html?v=13",
         "./node_modules/arcane-os/runtime/arcane/modules/DataMaintenance.js?v=3",
         "./node_modules/arcane-os/runtime/arcane/modules/MD.js?v=2",
         "./node_modules/arcane-os/runtime/arcane/modules/ArcaneNetworkPolicy.js?v=3",

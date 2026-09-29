@@ -20,7 +20,7 @@
 <!-- profile-telemetry-counts:start -->
 <p align="center">
   <strong>16 published project sites · 78 mapped ecosystem points · 171 relationships · 7 public repositories</strong><br>
-  <sub><strong>152 official npm range downloads</strong> from January 1, 2026 through September 6, 2026 · npm-stat is an optional comparison only</sub><br>
+  <sub><strong>158 official npm range downloads</strong> from January 1, 2026 through September 27, 2026 · npm-stat is an optional comparison only</sub><br>
   <a href="https://www.thewizardnexus.com/technology.html"><strong>Navigate the live TWiN technology directory →</strong></a>
 </p>
 <!-- profile-telemetry-counts:end -->
@@ -64,7 +64,7 @@ A public interface does not automatically mean public source, production readine
 - [Practice](https://www.thewizardnexus.com/practice.html) — PreCrisis, KEMPO, and the disciplines behind earlier action.
 - [Philosophy](https://www.thewizardnexus.com/philosophy.html) — KEMPO, Life First, and the moral commitments governing consequential work.
 - [KEMPO philosophy](https://kempo.thewizardnexus.com/philosophy.html) — the full public philosophy of practiced judgment under pressure.
-- [Life First Framework](https://life-first-framework.thewizardnexus.com/) — an open working framework for life, dignity, agency, accountability, and repair ([repository](https://github.com/RIAEvangelist/life-first-framework)).
+- [Life First Framework](https://riaevangelist.github.io/life-first-framework/) — an open working framework for life, dignity, agency, accountability, and repair ([repository](https://github.com/RIAEvangelist/life-first-framework)).
 - [Trust](https://www.thewizardnexus.com/trust.html) — accountable decisions, evidence, privacy, maturity, source boundaries, and repair.
 - [Zen Sentry Foundation](https://zen-sentry-foundation.thewizardnexus.com/) — research, tools, partnerships, and community initiatives for protection before crisis ([repository](https://github.com/TheWizardNexus/Zen-Sentry-Foundation)).
 - [Services](https://www.thewizardnexus.com/work.html) — seven focused paths with clear one-time service-hour pricing, adjustable 1–20 hour checkout, and a discuss-pricing route.
@@ -79,7 +79,7 @@ A public interface does not automatically mean public source, production readine
 
 ## This repository
 
-This repository is the plain HTML, CSS, and JavaScript source for **TheWizardNexus.com**, using **Arcane SDK 0.31.0** for its shared runtime, theme, installation, offline pages, DBOPFS storage, and mail integration. It publishes the selected browser package to GitHub Pages from `main` through [the Pages workflow](.github/workflows/profile-site.yml). The public, one-time Stripe service-hour catalog is recorded in [`data/service-products.json`](data/service-products.json); it contains public product, price, and Payment Link identifiers only—never secret keys.
+This repository is the plain HTML, CSS, and JavaScript source for **TheWizardNexus.com**, using **Arcane SDK 0.40.1** for its shared runtime, theme, installation, offline pages, DBOPFS storage, and mail integration. It publishes the selected browser package to GitHub Pages from `main` through [the Pages workflow](.github/workflows/profile-site.yml). The public, one-time Stripe service-hour catalog is recorded in [`data/service-products.json`](data/service-products.json); it contains public product, price, and Payment Link identifiers only—never secret keys.
 
 Use Node.js 22.23.2 or newer. From this repository, install the exact committed dependency tree and start the local site:
 
@@ -88,7 +88,7 @@ npm ci --ignore-scripts --no-audit --no-fund
 npm start
 ```
 
-Open [localhost:8080](http://localhost:8080). This development command uses the Arcane SDK's HTTP mode on localhost, where browsers provide the secure context needed for local storage and service workers. `npm run dev` selects the SDK's HTTPS development mode and requires the local certificate configuration described in the [Arcane SDK documentation](https://arcane-os-sdk.thewizardnexus.com/).
+Open [localhost:8080](http://localhost:8080). This development command uses the Arcane SDK's HTTP mode on localhost, where browsers provide the secure context needed for local storage and service workers. `npm run dev` selects the SDK's HTTPS development mode and requires the local certificate configuration described in the [Arcane SDK documentation](https://thewizardnexus.github.io/arcane-os-sdk/).
 
 This application lives directly at its repository root. Keep your existing server pointed at this checkout. The SDK-generated `arcane.webmanifest`, `arcane-pwa.mjs`, `arcane-sw.js`, and `arcane-offline.json` are committed alongside the pages, so pulling the repository supplies the offline files. The SDK is supplied by its installed `node_modules/arcane-os` paths. Keep application files at the repository root, with no root `arcane/` or internal `apps/<appname>/` directory and no redirects recreating those paths. Install the exact SDK dependency tree on initial setup and when the committed dependency changes:
 

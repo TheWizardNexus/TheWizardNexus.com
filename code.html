@@ -24,6 +24,7 @@
     "./node_modules/arcane-os/runtime/arcane/entities/User.js": "./node_modules/arcane-os/runtime/arcane/entities/User.js",
     "./node_modules/arcane-os/runtime/arcane/entities/Weather.js": "./node_modules/arcane-os/runtime/arcane/entities/Weather.js",
     "./node_modules/arcane-os/runtime/arcane/modules/AI.js": "./node_modules/arcane-os/runtime/arcane/modules/AI.js",
+    "./node_modules/arcane-os/runtime/arcane/modules/AIModelSelectionController.js": "./node_modules/arcane-os/runtime/arcane/modules/AIModelSelectionController.js",
     "./node_modules/arcane-os/runtime/arcane/modules/AIPreferenceRuntime.js": "./node_modules/arcane-os/runtime/arcane/modules/AIPreferenceRuntime.js",
     "./node_modules/arcane-os/runtime/arcane/modules/AIPreferenceTuple.js": "./node_modules/arcane-os/runtime/arcane/modules/AIPreferenceTuple.js",
     "./node_modules/arcane-os/runtime/arcane/modules/AIProviderRuntime.js": "./node_modules/arcane-os/runtime/arcane/modules/AIProviderRuntime.js",
@@ -47,6 +48,7 @@
     "./node_modules/arcane-os/runtime/arcane/modules/CommunicationProviderRegistry.js": "./node_modules/arcane-os/runtime/arcane/modules/CommunicationProviderRegistry.js",
     "./node_modules/arcane-os/runtime/arcane/modules/ComponentContracts.js": "./node_modules/arcane-os/runtime/arcane/modules/ComponentContracts.js",
     "./node_modules/arcane-os/runtime/arcane/modules/ConfiguredAIChatSession.js": "./node_modules/arcane-os/runtime/arcane/modules/ConfiguredAIChatSession.js",
+    "./node_modules/arcane-os/runtime/arcane/modules/ContinuousVoiceCapture.js": "./node_modules/arcane-os/runtime/arcane/modules/ContinuousVoiceCapture.js",
     "./node_modules/arcane-os/runtime/arcane/modules/ConversationActionItems.js": "./node_modules/arcane-os/runtime/arcane/modules/ConversationActionItems.js",
     "./node_modules/arcane-os/runtime/arcane/modules/ConversationClosingReport.js": "./node_modules/arcane-os/runtime/arcane/modules/ConversationClosingReport.js",
     "./node_modules/arcane-os/runtime/arcane/modules/ConversationTimebox.js": "./node_modules/arcane-os/runtime/arcane/modules/ConversationTimebox.js",
@@ -102,8 +104,10 @@
     "./node_modules/arcane-os/runtime/arcane/modules/TerminalCommandRegistry.js": "./node_modules/arcane-os/runtime/arcane/modules/TerminalCommandRegistry.js",
     "./node_modules/arcane-os/runtime/arcane/modules/ThemeBootstrap.js": "./node_modules/arcane-os/runtime/arcane/modules/ThemeBootstrap.js",
     "./node_modules/arcane-os/runtime/arcane/modules/ThemeManager.js": "./node_modules/arcane-os/runtime/arcane/modules/ThemeManager.js",
+    "./node_modules/arcane-os/runtime/arcane/modules/ThemePresentation.js": "./node_modules/arcane-os/runtime/arcane/modules/ThemePresentation.js",
     "./node_modules/arcane-os/runtime/arcane/modules/TimeGuard.js": "./node_modules/arcane-os/runtime/arcane/modules/TimeGuard.js",
     "./node_modules/arcane-os/runtime/arcane/modules/ToolCallRouter.js": "./node_modules/arcane-os/runtime/arcane/modules/ToolCallRouter.js",
+    "./node_modules/arcane-os/runtime/arcane/modules/VoiceCaptureWorklet.js": "./node_modules/arcane-os/runtime/arcane/modules/VoiceCaptureWorklet.js",
     "./node_modules/arcane-os/runtime/arcane/modules/WaitForComponent.js": "./node_modules/arcane-os/runtime/arcane/modules/WaitForComponent.js",
     "./node_modules/arcane-os/runtime/arcane/modules/YouTubeMedia.js": "./node_modules/arcane-os/runtime/arcane/modules/YouTubeMedia.js",
     "./node_modules/arcane-os/runtime/arcane/modules/uPlot.iife.min.js": "./node_modules/arcane-os/runtime/arcane/modules/uPlot.iife.min.js",
@@ -125,6 +129,8 @@
     "./node_modules/arcane-os/runtime/arcane/sdk/ai/browser-whisper-worker.mjs": "./node_modules/arcane-os/browser-runtime/ai/browser-whisper-worker.mjs",
     "./node_modules/arcane-os/browser-runtime/ai/browser-wllama-runtime.mjs": "./node_modules/arcane-os/browser-runtime/ai/browser-wllama-runtime.mjs",
     "./node_modules/arcane-os/runtime/arcane/sdk/ai/browser-wllama-runtime.mjs": "./node_modules/arcane-os/browser-runtime/ai/browser-wllama-runtime.mjs",
+    "./node_modules/arcane-os/browser-runtime/ai/digitalocean-speech.mjs": "./node_modules/arcane-os/browser-runtime/ai/digitalocean-speech.mjs",
+    "./node_modules/arcane-os/runtime/arcane/sdk/ai/digitalocean-speech.mjs": "./node_modules/arcane-os/browser-runtime/ai/digitalocean-speech.mjs",
     "./node_modules/arcane-os/browser-runtime/ai/model-controller.mjs": "./node_modules/arcane-os/browser-runtime/ai/model-controller.mjs",
     "./node_modules/arcane-os/runtime/arcane/sdk/ai/model-controller.mjs": "./node_modules/arcane-os/browser-runtime/ai/model-controller.mjs",
     "./node_modules/arcane-os/browser-runtime/ai/speech-worker-client.mjs": "./node_modules/arcane-os/browser-runtime/ai/speech-worker-client.mjs",
@@ -194,6 +200,7 @@
     "arcane-os/mail": "./node_modules/arcane-os/runtime/arcane/modules/MailApi.mjs",
     "arcane-os/model-definition": "./node_modules/arcane-os/runtime/arcane/modules/ModelDefinition.js",
     "arcane-os/modules/AI.js": "./node_modules/arcane-os/runtime/arcane/modules/AI.js",
+    "arcane-os/modules/AIModelSelectionController.js": "./node_modules/arcane-os/runtime/arcane/modules/AIModelSelectionController.js",
     "arcane-os/modules/AIPreferenceRuntime.js": "./node_modules/arcane-os/runtime/arcane/modules/AIPreferenceRuntime.js",
     "arcane-os/modules/AIPreferenceTuple.js": "./node_modules/arcane-os/runtime/arcane/modules/AIPreferenceTuple.js",
     "arcane-os/modules/AIProviderRuntime.js": "./node_modules/arcane-os/runtime/arcane/modules/AIProviderRuntime.js",
@@ -217,6 +224,7 @@
     "arcane-os/modules/CommunicationProviderRegistry.js": "./node_modules/arcane-os/runtime/arcane/modules/CommunicationProviderRegistry.js",
     "arcane-os/modules/ComponentContracts.js": "./node_modules/arcane-os/runtime/arcane/modules/ComponentContracts.js",
     "arcane-os/modules/ConfiguredAIChatSession.js": "./node_modules/arcane-os/runtime/arcane/modules/ConfiguredAIChatSession.js",
+    "arcane-os/modules/ContinuousVoiceCapture.js": "./node_modules/arcane-os/runtime/arcane/modules/ContinuousVoiceCapture.js",
     "arcane-os/modules/ConversationActionItems.js": "./node_modules/arcane-os/runtime/arcane/modules/ConversationActionItems.js",
     "arcane-os/modules/ConversationClosingReport.js": "./node_modules/arcane-os/runtime/arcane/modules/ConversationClosingReport.js",
     "arcane-os/modules/ConversationTimebox.js": "./node_modules/arcane-os/runtime/arcane/modules/ConversationTimebox.js",
@@ -272,8 +280,10 @@
     "arcane-os/modules/TerminalCommandRegistry.js": "./node_modules/arcane-os/runtime/arcane/modules/TerminalCommandRegistry.js",
     "arcane-os/modules/ThemeBootstrap.js": "./node_modules/arcane-os/runtime/arcane/modules/ThemeBootstrap.js",
     "arcane-os/modules/ThemeManager.js": "./node_modules/arcane-os/runtime/arcane/modules/ThemeManager.js",
+    "arcane-os/modules/ThemePresentation.js": "./node_modules/arcane-os/runtime/arcane/modules/ThemePresentation.js",
     "arcane-os/modules/TimeGuard.js": "./node_modules/arcane-os/runtime/arcane/modules/TimeGuard.js",
     "arcane-os/modules/ToolCallRouter.js": "./node_modules/arcane-os/runtime/arcane/modules/ToolCallRouter.js",
+    "arcane-os/modules/VoiceCaptureWorklet.js": "./node_modules/arcane-os/runtime/arcane/modules/VoiceCaptureWorklet.js",
     "arcane-os/modules/WaitForComponent.js": "./node_modules/arcane-os/runtime/arcane/modules/WaitForComponent.js",
     "arcane-os/modules/YouTubeMedia.js": "./node_modules/arcane-os/runtime/arcane/modules/YouTubeMedia.js",
     "arcane-os/modules/uPlot.iife.min.js": "./node_modules/arcane-os/runtime/arcane/modules/uPlot.iife.min.js",
@@ -335,8 +345,8 @@
       <section class="page-metrics" aria-label="Public repository summary">
         <p><span>Public repositories</span><strong id="repo-total">7</strong></p>
         <p><span>Original repositories</span><strong id="repo-original">7</strong><small>Excludes forks</small></p>
-        <p><span>GitHub stars</span><strong id="repo-stars">2</strong></p>
-        <p><span>Latest public update</span><strong class="metric-date" id="repo-updated">Sep 10</strong></p>
+        <p><span>GitHub stars</span><strong id="repo-stars">4</strong></p>
+        <p><span>Latest public update</span><strong class="metric-date" id="repo-updated">Sep 29</strong></p>
       </section>
       <p class="freshness" id="freshness"><span aria-hidden="true"></span> Static public snapshot embedded; live refresh runs when available.</p>
 

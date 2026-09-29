@@ -24,6 +24,7 @@
     "./node_modules/arcane-os/runtime/arcane/entities/User.js": "./node_modules/arcane-os/runtime/arcane/entities/User.js",
     "./node_modules/arcane-os/runtime/arcane/entities/Weather.js": "./node_modules/arcane-os/runtime/arcane/entities/Weather.js",
     "./node_modules/arcane-os/runtime/arcane/modules/AI.js": "./node_modules/arcane-os/runtime/arcane/modules/AI.js",
+    "./node_modules/arcane-os/runtime/arcane/modules/AIModelSelectionController.js": "./node_modules/arcane-os/runtime/arcane/modules/AIModelSelectionController.js",
     "./node_modules/arcane-os/runtime/arcane/modules/AIPreferenceRuntime.js": "./node_modules/arcane-os/runtime/arcane/modules/AIPreferenceRuntime.js",
     "./node_modules/arcane-os/runtime/arcane/modules/AIPreferenceTuple.js": "./node_modules/arcane-os/runtime/arcane/modules/AIPreferenceTuple.js",
     "./node_modules/arcane-os/runtime/arcane/modules/AIProviderRuntime.js": "./node_modules/arcane-os/runtime/arcane/modules/AIProviderRuntime.js",
@@ -47,6 +48,7 @@
     "./node_modules/arcane-os/runtime/arcane/modules/CommunicationProviderRegistry.js": "./node_modules/arcane-os/runtime/arcane/modules/CommunicationProviderRegistry.js",
     "./node_modules/arcane-os/runtime/arcane/modules/ComponentContracts.js": "./node_modules/arcane-os/runtime/arcane/modules/ComponentContracts.js",
     "./node_modules/arcane-os/runtime/arcane/modules/ConfiguredAIChatSession.js": "./node_modules/arcane-os/runtime/arcane/modules/ConfiguredAIChatSession.js",
+    "./node_modules/arcane-os/runtime/arcane/modules/ContinuousVoiceCapture.js": "./node_modules/arcane-os/runtime/arcane/modules/ContinuousVoiceCapture.js",
     "./node_modules/arcane-os/runtime/arcane/modules/ConversationActionItems.js": "./node_modules/arcane-os/runtime/arcane/modules/ConversationActionItems.js",
     "./node_modules/arcane-os/runtime/arcane/modules/ConversationClosingReport.js": "./node_modules/arcane-os/runtime/arcane/modules/ConversationClosingReport.js",
     "./node_modules/arcane-os/runtime/arcane/modules/ConversationTimebox.js": "./node_modules/arcane-os/runtime/arcane/modules/ConversationTimebox.js",
@@ -102,8 +104,10 @@
     "./node_modules/arcane-os/runtime/arcane/modules/TerminalCommandRegistry.js": "./node_modules/arcane-os/runtime/arcane/modules/TerminalCommandRegistry.js",
     "./node_modules/arcane-os/runtime/arcane/modules/ThemeBootstrap.js": "./node_modules/arcane-os/runtime/arcane/modules/ThemeBootstrap.js",
     "./node_modules/arcane-os/runtime/arcane/modules/ThemeManager.js": "./node_modules/arcane-os/runtime/arcane/modules/ThemeManager.js",
+    "./node_modules/arcane-os/runtime/arcane/modules/ThemePresentation.js": "./node_modules/arcane-os/runtime/arcane/modules/ThemePresentation.js",
     "./node_modules/arcane-os/runtime/arcane/modules/TimeGuard.js": "./node_modules/arcane-os/runtime/arcane/modules/TimeGuard.js",
     "./node_modules/arcane-os/runtime/arcane/modules/ToolCallRouter.js": "./node_modules/arcane-os/runtime/arcane/modules/ToolCallRouter.js",
+    "./node_modules/arcane-os/runtime/arcane/modules/VoiceCaptureWorklet.js": "./node_modules/arcane-os/runtime/arcane/modules/VoiceCaptureWorklet.js",
     "./node_modules/arcane-os/runtime/arcane/modules/WaitForComponent.js": "./node_modules/arcane-os/runtime/arcane/modules/WaitForComponent.js",
     "./node_modules/arcane-os/runtime/arcane/modules/YouTubeMedia.js": "./node_modules/arcane-os/runtime/arcane/modules/YouTubeMedia.js",
     "./node_modules/arcane-os/runtime/arcane/modules/uPlot.iife.min.js": "./node_modules/arcane-os/runtime/arcane/modules/uPlot.iife.min.js",
@@ -125,6 +129,8 @@
     "./node_modules/arcane-os/runtime/arcane/sdk/ai/browser-whisper-worker.mjs": "./node_modules/arcane-os/browser-runtime/ai/browser-whisper-worker.mjs",
     "./node_modules/arcane-os/browser-runtime/ai/browser-wllama-runtime.mjs": "./node_modules/arcane-os/browser-runtime/ai/browser-wllama-runtime.mjs",
     "./node_modules/arcane-os/runtime/arcane/sdk/ai/browser-wllama-runtime.mjs": "./node_modules/arcane-os/browser-runtime/ai/browser-wllama-runtime.mjs",
+    "./node_modules/arcane-os/browser-runtime/ai/digitalocean-speech.mjs": "./node_modules/arcane-os/browser-runtime/ai/digitalocean-speech.mjs",
+    "./node_modules/arcane-os/runtime/arcane/sdk/ai/digitalocean-speech.mjs": "./node_modules/arcane-os/browser-runtime/ai/digitalocean-speech.mjs",
     "./node_modules/arcane-os/browser-runtime/ai/model-controller.mjs": "./node_modules/arcane-os/browser-runtime/ai/model-controller.mjs",
     "./node_modules/arcane-os/runtime/arcane/sdk/ai/model-controller.mjs": "./node_modules/arcane-os/browser-runtime/ai/model-controller.mjs",
     "./node_modules/arcane-os/browser-runtime/ai/speech-worker-client.mjs": "./node_modules/arcane-os/browser-runtime/ai/speech-worker-client.mjs",
@@ -194,6 +200,7 @@
     "arcane-os/mail": "./node_modules/arcane-os/runtime/arcane/modules/MailApi.mjs",
     "arcane-os/model-definition": "./node_modules/arcane-os/runtime/arcane/modules/ModelDefinition.js",
     "arcane-os/modules/AI.js": "./node_modules/arcane-os/runtime/arcane/modules/AI.js",
+    "arcane-os/modules/AIModelSelectionController.js": "./node_modules/arcane-os/runtime/arcane/modules/AIModelSelectionController.js",
     "arcane-os/modules/AIPreferenceRuntime.js": "./node_modules/arcane-os/runtime/arcane/modules/AIPreferenceRuntime.js",
     "arcane-os/modules/AIPreferenceTuple.js": "./node_modules/arcane-os/runtime/arcane/modules/AIPreferenceTuple.js",
     "arcane-os/modules/AIProviderRuntime.js": "./node_modules/arcane-os/runtime/arcane/modules/AIProviderRuntime.js",
@@ -217,6 +224,7 @@
     "arcane-os/modules/CommunicationProviderRegistry.js": "./node_modules/arcane-os/runtime/arcane/modules/CommunicationProviderRegistry.js",
     "arcane-os/modules/ComponentContracts.js": "./node_modules/arcane-os/runtime/arcane/modules/ComponentContracts.js",
     "arcane-os/modules/ConfiguredAIChatSession.js": "./node_modules/arcane-os/runtime/arcane/modules/ConfiguredAIChatSession.js",
+    "arcane-os/modules/ContinuousVoiceCapture.js": "./node_modules/arcane-os/runtime/arcane/modules/ContinuousVoiceCapture.js",
     "arcane-os/modules/ConversationActionItems.js": "./node_modules/arcane-os/runtime/arcane/modules/ConversationActionItems.js",
     "arcane-os/modules/ConversationClosingReport.js": "./node_modules/arcane-os/runtime/arcane/modules/ConversationClosingReport.js",
     "arcane-os/modules/ConversationTimebox.js": "./node_modules/arcane-os/runtime/arcane/modules/ConversationTimebox.js",
@@ -272,8 +280,10 @@
     "arcane-os/modules/TerminalCommandRegistry.js": "./node_modules/arcane-os/runtime/arcane/modules/TerminalCommandRegistry.js",
     "arcane-os/modules/ThemeBootstrap.js": "./node_modules/arcane-os/runtime/arcane/modules/ThemeBootstrap.js",
     "arcane-os/modules/ThemeManager.js": "./node_modules/arcane-os/runtime/arcane/modules/ThemeManager.js",
+    "arcane-os/modules/ThemePresentation.js": "./node_modules/arcane-os/runtime/arcane/modules/ThemePresentation.js",
     "arcane-os/modules/TimeGuard.js": "./node_modules/arcane-os/runtime/arcane/modules/TimeGuard.js",
     "arcane-os/modules/ToolCallRouter.js": "./node_modules/arcane-os/runtime/arcane/modules/ToolCallRouter.js",
+    "arcane-os/modules/VoiceCaptureWorklet.js": "./node_modules/arcane-os/runtime/arcane/modules/VoiceCaptureWorklet.js",
     "arcane-os/modules/WaitForComponent.js": "./node_modules/arcane-os/runtime/arcane/modules/WaitForComponent.js",
     "arcane-os/modules/YouTubeMedia.js": "./node_modules/arcane-os/runtime/arcane/modules/YouTubeMedia.js",
     "arcane-os/modules/uPlot.iife.min.js": "./node_modules/arcane-os/runtime/arcane/modules/uPlot.iife.min.js",
@@ -370,8 +380,8 @@
 
           <section class="kempo-connected" aria-label="Connected ethical operating system instruments">
             <div class="technology-paths">
-              <a class="instrument-life-first" href="https://life-first-framework.thewizardnexus.com/"><div class="instrument-identity"><img src="assets/life-first-lantern-mark.png" alt="" width="64" height="80"><span>Life First Framework</span></div><strong>How should consequential action be governed?</strong><p>Frame, verify, compare, authorize, act, observe, and repair.</p><i aria-hidden="true">Open Life First ↗</i></a>
-              <a class="instrument-compass" href="https://twin-compass.thewizardnexus.com/"><div class="instrument-identity"><img src="assets/twin-compass-mark.png" alt="" width="80" height="80"><span>TWiN Compass</span></div><strong>What must remain present in reasoning?</strong><p>Moral reasoning and behavioral-health awareness held together.</p><i aria-hidden="true">Open TWiN Compass ↗</i></a>
+              <a class="instrument-life-first" href="https://riaevangelist.github.io/life-first-framework/"><div class="instrument-identity"><img src="assets/life-first-lantern-mark.png" alt="" width="64" height="80"><span>Life First Framework</span></div><strong>How should consequential action be governed?</strong><p>Frame, verify, compare, authorize, act, observe, and repair.</p><i aria-hidden="true">Open Life First ↗</i></a>
+              <a class="instrument-compass" href="https://thewizardnexus.github.io/TWiN-Compass/"><div class="instrument-identity"><img src="assets/twin-compass-mark.png" alt="" width="80" height="80"><span>TWiN Compass</span></div><strong>What must remain present in reasoning?</strong><p>Moral reasoning and behavioral-health awareness held together.</p><i aria-hidden="true">Open TWiN Compass ↗</i></a>
             </div>
           </section>
         </div>

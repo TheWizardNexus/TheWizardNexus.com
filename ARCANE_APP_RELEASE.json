@@ -16,8 +16,8 @@
       "manifest": "arcane.webmanifest",
       "offlineManifest": "arcane-offline.json",
       "worker": "arcane-sw.js",
-      "sdkVersion": "0.31.0",
-      "revision": "cf3b39c3-dcde-4771-bdaf-28d9a2989ac1"
+      "sdkVersion": "0.40.1",
+      "revision": "ba15a475-767b-4936-9384-591a08c938d3"
     }
   },
   "files": [
@@ -88,6 +88,7 @@
     "node_modules/arcane-os/browser-runtime/ai/browser-wasm.mjs",
     "node_modules/arcane-os/browser-runtime/ai/browser-whisper-worker.mjs",
     "node_modules/arcane-os/browser-runtime/ai/browser-wllama-runtime.mjs",
+    "node_modules/arcane-os/browser-runtime/ai/digitalocean-speech.mjs",
     "node_modules/arcane-os/browser-runtime/ai/model-controller.mjs",
     "node_modules/arcane-os/browser-runtime/ai/speech-worker-client.mjs",
     "node_modules/arcane-os/browser-runtime/ai/speech-worker-runtime.mjs",
@@ -183,6 +184,7 @@
     "node_modules/arcane-os/runtime/arcane/img/trash.svg",
     "node_modules/arcane-os/runtime/arcane/img/upload.svg",
     "node_modules/arcane-os/runtime/arcane/modules/AI.js",
+    "node_modules/arcane-os/runtime/arcane/modules/AIModelSelectionController.js",
     "node_modules/arcane-os/runtime/arcane/modules/AIPreferenceRuntime.js",
     "node_modules/arcane-os/runtime/arcane/modules/AIPreferenceTuple.js",
     "node_modules/arcane-os/runtime/arcane/modules/AIProviderRuntime.js",
@@ -206,6 +208,7 @@
     "node_modules/arcane-os/runtime/arcane/modules/CommunicationProviderRegistry.js",
     "node_modules/arcane-os/runtime/arcane/modules/ComponentContracts.js",
     "node_modules/arcane-os/runtime/arcane/modules/ConfiguredAIChatSession.js",
+    "node_modules/arcane-os/runtime/arcane/modules/ContinuousVoiceCapture.js",
     "node_modules/arcane-os/runtime/arcane/modules/ConversationActionItems.js",
     "node_modules/arcane-os/runtime/arcane/modules/ConversationClosingReport.js",
     "node_modules/arcane-os/runtime/arcane/modules/ConversationTimebox.js",
@@ -261,8 +264,10 @@
     "node_modules/arcane-os/runtime/arcane/modules/TerminalCommandRegistry.js",
     "node_modules/arcane-os/runtime/arcane/modules/ThemeBootstrap.js",
     "node_modules/arcane-os/runtime/arcane/modules/ThemeManager.js",
+    "node_modules/arcane-os/runtime/arcane/modules/ThemePresentation.js",
     "node_modules/arcane-os/runtime/arcane/modules/TimeGuard.js",
     "node_modules/arcane-os/runtime/arcane/modules/ToolCallRouter.js",
+    "node_modules/arcane-os/runtime/arcane/modules/VoiceCaptureWorklet.js",
     "node_modules/arcane-os/runtime/arcane/modules/WaitForComponent.js",
     "node_modules/arcane-os/runtime/arcane/modules/YouTubeMedia.js",
     "node_modules/arcane-os/runtime/arcane/modules/uPlot.LICENSE.txt",
