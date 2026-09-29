@@ -106,12 +106,12 @@ test("technology manifest preserves all canonical sites, headers, and five publi
       repository: "https://github.com/TheWizardNexus/Astrolabe",
     },
     dbopfs: {
-      site: "https://thewizardnexus.github.io/DBOPFS/",
+      site: "https://dbopfs.thewizardnexus.com/docs/",
       image: "assets/dbopfs-showcase-banner.png",
       repository: "https://github.com/TheWizardNexus/DBOPFS",
     },
     "dbopfs-studio": {
-      site: "https://thewizardnexus.github.io/DBOPFS-Studio/",
+      site: "https://dbopfs-studio.thewizardnexus.com/docs/",
       image: "https://raw.githubusercontent.com/TheWizardNexus/DBOPFS-Studio/main/assets/dbopfs-studio-readme-header.png",
       repository: "https://github.com/TheWizardNexus/DBOPFS-Studio",
     },
@@ -449,7 +449,7 @@ test("the public nexus uses focused pages while preserving the complete ecosyste
   assert.match(byName.get("technology.html"), /id="project-grid"/);
   assert.match(byName.get("technology.html"), /All live sites remain directly available without scripts/);
   const technologyNoScript = byName.get("technology.html").match(/<noscript>([\s\S]*?)<\/noscript>/)?.[1] || "";
-  assert.equal([...technologyNoScript.matchAll(/href="https:\/\/[a-z0-9-]+\.thewizardnexus\.com\//g)].length, 9);
+  assert.equal([...technologyNoScript.matchAll(/href="https:\/\/[a-z0-9-]+\.thewizardnexus\.com\//g)].length, 11);
   assert.match(technologyNoScript, /href="https:\/\/riaevangelist\.github\.io\/life-first-framework\/"/);
   assert.match(technologyNoScript, /href="https:\/\/precrisis\.ai\/"/);
   assert.doesNotMatch(byName.get("ecosystem.html"), /id="project-grid"|id="project-search"|id="project-filters"/);

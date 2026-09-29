@@ -24,8 +24,8 @@ const PERIODS = [
 const curatedHomepages = new Map([
   ["Astrolabe", "https://astrolabe.thewizardnexus.com/"],
   ["arcane-os-sdk", "https://thewizardnexus.github.io/arcane-os-sdk/"],
-  ["DBOPFS", "https://thewizardnexus.github.io/DBOPFS/"],
-  ["DBOPFS-Studio", "https://thewizardnexus.github.io/DBOPFS-Studio/"],
+  ["DBOPFS", "https://dbopfs.thewizardnexus.com/docs/"],
+  ["DBOPFS-Studio", "https://dbopfs-studio.thewizardnexus.com/docs/"],
   ["TheWizardNexus", "https://www.thewizardnexus.com/"],
   ["TheWizardNexus.com", "https://www.thewizardnexus.com/"],
   ["Zen-Sentry-Foundation", "https://zen-sentry-foundation.thewizardnexus.com/"],
