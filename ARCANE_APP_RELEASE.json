@@ -16,8 +16,8 @@
       "manifest": "arcane.webmanifest",
       "offlineManifest": "arcane-offline.json",
       "worker": "arcane-sw.js",
-      "sdkVersion": "0.40.1",
-      "revision": "ba15a475-767b-4936-9384-591a08c938d3"
+      "sdkVersion": "0.41.0",
+      "revision": "1df2c780-fd37-44b0-bb5d-5165fe6056ab"
     }
   },
   "files": [
@@ -93,6 +93,7 @@
     "node_modules/arcane-os/browser-runtime/ai/speech-worker-client.mjs",
     "node_modules/arcane-os/browser-runtime/ai/speech-worker-runtime.mjs",
     "node_modules/arcane-os/browser-runtime/ai/tool-text-stream.mjs",
+    "node_modules/arcane-os/browser-runtime/ai/twin-cloud-speech.mjs",
     "node_modules/arcane-os/browser-runtime/ai/twin-cloud.mjs",
     "node_modules/arcane-os/browser-runtime/ai/wllama/LICENCE",
     "node_modules/arcane-os/browser-runtime/ai/wllama/index.mjs",
@@ -102,6 +103,9 @@
     "node_modules/arcane-os/browser-runtime/dependencies/event-pubsub/index.js",
     "node_modules/arcane-os/browser-runtime/dependencies/event-pubsub/licence",
     "node_modules/arcane-os/browser-runtime/dependencies/event-pubsub/package.json",
+    "node_modules/arcane-os/browser-runtime/dependencies/js-queue/licence.md",
+    "node_modules/arcane-os/browser-runtime/dependencies/js-queue/package.json",
+    "node_modules/arcane-os/browser-runtime/dependencies/js-queue/queue.js",
     "node_modules/arcane-os/browser-runtime/dependencies/strong-type/index.js",
     "node_modules/arcane-os/browser-runtime/dependencies/strong-type/licence",
     "node_modules/arcane-os/browser-runtime/dependencies/strong-type/package.json",
