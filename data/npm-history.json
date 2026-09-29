@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-09-29T13:12:40.376Z",
+  "generatedAt": "2026-09-29T20:01:19.686Z",
   "maintainer": "thewizardnexus",
   "source": {
     "referenceProvider": "npm-stat.com",
@@ -557,7 +557,7 @@
     0,
     0,
     0,
-    0,
+    3,
     0,
     0,
     0,
@@ -569,17 +569,17 @@
     0,
     1
   ],
-  "total": 158,
+  "total": 161,
   "dataQuality": {
-    "officialTotal": 158,
+    "officialTotal": 161,
     "npmStatReferenceTotal": 158,
-    "officialMinusNpmStat": 0,
+    "officialMinusNpmStat": 3,
     "publishedTotalSource": "official npm range series",
-    "correctedPointCount": 0,
+    "correctedPointCount": 1,
     "referenceMissingPointCount": 0,
     "referenceAvailable": true,
-    "exactMatch": true,
-    "status": "official range series matches the optional npm-stat comparison point for point"
+    "exactMatch": false,
+    "status": "official range series published unchanged; optional npm-stat comparison differs"
   },
   "firstRecordedDay": {
     "date": "2026-08-11",
@@ -592,7 +592,7 @@
   "packages": [
     {
       "name": "dbopfs",
-      "total": 158,
+      "total": 161,
       "downloads": [
         0,
         0,
@@ -853,7 +853,7 @@
         0,
         0,
         0,
-        0,
+        3,
         0,
         0,
         0,
