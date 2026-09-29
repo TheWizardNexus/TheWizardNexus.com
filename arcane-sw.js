@@ -4,6 +4,7 @@
     const cachePrefix = `arcane-pwa|${JSON.stringify([manifest.appId, scope])}|`;
     const cacheName = `${cachePrefix}resources`;
     const manifestUrl = cacheUrl('arcane-offline.json');
+    const refreshStateUrl = cacheUrl('.arcane-pwa/refresh-state');
     const protocolUrls = new Set([cacheUrl('arcane-pwa.mjs'), cacheUrl(clientUrl)]);
     const installationAssets = [...new Set(manifest.assets.map(cacheUrl))];
     const resourceJobs = new Map();
@@ -16,6 +17,10 @@
     let previousCaches = null;
     let manifestRestored = false;
     let lastChecked = null;
+    let refreshState = null;
+    let priorUrls = null;
+    let changeSaved = null;
+    let refreshStateWrite = Promise.resolve();
 
     function cacheUrl(value) {
         const url = new URL(value, scope);
@@ -76,6 +81,15 @@
         for (const client of clients) {
             if (client.url.startsWith(scope)) {
                 client.postMessage(message);
+            }
+        }
+    }
+
+    async function reportUpdate(result) {
+        const clients = await self.clients.matchAll({type: 'window', includeUncontrolled: true});
+        for (const client of clients) {
+            if (client.url.startsWith(scope)) {
+                client.postMessage({type: 'arcane.pwa.refreshed', ...result});
             }
         }
     }
@@ -193,10 +207,22 @@
                 // Parse the control document before replacing the last usable inventory.
                 await readManifest(response.clone());
             }
+            const previousModified = Date.parse(cached.response?.headers.get('last-modified'));
+            const nextModified = Date.parse(response.headers.get('last-modified'));
+            const changed = Number.isFinite(previousModified) && Number.isFinite(nextModified)
+                && previousModified !== nextModified;
+            if (validate && priorUrls && changed) {
+                // Keep the prior date before replacement so a failed later metadata write
+                // cannot erase a completed resource change across worker termination.
+                refreshState.previousModified ??= {};
+                refreshState.previousModified[url] ??= previousModified;
+                await saveRefreshState();
+            }
             return {
                 response,
                 saved: cached.cache.put(url, response.clone()),
                 checked: true,
+                modified: changed,
                 error: null
             };
         } catch (cause) {
@@ -222,6 +248,13 @@
                 job.checked = result.checked;
                 try {
                     await result.saved;
+                    if (!result.error && result.checked && priorUrls
+                        && (result.modified || (url !== manifestUrl && !priorUrls.has(url)))) {
+                        // Record only completed cache writes; a partial cycle may outlive this worker.
+                        refreshState.changed = true;
+                        changeSaved ??= saveRefreshState();
+                        await changeSaved;
+                    }
                     return result.error;
                 } catch (cause) {
                     return resourceError(url, cause);
@@ -301,11 +334,54 @@
         return lastChecked === null || Date.now() - lastChecked > interval;
     }
 
+    function saveRefreshState() {
+        const content = JSON.stringify(refreshState);
+        async function writeRefreshState() {
+            const cache = await caches.open(cacheName);
+            await cache.put(refreshStateUrl, new Response(content));
+        }
+        // Only writes to this one shared metadata entry require ordering.
+        refreshStateWrite = refreshStateWrite.then(writeRefreshState, writeRefreshState);
+        return refreshStateWrite;
+    }
+
+    async function beginRefresh() {
+        const cache = await caches.open(cacheName);
+        const pending = await cache.match(refreshStateUrl);
+        if (pending) {
+            refreshState = await pending.json();
+            for (const [url, previousModified] of Object.entries(refreshState.previousModified ?? {})) {
+                const response = await cache.match(url);
+                const modified = Date.parse(response?.headers.get('last-modified'));
+                if (Number.isFinite(modified) && modified !== previousModified) {
+                    refreshState.changed = true;
+                }
+            }
+        } else {
+            const cached = await findCachedResource(manifestUrl);
+            let prior = null;
+            if (cached.response) {
+                try {
+                    prior = await readManifest(cached.response);
+                } catch (error) {
+                    // An unreadable prior inventory cannot establish additions; normal refresh can replace it.
+                    console.error('PWA update detection could not read the prior inventory.', error);
+                }
+            }
+            refreshState = {assets: prior?.assets ?? null, changed: false};
+            // Preserve the pre-refresh inventory before its cached response is replaced.
+            await saveRefreshState();
+        }
+        priorUrls = refreshState.assets === null ? null : new Set(refreshState.assets);
+        changeSaved = null;
+    }
+
     async function refreshResources() {
         await restored;
         if (!checkDue()) {
-            return {lastChecked, error: null};
+            return {lastChecked, updateAvailable: false, error: null};
         }
+        await beginRefresh();
         const failures = [];
         let inventory = resourceJob(new Request(manifestUrl), manifestUrl, true);
         let error = await inventory.done;
@@ -333,11 +409,16 @@
         }
         const checked = await populateResources(urls, true);
         failures.push(...checked.failures);
+        let updateAvailable = false;
         if (failures.length === 0) {
+            const cache = await caches.open(cacheName);
+            await cache.delete(refreshStateUrl);
+            updateAvailable = refreshState.changed;
             lastChecked = Date.now();
         }
         return {
             lastChecked,
+            updateAvailable,
             error: failures.length > 0
                 ? errorDetails(new AggregateError(failures, 'PWA resources could not all be updated.'))
                 : null
@@ -353,6 +434,9 @@
                 function releaseRefresh() {
                     refreshTask = null;
                     refreshJobs.clear();
+                    refreshState = null;
+                    priorUrls = null;
+                    changeSaved = null;
                 }
             );
         }
@@ -379,10 +463,12 @@
                     port?.close();
                     if (result.error) {
                         await reportFailure(result.error);
+                    } else if (result.updateAvailable) {
+                        await reportUpdate(result);
                     }
                 },
                 async function failRefresh(error) {
-                    port?.postMessage({type: 'arcane.pwa.refreshed', lastChecked, error: errorDetails(error)});
+                    port?.postMessage({type: 'arcane.pwa.refreshed', lastChecked, updateAvailable: false, error: errorDetails(error)});
                     port?.close();
                     await reportFailure(error);
                 }
@@ -462,8 +548,8 @@
     "schemaVersion": 1,
     "appId": "wizard-nexus",
     "appVersion": "0.1.0",
-    "sdkVersion": "0.38.0",
-    "revision": "aab11c7f-9885-4126-83bf-5b1eb2b4f1da",
+    "sdkVersion": "0.39.0",
+    "revision": "de2e9543-81be-4abb-b286-65139f710b3b",
     "mode": "release",
     "assets": [
         "./404.html",
@@ -704,6 +790,7 @@
         "./node_modules/arcane-os/runtime/arcane/modules/TerminalCommandRegistry.js",
         "./node_modules/arcane-os/runtime/arcane/modules/ThemeBootstrap.js",
         "./node_modules/arcane-os/runtime/arcane/modules/ThemeManager.js",
+        "./node_modules/arcane-os/runtime/arcane/modules/ThemePresentation.js",
         "./node_modules/arcane-os/runtime/arcane/modules/TimeGuard.js",
         "./node_modules/arcane-os/runtime/arcane/modules/ToolCallRouter.js",
         "./node_modules/arcane-os/runtime/arcane/modules/VoiceCaptureWorklet.js",

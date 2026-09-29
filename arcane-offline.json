@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "appId": "wizard-nexus",
   "appVersion": "0.1.0",
-  "sdkVersion": "0.38.0",
-  "revision": "aab11c7f-9885-4126-83bf-5b1eb2b4f1da",
+  "sdkVersion": "0.39.0",
+  "revision": "de2e9543-81be-4abb-b286-65139f710b3b",
   "mode": "release",
   "assets": [
     "./404.html",
@@ -244,6 +244,7 @@
     "./node_modules/arcane-os/runtime/arcane/modules/TerminalCommandRegistry.js",
     "./node_modules/arcane-os/runtime/arcane/modules/ThemeBootstrap.js",
     "./node_modules/arcane-os/runtime/arcane/modules/ThemeManager.js",
+    "./node_modules/arcane-os/runtime/arcane/modules/ThemePresentation.js",
     "./node_modules/arcane-os/runtime/arcane/modules/TimeGuard.js",
     "./node_modules/arcane-os/runtime/arcane/modules/ToolCallRouter.js",
     "./node_modules/arcane-os/runtime/arcane/modules/VoiceCaptureWorklet.js",
