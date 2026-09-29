@@ -116,7 +116,7 @@ test("technology manifest preserves all canonical sites, headers, and five publi
       repository: "https://github.com/TheWizardNexus/DBOPFS-Studio",
     },
     spellwire: {
-      site: "https://thewizardnexus.github.io/SpellWire/",
+      site: "https://spellwire.thewizardnexus.com/site/",
       image: "assets/spellwire-showcase-banner-v2.svg",
       repository: null,
     },
@@ -126,7 +126,7 @@ test("technology manifest preserves all canonical sites, headers, and five publi
       repository: null,
     },
     "twin-compass": {
-      site: "https://thewizardnexus.github.io/TWiN-Compass/",
+      site: "https://twin-compass.thewizardnexus.com/site/",
       image: "assets/twin-compass-readme-header.png",
       repository: null,
     },
@@ -449,7 +449,7 @@ test("the public nexus uses focused pages while preserving the complete ecosyste
   assert.match(byName.get("technology.html"), /id="project-grid"/);
   assert.match(byName.get("technology.html"), /All live sites remain directly available without scripts/);
   const technologyNoScript = byName.get("technology.html").match(/<noscript>([\s\S]*?)<\/noscript>/)?.[1] || "";
-  assert.equal([...technologyNoScript.matchAll(/href="https:\/\/[a-z0-9-]+\.thewizardnexus\.com\//g)].length, 7);
+  assert.equal([...technologyNoScript.matchAll(/href="https:\/\/[a-z0-9-]+\.thewizardnexus\.com\//g)].length, 9);
   assert.match(technologyNoScript, /href="https:\/\/riaevangelist\.github\.io\/life-first-framework\/"/);
   assert.match(technologyNoScript, /href="https:\/\/precrisis\.ai\/"/);
   assert.doesNotMatch(byName.get("ecosystem.html"), /id="project-grid"|id="project-search"|id="project-filters"/);
