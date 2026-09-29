@@ -16,8 +16,8 @@
       "manifest": "arcane.webmanifest",
       "offlineManifest": "arcane-offline.json",
       "worker": "arcane-sw.js",
-      "sdkVersion": "0.35.0",
-      "revision": "b7363740-c249-4daa-9bc5-d5113c1a5ad3"
+      "sdkVersion": "0.36.0",
+      "revision": "4f65ee13-858e-456c-b017-fbfe00daf79d"
     }
   },
   "files": [
@@ -208,6 +208,7 @@
     "node_modules/arcane-os/runtime/arcane/modules/CommunicationProviderRegistry.js",
     "node_modules/arcane-os/runtime/arcane/modules/ComponentContracts.js",
     "node_modules/arcane-os/runtime/arcane/modules/ConfiguredAIChatSession.js",
+    "node_modules/arcane-os/runtime/arcane/modules/ContinuousVoiceCapture.js",
     "node_modules/arcane-os/runtime/arcane/modules/ConversationActionItems.js",
     "node_modules/arcane-os/runtime/arcane/modules/ConversationClosingReport.js",
     "node_modules/arcane-os/runtime/arcane/modules/ConversationTimebox.js",
@@ -265,6 +266,7 @@
     "node_modules/arcane-os/runtime/arcane/modules/ThemeManager.js",
     "node_modules/arcane-os/runtime/arcane/modules/TimeGuard.js",
     "node_modules/arcane-os/runtime/arcane/modules/ToolCallRouter.js",
+    "node_modules/arcane-os/runtime/arcane/modules/VoiceCaptureWorklet.js",
     "node_modules/arcane-os/runtime/arcane/modules/WaitForComponent.js",
     "node_modules/arcane-os/runtime/arcane/modules/YouTubeMedia.js",
     "node_modules/arcane-os/runtime/arcane/modules/uPlot.LICENSE.txt",
