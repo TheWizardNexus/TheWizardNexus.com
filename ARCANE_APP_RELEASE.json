@@ -16,8 +16,8 @@
       "manifest": "arcane.webmanifest",
       "offlineManifest": "arcane-offline.json",
       "worker": "arcane-sw.js",
-      "sdkVersion": "0.47.0",
-      "revision": "62c4427d-d4f3-40d9-b81a-c9f9a3e642a4"
+      "sdkVersion": "0.48.0",
+      "revision": "450fb004-1ccf-4b9a-a77d-8b003c81c4bf"
     }
   },
   "files": [
@@ -162,6 +162,7 @@
     "node_modules/arcane-os/runtime/arcane/css/document-site.css",
     "node_modules/arcane-os/runtime/arcane/css/layout.css",
     "node_modules/arcane-os/runtime/arcane/css/primitives.css",
+    "node_modules/arcane-os/runtime/arcane/css/print.css",
     "node_modules/arcane-os/runtime/arcane/css/theme.css",
     "node_modules/arcane-os/runtime/arcane/css/utility-workspace.css",
     "node_modules/arcane-os/runtime/arcane/entities/ApiModelRecord.js",
