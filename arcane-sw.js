@@ -574,8 +574,8 @@
     "schemaVersion": 1,
     "appId": "wizard-nexus",
     "appVersion": "0.1.0",
-    "sdkVersion": "0.44.0",
-    "revision": "f84170b7-1b49-4cc7-8d12-41c107936563",
+    "sdkVersion": "0.45.0",
+    "revision": "73179906-fa8e-4496-bc6a-c2d63e68bee7",
     "mode": "release",
     "assets": [
         "./404.html",
@@ -790,6 +790,7 @@
         "./node_modules/arcane-os/runtime/arcane/modules/MailApi.mjs",
         "./node_modules/arcane-os/runtime/arcane/modules/MailOutbox.mjs",
         "./node_modules/arcane-os/runtime/arcane/modules/MailTransport.mjs",
+        "./node_modules/arcane-os/runtime/arcane/modules/MarkdownMedia.js",
         "./node_modules/arcane-os/runtime/arcane/modules/MarkdownSpeech.js",
         "./node_modules/arcane-os/runtime/arcane/modules/Marked.min.js",
         "./node_modules/arcane-os/runtime/arcane/modules/MemoryRecords.js",
