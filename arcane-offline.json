@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "appId": "wizard-nexus",
   "appVersion": "0.1.0",
-  "sdkVersion": "0.46.0",
-  "revision": "534bd741-f296-476d-a031-5c71bf0d1f88",
+  "sdkVersion": "0.47.0",
+  "revision": "62c4427d-d4f3-40d9-b81a-c9f9a3e642a4",
   "mode": "release",
   "assets": [
     "./404.html",
@@ -63,6 +63,7 @@
     "./node_modules/arcane-os/browser-runtime/ai/browser-kokoro-worker.mjs",
     "./node_modules/arcane-os/browser-runtime/ai/browser-speech-artifacts.mjs",
     "./node_modules/arcane-os/browser-runtime/ai/browser-speech-providers.mjs",
+    "./node_modules/arcane-os/browser-runtime/ai/browser-speech-recognition.mjs",
     "./node_modules/arcane-os/browser-runtime/ai/browser-speech.mjs",
     "./node_modules/arcane-os/browser-runtime/ai/browser-wasm-llm-provider.mjs",
     "./node_modules/arcane-os/browser-runtime/ai/browser-wasm.mjs",
