@@ -574,8 +574,8 @@
     "schemaVersion": 1,
     "appId": "wizard-nexus",
     "appVersion": "0.1.0",
-    "sdkVersion": "0.42.2",
-    "revision": "7b6440bc-462c-48f5-b32b-6ec5d654f3ab",
+    "sdkVersion": "0.43.0",
+    "revision": "52c0bc14-70fe-46cf-a0b7-7007047b1818",
     "mode": "release",
     "assets": [
         "./404.html",
@@ -802,6 +802,7 @@
         "./node_modules/arcane-os/runtime/arcane/modules/PersistentAIChatSession.js",
         "./node_modules/arcane-os/runtime/arcane/modules/PreferenceStore.js",
         "./node_modules/arcane-os/runtime/arcane/modules/PreparedSpeech.js",
+        "./node_modules/arcane-os/runtime/arcane/modules/PrintView.js",
         "./node_modules/arcane-os/runtime/arcane/modules/QRCode.min.js",
         "./node_modules/arcane-os/runtime/arcane/modules/Questionnaire.js",
         "./node_modules/arcane-os/runtime/arcane/modules/RecordLinkIndex.js",
