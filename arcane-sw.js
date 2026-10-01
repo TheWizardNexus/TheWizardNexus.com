@@ -574,8 +574,8 @@
     "schemaVersion": 1,
     "appId": "wizard-nexus",
     "appVersion": "0.1.0",
-    "sdkVersion": "0.43.0",
-    "revision": "52c0bc14-70fe-46cf-a0b7-7007047b1818",
+    "sdkVersion": "0.44.0",
+    "revision": "f84170b7-1b49-4cc7-8d12-41c107936563",
     "mode": "release",
     "assets": [
         "./404.html",
