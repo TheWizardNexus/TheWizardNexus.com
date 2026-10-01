@@ -16,8 +16,8 @@
       "manifest": "arcane.webmanifest",
       "offlineManifest": "arcane-offline.json",
       "worker": "arcane-sw.js",
-      "sdkVersion": "0.42.1",
-      "revision": "caf63c74-0c63-4155-ae7b-3231090ce85c"
+      "sdkVersion": "0.42.2",
+      "revision": "7b6440bc-462c-48f5-b32b-6ec5d654f3ab"
     }
   },
   "files": [
