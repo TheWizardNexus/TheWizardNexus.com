@@ -492,8 +492,10 @@
 
     function staticNavigationResource(url) {
         const document = new URL(url);
-        if (document.origin !== scopeOrigin || !document.search
-            || !/\.html?$/iu.test(document.pathname)) {
+        if (document.origin !== scopeOrigin) return null;
+        if (document.pathname.endsWith('/')) {
+            document.pathname += 'index.html';
+        } else if (!document.search || !/\.html?$/iu.test(document.pathname)) {
             return null;
         }
         document.search = '';
@@ -574,8 +576,8 @@
     "schemaVersion": 1,
     "appId": "wizard-nexus",
     "appVersion": "0.1.0",
-    "sdkVersion": "0.52.0",
-    "revision": "3426a2cd-0633-4c07-8be9-026b3b791023",
+    "sdkVersion": "0.52.1",
+    "revision": "00437c66-796e-4fb0-8b92-81721fc0c9a3",
     "mode": "release",
     "assets": [
         "./404.html",
@@ -863,7 +865,5 @@
         "./arcane-offline.json",
         "./arcane-pwa.mjs"
     ],
-    "navigationAliases": {
-        "./": "./index.html"
-    }
+    "navigationAliases": {}
 }, "./node_modules/arcane-os/browser-runtime/pwa.mjs");
