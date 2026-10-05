@@ -100,7 +100,15 @@ npm ci --ignore-scripts --no-audit --no-fund
 
 Serving this checkout requires no build or preparation command. Maintainers refresh the committed SDK-generated files through `npm run prepare:site` when changing the SDK, page inventory, or application descriptor, and include that output in the same commit. This uses the SDK's public generator and packager once to prepare relative URLs that work at both the domain root and a subdirectory. Generated files remain owned by the SDK generator and must not be hand-edited.
 
-For an authorized SDK update, maintainers run `npm update arcane-os --ignore-scripts --no-audit --no-fund` to resolve the published `latest` channel. When the installed SDK version changes, run `npm run prepare:site` and commit the updated lockfile and generated files together. Keep the development declaration as `latest`.
+For each development pull and dependency refresh, coordinate the dependency and Git mutation window with other maintainers and preserve active processes. Keep the development declaration as `latest` and follow this sequence:
+
+1. Remove only this application's disposable `node_modules` directory before pulling. Retain `package-lock.json`.
+2. Run `git pull` and resolve any reported conflict before continuing.
+3. Run `npm i --ignore-scripts --no-audit --no-fund`.
+4. Run `npm update arcane-os --ignore-scripts --no-audit --no-fund`, targeting only the SDK.
+5. Read `npm view arcane-os@latest version` and compare it with the installed SDK version in `node_modules/arcane-os/package.json` and the SDK resolution in `package-lock.json`. Both must match the freshly selected published version before materializing or building. If `latest` changes during the operation, refresh the SDK again and record the actual selected version.
+
+When the installed SDK version changes, run `npm run prepare:site` and commit the updated lockfile and generated files together. The committed dependency installation above remains the setup path for serving the prepared site; development refreshes use the sequence here.
 
 GitHub Actions installs the runtime recorded in the lockfile, refreshes public telemetry, and runs the configured source checks. After synchronizing its snapshot commit, it copies the files listed in the committed `ARCANE_APP_RELEASE.json` into `output/pages` once, checks that upload, and deploys it. It does not regenerate the repository or run the SDK packager. The copy preserves an optional root `CNAME`.
 
