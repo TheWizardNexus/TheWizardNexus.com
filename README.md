@@ -79,7 +79,9 @@ A public interface does not automatically mean public source, production readine
 
 ## This repository
 
-This repository is the plain HTML, CSS, and JavaScript source for **TheWizardNexus.com**, using **Arcane SDK 0.54.1** for its shared runtime, theme, installation, offline pages, DBOPFS storage, and mail integration. It publishes the selected browser package to GitHub Pages from `main` through [the Pages workflow](.github/workflows/profile-site.yml). The public, one-time Stripe service-hour catalog is recorded in [`data/service-products.json`](data/service-products.json); it contains public product, price, and Payment Link identifiers only—never secret keys.
+This repository is the plain HTML, CSS, and JavaScript source for **TheWizardNexus.com**, using **Arcane SDK** for its shared runtime, theme, installation, offline pages, DBOPFS storage, and mail integration. It publishes the selected browser package to GitHub Pages from `main` through [the Pages workflow](.github/workflows/profile-site.yml). The public, one-time Stripe service-hour catalog is recorded in [`data/service-products.json`](data/service-products.json); it contains public product, price, and Payment Link identifiers only—never secret keys.
+
+During development, `package.json` declares `"arcane-os": "latest"`. Retain `package-lock.json` as the record of the resolved SDK and dependency tree. An exact SDK declaration begins only when Roshi explicitly designates this application as a production build.
 
 Use Node.js 22.23.2 or newer. From this repository, install the exact committed dependency tree and start the local site:
 
@@ -98,7 +100,9 @@ npm ci --ignore-scripts --no-audit --no-fund
 
 Serving this checkout requires no build or preparation command. Maintainers refresh the committed SDK-generated files through `npm run prepare:site` when changing the SDK, page inventory, or application descriptor, and include that output in the same commit. This uses the SDK's public generator and packager once to prepare relative URLs that work at both the domain root and a subdirectory. Generated files remain owned by the SDK generator and must not be hand-edited.
 
-GitHub Actions installs the pinned runtime, refreshes public telemetry, and runs the configured source checks. After synchronizing its snapshot commit, it copies the files listed in the committed `ARCANE_APP_RELEASE.json` into `output/pages` once, checks that upload, and deploys it. It does not regenerate the repository or run the SDK packager. The copy preserves an optional root `CNAME`.
+For an authorized SDK update, maintainers run `npm update arcane-os --ignore-scripts --no-audit --no-fund` to resolve the published `latest` channel. When the installed SDK version changes, run `npm run prepare:site` and commit the updated lockfile and generated files together. Keep the development declaration as `latest`.
+
+GitHub Actions installs the runtime recorded in the lockfile, refreshes public telemetry, and runs the configured source checks. After synchronizing its snapshot commit, it copies the files listed in the committed `ARCANE_APP_RELEASE.json` into `output/pages` once, checks that upload, and deploys it. It does not regenerate the repository or run the SDK packager. The copy preserves an optional root `CNAME`.
 
 For an optional separate static export, `npm run build` packages the prepared website and its selected SDK runtime into `dist/wizard-nexus`, including an optional root `CNAME`. The authored [`arcane-app.json`](arcane-app.json) selects the public content; [`arcane-packager.json`](arcane-packager.json) keeps this application at the repository root. When using that export, copy its complete contents, including its `node_modules` directory, to the selected document root.
 

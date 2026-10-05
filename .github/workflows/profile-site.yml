@@ -37,7 +37,7 @@ jobs:
             node scripts/update-profile-data.mjs --force
           fi
 
-      - name: Install the pinned Arcane SDK
+      - name: Install the locked Arcane SDK
         run: npm ci --ignore-scripts --no-audit --no-fund
 
       - name: Verify committed repository-root delivery
