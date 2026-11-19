@@ -200,7 +200,7 @@ async function submitContact(event) {
                             endpoint: MAIL_ENDPOINT,
                             reportKey: entry.id,
                             report: {
-                                from: 'The Wizard Nexus website <twin@mail.precrisis.ai>',
+                                from: 'The Wizard Nexus website <twin@mail.thewizardnexus.com>',
                                 to: ['connect+website@thewizardnexus.com'],
                                 reply_to: draft.email,
                                 subject: draft.subject,
